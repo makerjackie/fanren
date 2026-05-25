@@ -2,7 +2,6 @@ import { createFileRoute } from '@tanstack/react-router'
 import {
   Compass,
   Copy,
-  ExternalLink,
   Play,
   RotateCcw,
   ScrollText,
@@ -313,7 +312,7 @@ function Home() {
     setEntered(true)
     const audio = audioRef.current
     if (!audio) return
-    audio.volume = 0.28
+    audio.volume = 0.36
     audio
       .play()
       .then(() => setSoundOn(true))
@@ -344,12 +343,7 @@ function Home() {
 
   return (
     <main className={`site-shell ${entered ? 'is-entered' : ''}`}>
-      <audio
-        ref={audioRef}
-        src="/media/audio/ambient.mp3"
-        preload="auto"
-        loop
-      />
+      <audio ref={audioRef} src="/media/audio/bufan.mp3" preload="auto" loop />
 
       <section className="hero-section" aria-label="凡人断章寻踪入口">
         <video
@@ -416,7 +410,9 @@ function Home() {
           aria-hidden={entered}
           tabIndex={entered ? -1 : 0}
         >
-          <span className="gate-scroll" aria-hidden="true" />
+          <span className="gate-door gate-door-left" aria-hidden="true" />
+          <span className="gate-door gate-door-right" aria-hidden="true" />
+          <span className="gate-light" aria-hidden="true" />
           <span className="gate-ring gate-ring-outer" aria-hidden="true" />
           <span className="gate-ring gate-ring-inner" aria-hidden="true" />
           <span className="gate-sword" aria-hidden="true" />
@@ -426,8 +422,8 @@ function Home() {
           <span className="gate-rune gate-rune-right" aria-hidden="true">
             凡
           </span>
-          <span className="gate-title">启封旧卷</span>
-          <span className="gate-subtitle">点一下，风声入卷，旧事开场</span>
+          <span className="gate-title">叩开洞府</span>
+          <span className="gate-subtitle">门开处，旧章自来</span>
         </button>
       </section>
 
@@ -619,27 +615,9 @@ function Home() {
         </video>
         <div className="oracle-card">
           <p className="eyebrow">今日天机</p>
-          <h2>别从头硬翻，先把断掉的那一章接上。</h2>
+          <h2>旧卷翻到这里，风声从七玄门吹到乱星海。</h2>
           <p>
-            这里只做剧情记忆整理，不提供正片资源，不售卖周边，不接广告合作，也不暗示任何官方授权。
-          </p>
-          <a
-            className="credit-link"
-            href="https://01mvp.com"
-            target="_blank"
-            rel="noreferrer"
-          >
-            站点署名：01MVP
-            <ExternalLink size={17} />
-          </a>
-        </div>
-      </section>
-
-      <section className="rights-section" aria-label="粉丝作品边界说明">
-        <div>
-          <span>粉丝作品边界</span>
-          <p>
-            非官方、非商业、非观看入口。站内内容只做个人重读后的剧情线索整理；图片、视频与角色名称仅用于氛围和识别，如权利方认为不妥，可替换为原创素材或移除。
+            山门旧影、禁地花雨、星海长夜，想起哪一幕，就从哪一幕继续往前走。
           </p>
         </div>
       </section>
@@ -648,7 +626,11 @@ function Home() {
         <div>
           <strong>凡人修仙传 · 人界篇断章寻踪</strong>
           <span>
-            非官方粉丝整理页。剧情线索为个人重读整理，不提供观看资源，不承接商业合作。
+            旧事重温页 · 由{' '}
+            <a href="https://01mvp.com" target="_blank" rel="noreferrer">
+              01MVP
+            </a>{' '}
+            整理
           </span>
         </div>
         <a href="#recall">

@@ -272,7 +272,7 @@ video {
 
 .primary-link,
 .share-row button:first-child,
-.oracle-card a:not(.credit-link) {
+.oracle-card a {
   color: #160d08;
   background: linear-gradient(135deg, #f6df98, #c4933c);
   border: 1px solid rgba(255, 231, 160, 0.72);
@@ -328,19 +328,15 @@ video {
   background:
     radial-gradient(
       circle at 50% 50%,
-      rgba(245, 216, 137, 0.18),
-      transparent 17rem
-    ),
-    radial-gradient(
-      circle at 28% 38%,
-      rgba(118, 168, 137, 0.12),
+      rgba(245, 216, 137, 0.1),
       transparent 18rem
     ),
-    rgba(4, 3, 3, 0.34);
-  backdrop-filter: blur(2px) saturate(1.16);
+    #050607;
+  perspective: 1200px;
+  overflow: hidden;
   transition:
-    opacity 520ms ease,
-    visibility 520ms ease;
+    opacity 700ms ease 820ms,
+    visibility 0s linear 1520ms;
 }
 
 .entry-gate::before,
@@ -355,10 +351,11 @@ video {
 .entry-gate::before {
   width: min(88vw, 720px);
   height: min(88vw, 720px);
-  border: 1px solid rgba(245, 216, 137, 0.18);
+  border: 1px solid rgba(245, 216, 137, 0.16);
   transform: translate(-50%, -50%) rotate(45deg);
   box-shadow: 0 0 80px rgba(216, 179, 95, 0.1);
   animation: sealTurn 16s linear infinite;
+  z-index: 3;
 }
 
 .entry-gate::after {
@@ -379,39 +376,102 @@ video {
     );
   transform: translate(-50%, -50%);
   opacity: 0.7;
+  z-index: 3;
 }
 
 .is-entered .entry-gate {
   visibility: hidden;
   opacity: 0;
   pointer-events: none;
+  background: transparent;
 }
 
-.gate-scroll {
+.gate-door {
   position: absolute;
-  left: 50%;
-  top: 50%;
-  width: min(72vw, 480px);
-  height: min(66svh, 460px);
-  border: 1px solid rgba(245, 216, 137, 0.4);
+  top: 0;
+  bottom: 0;
+  width: 50.08%;
+  overflow: hidden;
+  transition:
+    transform 1100ms cubic-bezier(0.2, 0.78, 0.22, 1),
+    filter 1100ms ease;
+  z-index: 1;
+  will-change: transform;
+}
+
+.gate-door::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 200%;
+  background-image:
+    linear-gradient(rgba(4, 5, 6, 0.04), rgba(4, 5, 6, 0.24)),
+    url('/media/images/bg/dongfu-gate.webp');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.gate-door-left {
+  left: 0;
+  transform-origin: left center;
+}
+
+.gate-door-left::before {
+  left: 0;
+}
+
+.gate-door-right {
+  right: 0;
+  transform-origin: right center;
+}
+
+.gate-door-right::before {
+  right: 0;
+}
+
+.entry-gate:hover .gate-door {
+  filter: brightness(1.08) saturate(1.06);
+}
+
+.is-entered .gate-door-left {
+  transform: rotateY(-78deg) translateX(-2.8vw);
+  filter: brightness(0.52);
+}
+
+.is-entered .gate-door-right {
+  transform: rotateY(78deg) translateX(2.8vw);
+  filter: brightness(0.52);
+}
+
+.gate-light {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
   background:
+    radial-gradient(
+      circle at 50% 54%,
+      rgba(245, 216, 137, 0.28),
+      transparent 15rem
+    ),
     linear-gradient(
       90deg,
-      rgba(60, 27, 17, 0.18),
-      rgba(255, 241, 190, 0.1) 18%,
-      rgba(255, 241, 190, 0.16) 50%,
-      rgba(255, 241, 190, 0.1) 82%,
-      rgba(60, 27, 17, 0.18)
-    ),
-    url('/media/images/bg/paper-texture.svg');
-  background-size:
-    auto,
-    220px 220px;
-  box-shadow:
-    inset 0 0 40px rgba(245, 216, 137, 0.1),
-    0 22px 120px rgba(0, 0, 0, 0.3);
-  opacity: 0.72;
-  transform: translate(-50%, -50%);
+      transparent 48.8%,
+      rgba(255, 240, 178, 0.86),
+      transparent 51.2%
+    );
+  opacity: 0.62;
+  mix-blend-mode: screen;
+  transition:
+    opacity 700ms ease,
+    transform 900ms ease;
+  pointer-events: none;
+}
+
+.is-entered .gate-light {
+  opacity: 1;
+  transform: scaleX(1.8);
 }
 
 .gate-ring {
@@ -421,6 +481,7 @@ video {
   aspect-ratio: 1;
   border-radius: 999px;
   pointer-events: none;
+  z-index: 4;
 }
 
 .gate-ring-outer {
@@ -442,6 +503,7 @@ video {
   position: absolute;
   left: 50%;
   top: 50%;
+  z-index: 4;
   width: 2px;
   height: min(46vw, 300px);
   background: linear-gradient(
@@ -463,10 +525,13 @@ video {
   position: relative;
   display: block;
   text-align: center;
+  transition:
+    opacity 320ms ease,
+    transform 320ms ease;
 }
 
 .gate-title {
-  z-index: 2;
+  z-index: 5;
   padding-left: 0.22em;
   font-family: var(--font-display);
   font-size: 4.6rem;
@@ -477,7 +542,7 @@ video {
 }
 
 .gate-subtitle {
-  z-index: 2;
+  z-index: 5;
   margin-top: 6.4rem;
   color: rgba(255, 246, 220, 0.8);
   font-size: 0.88rem;
@@ -486,7 +551,7 @@ video {
 
 .gate-rune {
   position: absolute;
-  z-index: 1;
+  z-index: 5;
   top: calc(50% - 1.2rem);
   color: rgba(245, 216, 137, 0.72);
   font-size: 2.4rem;
@@ -501,6 +566,14 @@ video {
 .gate-rune-right {
   right: calc(50% - min(32vw, 210px));
   animation-delay: 1.2s;
+}
+
+.is-entered .gate-title,
+.is-entered .gate-subtitle,
+.is-entered .gate-rune,
+.is-entered .gate-ring,
+.is-entered .gate-sword {
+  opacity: 0;
 }
 
 .recall-section,
@@ -1071,45 +1144,6 @@ video {
   line-height: 1.95;
 }
 
-.credit-link {
-  width: fit-content;
-  margin: 1rem auto 0;
-  min-height: 38px;
-  padding: 0.45rem 0.72rem;
-  color: rgba(245, 230, 198, 0.62);
-  border: 1px solid rgba(245, 216, 137, 0.2);
-  background: rgba(255, 255, 255, 0.04);
-  font-size: 0.82rem;
-}
-
-.rights-section {
-  width: min(1180px, calc(100vw - 32px));
-  margin: 0 auto;
-  padding: 2.4rem 0 3.8rem;
-}
-
-.rights-section div {
-  display: grid;
-  grid-template-columns: 180px minmax(0, 1fr);
-  gap: 1.2rem;
-  align-items: start;
-  border-top: 1px solid rgba(216, 179, 95, 0.16);
-  padding-top: 1.2rem;
-}
-
-.rights-section span {
-  color: rgba(245, 216, 137, 0.72);
-  font-size: 0.8rem;
-  letter-spacing: 0.18em;
-}
-
-.rights-section p {
-  margin: 0;
-  color: rgba(245, 230, 198, 0.54);
-  font-size: 0.9rem;
-  line-height: 1.85;
-}
-
 .site-footer {
   display: flex;
   justify-content: space-between;
@@ -1132,6 +1166,13 @@ video {
 .site-footer span {
   color: rgba(245, 230, 198, 0.56);
   font-size: 0.88rem;
+}
+
+.site-footer span a {
+  color: rgba(245, 216, 137, 0.72);
+  text-decoration: underline;
+  text-decoration-color: rgba(245, 216, 137, 0.24);
+  text-underline-offset: 3px;
 }
 
 @keyframes spiritFloat {
@@ -1289,20 +1330,9 @@ video {
 
   .recall-section,
   .history-section,
-  .character-section,
-  .rights-section {
+  .character-section {
     width: min(100% - 24px, 1180px);
     padding: 4.5rem 0;
-  }
-
-  .rights-section {
-    padding-top: 1.2rem;
-    padding-bottom: 2.8rem;
-  }
-
-  .rights-section div {
-    grid-template-columns: 1fr;
-    gap: 0.75rem;
   }
 
   .section-heading h2,
