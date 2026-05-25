@@ -1,12 +1,11 @@
 import { createFileRoute } from '@tanstack/react-router'
 import {
+  ChevronRight,
   Compass,
-  Copy,
+  Map as MapIcon,
+  MapPin,
   Play,
-  RotateCcw,
-  ScrollText,
   Sparkles,
-  Swords,
   Volume2,
   VolumeX,
 } from 'lucide-react'
@@ -15,256 +14,243 @@ import type { CSSProperties } from 'react'
 
 export const Route = createFileRoute('/')({ component: Home })
 
-type Stage = {
+type JourneyNode = {
   id: string
-  title: string
-  short: string
-  place: string
-  memory: string
-  recap: string
-  reclaim: string
-  next: string
-  status: string
-  forgotten: number
-  route: string
+  step: string
+  label: string
+  region: string
+  arc: string
+  realm: string
+  note: string
+  pulse: string
   people: string[]
   artifacts: string[]
-  image: string
-  flowIndex: number
+  women: string[]
+  x: number
+  y: number
 }
 
-type HistoryStep = {
-  title: string
-  era: string
-  detail: string
-}
-
-type CharacterPath = {
+type Companion = {
   name: string
   image: string
-  tag: string
+  nodeId: string
+  appearsAt: string
   note: string
-  beats: string[]
 }
 
-const stages: Stage[] = [
+type Chapter = {
+  title: string
+  range: string
+  note: string
+  startIndex: number
+}
+
+const journeyNodes: JourneyNode[] = [
   {
     id: 'qixuan',
-    title: '只记得墨大夫那一局',
-    short: '七玄门旧梦',
-    place: '越国镜州 · 七玄门',
-    memory: '韩立还是山村少年，在神手谷练长春功，捡到了改变命运的小瓶。',
-    recap:
-      '你断在最早的人间烟火里。墨大夫、余子童、金光上人接连登场，韩立第一次知道修仙者也会算计到骨头里。',
-    reclaim:
-      '先把掌天瓶、长春功、升仙令想起来。这里不是热血开局，而是韩立谨慎性格的源头。',
-    next: '往后就是太南小会、黄枫谷和血色禁地，凡人正式推门进修仙界。',
-    status: '旧事蒙尘九成',
-    forgotten: 91,
-    route: '七玄门 -> 金光上人 -> 太南小会 -> 黄枫谷',
-    people: ['韩立', '墨大夫', '厉飞雨'],
-    artifacts: ['掌天瓶', '升仙令', '长春功'],
-    image: '/media/images/characters/mo-daifu.webp',
-    flowIndex: 0,
+    step: '01',
+    label: '七玄门',
+    region: '越国镜州',
+    arc: '凡人入局',
+    realm: '凡人少年',
+    note: '山村少年进了神手谷，小瓶第一次把命数往旁边拨了一下。',
+    pulse: '墨大夫设局，余子童夺舍，韩立从江湖门缝里看见了修仙界。',
+    people: ['韩立', '厉飞雨', '墨大夫'],
+    artifacts: ['掌天瓶', '长春功', '升仙令'],
+    women: [],
+    x: 18,
+    y: 72,
   },
   {
-    id: 'bloody-trial',
-    title: '记得血色禁地和南宫婉',
-    short: '血色禁地',
-    place: '越国七派 · 血色禁地',
-    memory: '你还记得那场试炼，也记得韩立和南宫婉的命运从这里拧在一起。',
-    recap:
-      '这是人界篇早期的分水岭。韩立靠准备和耐心活下来，拿到筑基关键资源，南宫婉线也从意外变成长线。',
-    reclaim:
-      '回看血色禁地、筑基、李化元、青元剑诀。重点不是名词，而是韩立为什么能稳定长起来。',
-    next: '正魔大战很快压过来，韩立最有凡人味的选择出现了：不硬撑，先活。',
-    status: '旧事蒙尘七成',
-    forgotten: 73,
-    route: '黄枫谷 -> 血色禁地 -> 筑基 -> 正魔大战',
-    people: ['韩立', '南宫婉', '李化元'],
-    artifacts: ['筑基丹', '青元剑诀', '符宝'],
-    image: '/media/images/characters/nangong-wan.webp',
-    flowIndex: 2,
+    id: 'tainan',
+    step: '02',
+    label: '太南小会',
+    region: '越国散修集',
+    arc: '仙门初见',
+    realm: '练气',
+    note: '符箓、摊位、升仙令摊在眼前，仙路第一次有了价码。',
+    pulse: '这里不是大场面，却把底层修士的规矩交代得很清楚。',
+    people: ['韩立', '万小山'],
+    artifacts: ['符箓', '升仙令', '灵石'],
+    women: [],
+    x: 30,
+    y: 64,
   },
   {
-    id: 'run-to-sea',
-    title: '记得他跑路去了乱星海',
-    short: '韩跑跑远遁',
-    place: '天南战乱 · 古传送阵',
-    memory: '越国卷入正魔大战，韩立没有站在原地等情怀，而是保存实力远遁海外。',
-    recap:
-      '你记住了凡人最有辨识度的选择：修仙界不是擂台，活下来才有下一章。乱星海打开新地图，也让韩立从宗门弟子变成真正的独行修士。',
-    reclaim:
-      '把古传送阵、乱星海、极阴老祖、结丹线串起来。掌天瓶催熟灵药的价值，会在这段全面放大。',
-    next: '虚天殿、虚天鼎、乾蓝冰焰会把韩立推到高阶修士的牌桌边缘。',
-    status: '旧事蒙尘五成',
-    forgotten: 52,
-    route: '天南逃亡 -> 乱星海 -> 结丹 -> 虚天殿',
-    people: ['韩立', '银月', '极阴老祖'],
-    artifacts: ['古传送阵', '噬金虫', '虚天鼎'],
-    image: '/media/images/characters/yinyue.webp',
-    flowIndex: 4,
+    id: 'huangfeng',
+    step: '03',
+    label: '黄枫谷',
+    region: '越国七派',
+    arc: '山门发育',
+    realm: '练气后期',
+    note: '药园、洞府、飞剑和师门，韩立把谨慎慢慢练成了习惯。',
+    pulse: '辛如音的阵法支线，也在这段把“旧人旧债”留了下来。',
+    people: ['韩立', '李化元', '辛如音'],
+    artifacts: ['青元剑诀', '符宝', '阵法典籍'],
+    women: ['辛如音'],
+    x: 42,
+    y: 55,
+  },
+  {
+    id: 'bloody',
+    step: '04',
+    label: '血色禁地',
+    region: '越国禁地',
+    arc: '禁地花雨',
+    realm: '筑基机缘',
+    note: '试炼夺药，南宫婉登场，一场意外把两个人的长路拧在一起。',
+    pulse: '凡人早期名场面就在这里：活下来，带走资源，也带走一条情线。',
+    people: ['韩立', '南宫婉', '向之礼'],
+    artifacts: ['筑基丹', '灵草', '符宝'],
+    women: ['南宫婉'],
+    x: 51,
+    y: 66,
+  },
+  {
+    id: 'war',
+    step: '05',
+    label: '正魔战局',
+    region: '天南乱局',
+    arc: '先跑为敬',
+    realm: '筑基后期',
+    note: '风声不对，韩立不站在原地等情怀，先把命留到下一章。',
+    pulse: '“韩跑跑”的味道从这里变得鲜明：能赢就赢，不能赢就走。',
+    people: ['韩立', '陈巧倩', '令狐老祖'],
+    artifacts: ['古传送阵', '傀儡', '遁术'],
+    women: ['陈巧倩'],
+    x: 60,
+    y: 50,
+  },
+  {
+    id: 'sea',
+    step: '06',
+    label: '乱星海',
+    region: '外海诸岛',
+    arc: '地图打开',
+    realm: '结丹',
+    note: '海雾一开，宗门弟子变成独行修士，灵虫、丹药、洞府全换了量级。',
+    pulse: '紫灵、元瑶先后入场，星海这段很像另一部新书。',
+    people: ['韩立', '紫灵', '元瑶'],
+    artifacts: ['噬金虫', '曲魂', '阵盘'],
+    women: ['紫灵', '元瑶'],
+    x: 75,
+    y: 67,
   },
   {
     id: 'xutian',
-    title: '记得虚天殿抢宝',
-    short: '虚天殿夺宝',
-    place: '乱星海 · 虚天殿',
-    memory: '你应该还记得一群高阶修士互相算计，韩立在夹缝里硬拿机缘。',
-    recap:
-      '这一段好看在“稳”和“狠”一起出现。韩立不是最强，但他准备最多、撤退最快、底牌最杂。',
-    reclaim:
-      '顺一遍虚天殿、青竹蜂云剑、噬金虫和银月线。到这里，韩立已经能在高阶局里留下名字。',
-    next: '回到天南后，元婴、坠魔谷、昆吾山会连续把世界观拔高。',
-    status: '旧事蒙尘三成',
-    forgotten: 36,
-    route: '虚天殿 -> 结丹稳固 -> 青竹蜂云剑 -> 回天南',
+    step: '07',
+    label: '虚天殿',
+    region: '乱星海秘境',
+    arc: '高阶牌桌',
+    realm: '结丹中后期',
+    note: '一群高阶修士互相算计，韩立在夹缝里把关键机缘拿到手。',
+    pulse: '虚天鼎、乾蓝冰焰、银月线出现，人界篇的牌面往上抬了一层。',
     people: ['韩立', '银月', '蛮胡子'],
     artifacts: ['虚天鼎', '乾蓝冰焰', '青竹蜂云剑'],
-    image: '/media/images/characters/xiang-zhili.webp',
-    flowIndex: 5,
+    women: ['银月'],
+    x: 84,
+    y: 48,
   },
   {
-    id: 'nascent',
-    title: '已经看到元婴之后',
-    short: '元婴老魔',
-    place: '天南 · 落云宗',
-    memory: '你记得韩立已经成了元婴修士，手里底牌多到敌人很难算清。',
-    recap:
-      '这里完成身份转变：他不再只是逃命的小修士，而是天南有分量的大修。飞剑、神雷、傀儡、灵虫开始组成完整战斗系统。',
-    reclaim:
-      '接回落云宗、慕兰大战、坠魔谷和南宫婉重逢线。看点是韩老魔为什么越来越难杀。',
-    next: '后面的爽感在大场面、旧人回归、高阶战局，以及韩立那种老练的分寸感。',
-    status: '旧事蒙尘两成',
-    forgotten: 24,
-    route: '元婴 -> 落云宗 -> 慕兰大战 -> 坠魔谷',
+    id: 'luoyun',
+    step: '08',
+    label: '落云宗',
+    region: '天南归来',
+    arc: '元婴成型',
+    realm: '元婴',
+    note: '回到天南时，旧日小修已经成了能坐上牌桌的韩老魔。',
+    pulse: '南宫婉线回收，飞剑、神雷、灵虫也组成了完整战斗体系。',
     people: ['韩立', '南宫婉', '紫灵'],
     artifacts: ['辟邪神雷', '青竹蜂云剑', '大衍诀'],
-    image: '/media/images/characters/zi-ling.webp',
-    flowIndex: 6,
+    women: ['南宫婉', '紫灵'],
+    x: 68,
+    y: 34,
   },
   {
     id: 'kunwu',
-    title: '还记得坠魔谷 / 昆吾山',
-    short: '人界终局',
-    place: '天南 · 大晋 · 昆吾山',
-    memory: '你已经记到人界篇后期，化神、魔界裂缝和灵界消息都开始浮出水面。',
-    recap:
-      '人界后期的重点不只是副本，而是上限被揭开。韩立要面对的是飞升、空间节点和更高世界。',
-    reclaim:
-      '快速扫过大晋、坠魔谷、昆吾山、空间节点和冰凤线即可。你缺的不是全集，是主线顺序。',
-    next: '再往后就是离开人界，真正进入更大的修仙宇宙。',
-    status: '旧事蒙尘一成',
-    forgotten: 12,
-    route: '坠魔谷 -> 昆吾山 -> 化神线索 -> 偷渡灵界',
+    step: '09',
+    label: '昆吾山',
+    region: '大晋古山',
+    arc: '人界门尽',
+    realm: '元婴后期',
+    note: '化神、古魔、空间节点浮出水面，飞升不再只是传说。',
+    pulse: '人界篇的尽头不是结束，是下一扇门在山雾里亮了起来。',
     people: ['韩立', '银月', '向之礼'],
     artifacts: ['空间节点', '八灵尺', '古魔封印'],
-    image: '/media/images/characters/yuanyao.webp',
-    flowIndex: 8,
-  },
-  {
-    id: 'only-run',
-    title: '只记得韩跑跑很能苟',
-    short: '道心未散',
-    place: '记忆裂缝 · 不明洞府',
-    memory: '你保留了最关键的一条：韩立不是莽，是把活命当成第一功法。',
-    recap:
-      '这其实够用了。凡人好看的地方，是普通资质的人在极端残酷的系统里，用谨慎、耐心和底牌一点点把命续上。',
-    reclaim:
-      '从七玄门、血色禁地、乱星海、元婴四段接回即可。先看主线，再看支线。',
-    next: '如果复播前只接一条线，就接“韩立从逃亡到元婴”的成长线。',
-    status: '旧事蒙尘十成，道心还在',
-    forgotten: 96,
-    route: '七玄门 -> 血色禁地 -> 乱星海 -> 元婴',
-    people: ['韩立', '厉飞雨', '南宫婉'],
-    artifacts: ['掌天瓶', '符箓', '跑路路线'],
-    image: '/media/images/characters/hanli.webp',
-    flowIndex: 1,
+    women: ['银月'],
+    x: 56,
+    y: 18,
   },
 ]
 
-const historyFlow: HistoryStep[] = [
-  {
-    title: '七玄门',
-    era: '凡人入局',
-    detail: '墨大夫设局，掌天瓶现身，韩立第一次从江湖摸到修仙界门槛。',
-  },
-  {
-    title: '太南小会',
-    era: '散修初见',
-    detail: '升仙令、修仙集市和底层散修规则，把“仙路很贵”讲清楚了。',
-  },
-  {
-    title: '黄枫谷',
-    era: '宗门发育',
-    detail: '入门、筑基、拜师、练剑，韩立开始把谨慎变成稳定收益。',
-  },
-  {
-    title: '血色禁地',
-    era: '早期名场面',
-    detail: '试炼夺药，南宫婉线埋下，韩立真正开始靠底牌活过大局。',
-  },
-  {
-    title: '乱星海',
-    era: '地图展开',
-    detail: '古传送阵远遁海外，结丹、灵虫、虚天殿接连把牌面拉高。',
-  },
-  {
-    title: '虚天殿',
-    era: '高阶牌桌',
-    detail: '虚天鼎、乾蓝冰焰、银月线开启，韩立在夹缝里拿到关键机缘。',
-  },
-  {
-    title: '元婴之后',
-    era: '韩老魔成型',
-    detail: '回天南、落云宗、慕兰战局，飞剑神雷与灵虫形成战斗体系。',
-  },
-  {
-    title: '坠魔谷',
-    era: '世界观上抬',
-    detail: '古魔、裂缝、旧人重逢交织，人界不再只是门派与资源之争。',
-  },
-  {
-    title: '昆吾山',
-    era: '人界终局',
-    detail: '化神和空间节点浮出水面，飞升不再是传说，而是下一扇门。',
-  },
-]
-
-const characterPaths: CharacterPath[] = [
-  {
-    name: '韩立',
-    image: '/media/images/characters/hanli.webp',
-    tag: '主线',
-    note: '凡人开局，靠耐心、底牌和撤退路线，把每一次小胜变成下一次活路。',
-    beats: [
-      '七玄门入局',
-      '黄枫谷筑基',
-      '乱星海结丹',
-      '回天南元婴',
-      '寻找飞升路',
-    ],
-  },
+const companions: Companion[] = [
   {
     name: '南宫婉',
     image: '/media/images/characters/nangong-wan.webp',
-    tag: '情线',
-    note: '血色禁地之后，她不常在场，却一直是韩立人界篇最重要的牵挂。',
-    beats: ['掩月宗', '血色禁地', '长期分离', '再遇与重逢', '道侣线回收'],
+    nodeId: 'bloody',
+    appearsAt: '血色禁地',
+    note: '早期最有记忆点的一场相逢，后来变成韩立人界篇最重的一条牵挂。',
+  },
+  {
+    name: '辛如音',
+    image: '/media/images/characters/xin-ruyin.webp',
+    nodeId: 'huangfeng',
+    appearsAt: '黄枫谷外',
+    note: '阵法、旧宅、遗愿，她的支线不喧哗，却很像凡人世界里的余温。',
+  },
+  {
+    name: '紫灵',
+    image: '/media/images/characters/zi-ling.webp',
+    nodeId: 'sea',
+    appearsAt: '乱星海',
+    note: '星海篇的明艳人物，和韩立之间总有一点近又远的味道。',
+  },
+  {
+    name: '元瑶',
+    image: '/media/images/characters/yuanyao.webp',
+    nodeId: 'sea',
+    appearsAt: '乱星海',
+    note: '鬼修线把乱星海写得更冷，也让韩立少见地留下了几分柔软。',
   },
   {
     name: '银月',
     image: '/media/images/characters/yinyue.webp',
-    tag: '伏笔',
-    note: '从器灵到身世线，她让乱星海之后的故事自然接向灵界。',
-    beats: ['器灵现身', '虚天殿后同行', '妖族身世', '昆吾山牵连', '灵界伏笔'],
+    nodeId: 'xutian',
+    appearsAt: '虚天殿后',
+    note: '从器灵到身世伏笔，她把人界故事自然牵向更大的世界。',
+  },
+]
+
+const chapters: Chapter[] = [
+  {
+    title: '江湖门缝',
+    range: '七玄门 -> 太南小会',
+    note: '凡人出身、瓶子现身，韩立第一次知道仙路不是梦，是局。',
+    startIndex: 0,
   },
   {
-    name: '厉飞雨',
-    image: '/media/images/characters/li-feyu.webp',
-    tag: '凡尘',
-    note: '他提醒观众：韩立走得再远，最早那段江湖和凡人烟火并没有消失。',
-    beats: ['七玄门旧友', '凡人少年意气', '化名余响', '旧日对照', '人间牵挂'],
+    title: '山门岁月',
+    range: '黄枫谷 -> 血色禁地',
+    note: '宗门、筑基、禁地、南宫婉，早期名场面都压在这一段。',
+    startIndex: 2,
+  },
+  {
+    title: '风紧就走',
+    range: '正魔战局 -> 乱星海',
+    note: '韩跑跑这个称呼不是怂，是在残酷规则里把下一章跑出来。',
+    startIndex: 4,
+  },
+  {
+    title: '高阶入席',
+    range: '虚天殿 -> 落云宗',
+    note: '结丹、元婴、飞剑神雷，韩立开始拥有自己的牌桌位置。',
+    startIndex: 6,
+  },
+  {
+    title: '人界门尽',
+    range: '昆吾山之后',
+    note: '世界上限抬起来，空间节点亮起来，飞升路终于露出轮廓。',
+    startIndex: 8,
   },
 ]
 
@@ -283,30 +269,41 @@ const particles = [
   [94, 34, 6],
 ]
 
+const routePoints = journeyNodes.map((node) => `${node.x},${node.y}`).join(' ')
+
 function Home() {
   const audioRef = useRef<HTMLAudioElement>(null)
   const [entered, setEntered] = useState(false)
   const [soundOn, setSoundOn] = useState(false)
-  const [selectedId, setSelectedId] = useState(stages[2].id)
-  const [selectedCharacterName, setSelectedCharacterName] = useState(
-    characterPaths[0].name,
-  )
-  const [copied, setCopied] = useState(false)
+  const [activeNodeId, setActiveNodeId] = useState(journeyNodes[0].id)
+  const [pulseKey, setPulseKey] = useState(0)
 
-  const selectedStage = useMemo(
-    () => stages.find((stage) => stage.id === selectedId) ?? stages[2],
-    [selectedId],
+  const activeIndex = Math.max(
+    journeyNodes.findIndex((node) => node.id === activeNodeId),
+    0,
   )
+  const activeNode = journeyNodes[activeIndex]
+  const routeProgress = activeIndex / (journeyNodes.length - 1)
 
-  const selectedCharacter = useMemo(
+  const activeCompanions = useMemo(
     () =>
-      characterPaths.find(
-        (character) => character.name === selectedCharacterName,
-      ) ?? characterPaths[0],
-    [selectedCharacterName],
+      companions.filter(
+        (companion) =>
+          companion.nodeId === activeNode.id ||
+          activeNode.women.includes(companion.name),
+      ),
+    [activeNode],
   )
 
-  const shareText = `我在「${selectedStage.short}」附近断过片，旧事还剩 ${selectedStage.forgotten}% 没接回。下一段从「${selectedStage.route}」继续看。`
+  const chooseNode = (nodeId: string) => {
+    setActiveNodeId(nodeId)
+    setPulseKey((current) => current + 1)
+  }
+
+  const advanceJourney = () => {
+    const next = journeyNodes[(activeIndex + 1) % journeyNodes.length]
+    chooseNode(next.id)
+  }
 
   const enterSite = () => {
     setEntered(true)
@@ -335,17 +332,12 @@ function Home() {
       .catch(() => setSoundOn(false))
   }
 
-  const copyShareText = async () => {
-    await navigator.clipboard.writeText(`${shareText} https://fanren.01mvp.com`)
-    setCopied(true)
-    window.setTimeout(() => setCopied(false), 1800)
-  }
-
   return (
     <main className={`site-shell ${entered ? 'is-entered' : ''}`}>
       <audio ref={audioRef} src="/media/audio/bufan.mp3" preload="auto" loop />
+      <span className="world-flash" aria-hidden="true" />
 
-      <section className="hero-section" aria-label="凡人断章寻踪入口">
+      <section className="hero-section" aria-label="凡人修仙传入口">
         <video
           className="hero-video"
           autoPlay
@@ -383,22 +375,21 @@ function Home() {
         </button>
 
         <div className="hero-content">
-          <p className="eyebrow">非官方粉丝互动页</p>
           <h1>
             凡人修仙传
-            <span>人界篇断章寻踪</span>
+            <span>韩跑跑行迹图</span>
           </h1>
           <p className="hero-copy">
-            想不起自己断在哪一段？点一个旧印，把七玄门、血色禁地、乱星海和元婴后的线索接回来。
+            从七玄门到乱星海，从一只小瓶到一条飞升路。点亮地图，看韩立这一跑到底跑过多少地方。
           </p>
           <div className="hero-actions">
-            <a href="#recall" className="primary-link">
-              <ScrollText size={18} />
-              寻回断点
+            <a href="#journey" className="primary-link">
+              <MapIcon size={18} />
+              展开行迹
             </a>
-            <a href="#history" className="ghost-link">
-              <Compass size={18} />
-              看人界路书
+            <a href="#companions" className="ghost-link">
+              <Sparkles size={18} />
+              看旧人登场
             </a>
           </div>
         </div>
@@ -413,6 +404,7 @@ function Home() {
           <span className="gate-door gate-door-left" aria-hidden="true" />
           <span className="gate-door gate-door-right" aria-hidden="true" />
           <span className="gate-light" aria-hidden="true" />
+          <span className="gate-sky" aria-hidden="true" />
           <span className="gate-ring gate-ring-outer" aria-hidden="true" />
           <span className="gate-ring gate-ring-inner" aria-hidden="true" />
           <span className="gate-sword" aria-hidden="true" />
@@ -423,182 +415,186 @@ function Home() {
             凡
           </span>
           <span className="gate-title">叩开洞府</span>
-          <span className="gate-subtitle">门开处，旧章自来</span>
+          <span className="gate-subtitle">门后有山河，也有旧人</span>
         </button>
       </section>
 
-      <section id="recall" className="recall-section">
-        <div className="section-kicker">你最后记得哪里</div>
-        <div className="section-heading">
-          <h2>选一个记忆断点</h2>
+      <section id="journey" className="journey-section">
+        <div className="section-heading compact">
+          <span className="section-kicker">行迹图</span>
+          <h2>点一个地方，韩立就跑过去</h2>
           <p>
-            不用答题，不用登录。像就点它，页面会把下一段主线、人物和法宝一起亮出来。
+            地名亮起时，路线、境界、旧人和法宝会一起浮出来。先看路，再想起那一章。
           </p>
         </div>
 
-        <div className="memory-grid">
-          {stages.map((stage, index) => (
-            <button
-              className={`memory-card ${selectedStage.id === stage.id ? 'active' : ''}`}
-              key={stage.id}
-              type="button"
-              onClick={() => setSelectedId(stage.id)}
+        <div className="journey-layout">
+          <div className="map-board" aria-label="韩立人界篇路线图">
+            <img
+              className="map-art"
+              src="/media/images/bg/hanli-map.webp"
+              alt=""
+            />
+            <svg
+              className="route-svg"
+              viewBox="0 0 100 100"
+              preserveAspectRatio="none"
+              aria-hidden="true"
             >
-              <span className="memory-index">
-                {String(index + 1).padStart(2, '0')}
-              </span>
-              <span className="memory-place">{stage.place}</span>
-              <strong>{stage.title}</strong>
-              <span>{stage.memory}</span>
+              <polyline
+                className="route-line route-line-shadow"
+                points={routePoints}
+              />
+              <polyline
+                className="route-line route-line-live"
+                points={routePoints}
+                pathLength={1}
+                style={{
+                  strokeDasharray: 1,
+                  strokeDashoffset: 1 - routeProgress,
+                }}
+              />
+            </svg>
+
+            {journeyNodes.map((node, index) => (
+              <button
+                key={node.id}
+                className={`map-node ${
+                  index <= activeIndex ? 'visited' : ''
+                } ${node.id === activeNode.id ? 'active' : ''}`}
+                type="button"
+                style={{
+                  left: `${node.x}%`,
+                  top: `${node.y}%`,
+                }}
+                onClick={() => chooseNode(node.id)}
+                aria-label={`前往${node.label}`}
+              >
+                <span className="map-node-dot" aria-hidden="true" />
+                <span className="map-node-label">{node.label}</span>
+              </button>
+            ))}
+
+            <span
+              className="runner-token"
+              style={{
+                left: `${activeNode.x}%`,
+                top: `${activeNode.y}%`,
+              }}
+              aria-hidden="true"
+            >
+              韩
+            </span>
+          </div>
+
+          <aside className="route-panel" aria-live="polite">
+            <div className="panel-topline">
+              <span>第 {activeNode.step} 站</span>
+              <span>{activeNode.realm}</span>
+            </div>
+            <h3>{activeNode.label}</h3>
+            <p className="panel-region">
+              <MapPin size={15} />
+              {activeNode.region} · {activeNode.arc}
+            </p>
+            <p className="panel-note">{activeNode.note}</p>
+            <div className="memory-plume" key={`${activeNode.id}-${pulseKey}`}>
+              {activeNode.pulse}
+            </div>
+            <div className="route-tags">
+              <div>
+                <span>同场</span>
+                <p>{activeNode.people.join(' / ')}</p>
+              </div>
+              <div>
+                <span>行囊</span>
+                <p>{activeNode.artifacts.join(' / ')}</p>
+              </div>
+            </div>
+            <button className="next-run" type="button" onClick={advanceJourney}>
+              再跑一段
+              <ChevronRight size={18} />
+            </button>
+          </aside>
+        </div>
+      </section>
+
+      <section className="chapter-section">
+        <div className="section-heading">
+          <span className="section-kicker">五段路</span>
+          <h2>一眼扫回人界篇</h2>
+          <p>
+            每段只留一个味道：进门、筑基、远遁、入席、开下一界。粉丝看到地名，会自己补上风声。
+          </p>
+        </div>
+
+        <div className="chapter-track">
+          {chapters.map((chapter) => (
+            <button
+              key={chapter.title}
+              className={`chapter-card ${
+                activeIndex >= chapter.startIndex ? 'active' : ''
+              }`}
+              type="button"
+              onClick={() => chooseNode(journeyNodes[chapter.startIndex].id)}
+            >
+              <span>{chapter.range}</span>
+              <strong>{chapter.title}</strong>
+              <p>{chapter.note}</p>
             </button>
           ))}
         </div>
       </section>
 
-      <section id="report" className="report-section">
-        <div className="report-video-frame" aria-hidden="true">
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            poster="/media/images/bg/timeline-poster.jpg"
-          >
-            <source src="/media/videos/timeline.mp4" type="video/mp4" />
-          </video>
-        </div>
-
-        <div className="jade-report">
-          <div className="report-topline">
-            <span>断点已锁定</span>
-            <span>{selectedStage.status}</span>
-          </div>
-          <div className="report-main">
-            <div className="seal-block">
-              <img src={selectedStage.image} alt="" />
-              <span>人界篇</span>
-            </div>
-            <div>
-              <p className="report-place">{selectedStage.place}</p>
-              <h2>{selectedStage.short}</h2>
-              <p>{selectedStage.recap}</p>
-            </div>
-          </div>
-
-          <div className="progress-block">
-            <div>
-              <span>旧事未接回</span>
-              <strong>{selectedStage.forgotten}%</strong>
-            </div>
-            <div className="progress-track">
-              <span style={{ width: `${selectedStage.forgotten}%` }} />
-            </div>
-          </div>
-
-          <div className="report-columns">
-            <article>
-              <Sparkles size={18} />
-              <h3>前情压缩</h3>
-              <p>{selectedStage.reclaim}</p>
-            </article>
-            <article>
-              <Swords size={18} />
-              <h3>下一段看点</h3>
-              <p>{selectedStage.next}</p>
-            </article>
-          </div>
-
-          <div className="report-tags">
-            <div>
-              <span>旧人</span>
-              <p>{selectedStage.people.join(' / ')}</p>
-            </div>
-            <div>
-              <span>法宝</span>
-              <p>{selectedStage.artifacts.join(' / ')}</p>
-            </div>
-            <div>
-              <span>接回路线</span>
-              <p>{selectedStage.route}</p>
-            </div>
-          </div>
-
-          <div className="share-row">
-            <button type="button" onClick={copyShareText}>
-              <Copy size={17} />
-              {copied ? '已复制' : '复制断点'}
-            </button>
-            <button type="button" onClick={() => setSelectedId(stages[0].id)}>
-              <RotateCcw size={17} />
-              从七玄门接起
-            </button>
-          </div>
-        </div>
-      </section>
-
-      <section id="history" className="history-section">
-        <div className="section-kicker">人界篇进度</div>
+      <section id="companions" className="companions-section">
         <div className="section-heading">
-          <h2>韩立这一路到底走到哪了</h2>
+          <span className="section-kicker">旧人登场</span>
+          <h2>她们出现在哪一站</h2>
           <p>
-            把大段剧情压成一张路书。你选的断点会在这里点亮，往后看就是下一段旧事。
+            不做长百科，只把登场位置放回地图。点一张人物照，路线会跳到那一幕。
           </p>
         </div>
-        <div className="history-track">
-          {historyFlow.map((step, index) => {
-            const state =
-              index < selectedStage.flowIndex
-                ? 'past'
-                : index === selectedStage.flowIndex
-                  ? 'current'
-                  : ''
 
-            return (
-              <article className={`history-step ${state}`} key={step.title}>
-                <span>{String(index + 1).padStart(2, '0')}</span>
-                <strong>{step.title}</strong>
-                <em>{step.era}</em>
-                <p>{step.detail}</p>
-              </article>
-            )
-          })}
-        </div>
-      </section>
+        <div className="companion-layout">
+          <div className="companion-grid">
+            {companions.map((companion) => {
+              const active = activeCompanions.some(
+                (item) => item.name === companion.name,
+              )
 
-      <section className="character-section">
-        <div className="section-kicker">人物命线</div>
-        <div className="section-heading">
-          <h2>旧人不是百科，是记忆钩子</h2>
-          <p>点一个人，看他在人界篇的几次抬头。先抓住线，再回去看细节。</p>
-        </div>
-        <div className="character-layout">
-          <div className="character-grid">
-            {characterPaths.map((card) => (
-              <button
-                className={`character-card ${
-                  selectedCharacter.name === card.name ? 'active' : ''
-                }`}
-                key={card.name}
-                type="button"
-                onClick={() => setSelectedCharacterName(card.name)}
-              >
-                <img src={card.image} alt={card.name} loading="lazy" />
-                <div>
-                  <span>{card.tag}</span>
-                  <h3>{card.name}</h3>
-                  <p>{card.note}</p>
-                </div>
-              </button>
-            ))}
+              return (
+                <button
+                  className={`companion-card ${active ? 'active' : ''}`}
+                  key={companion.name}
+                  type="button"
+                  onClick={() => chooseNode(companion.nodeId)}
+                >
+                  <img src={companion.image} alt={companion.name} />
+                  <div>
+                    <span>{companion.appearsAt}</span>
+                    <h3>{companion.name}</h3>
+                    <p>{companion.note}</p>
+                  </div>
+                </button>
+              )
+            })}
           </div>
-          <aside className="path-panel">
-            <span>当前命线</span>
-            <h3>{selectedCharacter.name}</h3>
-            <ol>
-              {selectedCharacter.beats.map((beat) => (
-                <li key={beat}>{beat}</li>
-              ))}
-            </ol>
+
+          <aside className="companion-panel">
+            <Compass size={20} />
+            <h3>{activeNode.label}</h3>
+            {activeCompanions.length > 0 ? (
+              <p>
+                这一站会遇见{' '}
+                {activeCompanions.map((item) => item.name).join('、')}。
+              </p>
+            ) : (
+              <p>这一站更多是韩立自己的路，风声比人声更重。</p>
+            )}
+            <button type="button" onClick={advanceJourney}>
+              沿路往前
+              <ChevronRight size={17} />
+            </button>
           </aside>
         </div>
       </section>
@@ -614,28 +610,27 @@ function Home() {
           <source src="/media/videos/oracle.mp4" type="video/mp4" />
         </video>
         <div className="oracle-card">
-          <p className="eyebrow">今日天机</p>
-          <h2>旧卷翻到这里，风声从七玄门吹到乱星海。</h2>
-          <p>
-            山门旧影、禁地花雨、星海长夜，想起哪一幕，就从哪一幕继续往前走。
-          </p>
+          <h2>门已经开了，路还在往前。</h2>
+          <p>山门旧影、禁地花雨、星海长夜，点回地图，换一站再走。</p>
+          <a href="#journey">
+            <MapIcon size={17} />
+            回到行迹图
+          </a>
         </div>
       </section>
 
       <footer className="site-footer">
         <div>
-          <strong>凡人修仙传 · 人界篇断章寻踪</strong>
+          <strong>凡人修仙传 · 韩跑跑行迹图</strong>
           <span>
-            旧事重温页 · 由{' '}
             <a href="https://01mvp.com" target="_blank" rel="noreferrer">
               01MVP
-            </a>{' '}
-            整理
+            </a>
           </span>
         </div>
-        <a href="#recall">
+        <a href="#journey">
           <Play size={15} />
-          再测一次
+          再走一遍
         </a>
       </footer>
     </main>

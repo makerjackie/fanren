@@ -13,12 +13,12 @@ export const Route = createRootRoute({
         content: 'width=device-width, initial-scale=1',
       },
       {
-        title: '凡人修仙传人界篇断章寻踪 | fanren.01mvp.com',
+        title: '凡人修仙传 · 韩跑跑行迹图 | fanren.01mvp.com',
       },
       {
         name: 'description',
         content:
-          '选择你最后记得的剧情节点，把凡人修仙传人界篇主线、人物命线和下一段看点接回来。',
+          '叩开洞府，沿着地图点亮韩立在人界篇走过的地方，看旧人、法宝和剧情回声一起浮出来。',
       },
     ],
     links: [
