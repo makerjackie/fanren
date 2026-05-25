@@ -13,12 +13,12 @@ export const Route = createRootRoute({
         content: 'width=device-width, initial-scale=1',
       },
       {
-        title: '凡人修仙传 · 韩跑跑行迹图 | fanren.01mvp.com',
+        title: '凡人修仙传 · 互动行迹图与壁纸灵感库 | fanren.01mvp.com',
       },
       {
         name: 'description',
         content:
-          '叩开洞府，沿着地图点亮韩立在人界篇走过的地方，看旧人、法宝和剧情回声一起浮出来。',
+          '把韩立的人界路线做成可玩的数据地图，并整理官方壁纸、制作方 PV 与动态壁纸来源。',
       },
     ],
     links: [

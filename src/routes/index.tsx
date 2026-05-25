@@ -2,15 +2,26 @@ import { createFileRoute } from '@tanstack/react-router'
 import {
   ChevronRight,
   Compass,
+  ExternalLink,
+  Film,
+  Gamepad2,
+  Image as ImageIcon,
+  Layers,
   Map as MapIcon,
   MapPin,
   Play,
+  ShieldCheck,
   Sparkles,
   Volume2,
   VolumeX,
 } from 'lucide-react'
-import { useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import type { CSSProperties } from 'react'
+import {
+  dynamicMediaSources,
+  gameAssets,
+  staticMediaSources,
+} from '../data/mediaCatalog'
 
 export const Route = createFileRoute('/')({ component: Home })
 
@@ -275,6 +286,8 @@ function Home() {
   const audioRef = useRef<HTMLAudioElement>(null)
   const [entered, setEntered] = useState(false)
   const [soundOn, setSoundOn] = useState(false)
+  const [heroHighSource, setHeroHighSource] = useState<string | null>(null)
+  const [heroHighReady, setHeroHighReady] = useState(false)
   const [activeNodeId, setActiveNodeId] = useState(journeyNodes[0].id)
   const [pulseKey, setPulseKey] = useState(0)
 
@@ -294,6 +307,37 @@ function Home() {
       ),
     [activeNode],
   )
+
+  useEffect(() => {
+    const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const connection = (
+      navigator as Navigator & {
+        connection?: { saveData?: boolean; effectiveType?: string }
+      }
+    ).connection
+
+    if (motionQuery.matches || connection?.saveData) {
+      return
+    }
+
+    const loadHighVideo = () => setHeroHighSource('/media/videos/hero.mp4')
+    const requestIdle = Reflect.get(window, 'requestIdleCallback') as
+      | ((callback: () => void, options?: { timeout: number }) => number)
+      | undefined
+    const cancelIdle = Reflect.get(window, 'cancelIdleCallback') as
+      | ((id: number) => void)
+      | undefined
+
+    if (requestIdle) {
+      const idleId = requestIdle(loadHighVideo, {
+        timeout: 2600,
+      })
+      return () => cancelIdle?.(idleId)
+    }
+
+    const timerId = window.setTimeout(loadHighVideo, 1600)
+    return () => window.clearTimeout(timerId)
+  }, [])
 
   const chooseNode = (nodeId: string) => {
     setActiveNodeId(nodeId)
@@ -338,16 +382,36 @@ function Home() {
       <span className="world-flash" aria-hidden="true" />
 
       <section className="hero-section" aria-label="凡人修仙传入口">
-        <video
-          className="hero-video"
-          autoPlay
-          loop
-          muted
-          playsInline
-          poster="/media/images/bg/hero-poster.jpg"
-        >
-          <source src="/media/videos/hero.mp4" type="video/mp4" />
-        </video>
+        <div className="hero-media" aria-hidden="true">
+          <video
+            className={`hero-video hero-video-preview ${
+              heroHighReady ? 'is-faded' : ''
+            }`}
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+            poster="/media/images/bg/hero-poster.jpg"
+          >
+            <source src="/media/videos/hero-preview.mp4" type="video/mp4" />
+          </video>
+          {heroHighSource ? (
+            <video
+              className={`hero-video hero-video-high ${
+                heroHighReady ? 'is-ready' : ''
+              }`}
+              autoPlay
+              loop
+              muted
+              playsInline
+              preload="metadata"
+              onCanPlay={() => setHeroHighReady(true)}
+            >
+              <source src={heroHighSource} type="video/mp4" />
+            </video>
+          ) : null}
+        </div>
         <div className="hero-scrim" />
         <div className="spirit-layer" aria-hidden="true">
           {particles.map(([x, y, delay], index) => (
@@ -377,54 +441,83 @@ function Home() {
         <div className="hero-content">
           <h1>
             凡人修仙传
-            <span>韩跑跑行迹图</span>
+            <span>交互行迹图与壁纸灵感库</span>
           </h1>
           <p className="hero-copy">
-            从七玄门到乱星海，从一只小瓶到一条飞升路。点亮地图，看韩立这一跑到底跑过多少地方。
+            一边把韩立的人界路线做成可玩的数据地图，一边整理官方壁纸、PV
+            和动态壁纸线索，让粉丝能看故事，也能收藏来源。
           </p>
           <div className="hero-actions">
-            <a href="#journey" className="primary-link">
-              <MapIcon size={18} />
-              展开行迹
+            <a href="#visual-game" className="primary-link">
+              <Gamepad2 size={18} />
+              玩行迹图
             </a>
-            <a href="#companions" className="ghost-link">
-              <Sparkles size={18} />
-              看旧人登场
+            <a href="#wallpapers" className="ghost-link">
+              <ImageIcon size={18} />
+              看壁纸来源
             </a>
           </div>
         </div>
-
-        <button
-          type="button"
-          className="entry-gate"
-          onClick={enterSite}
-          aria-hidden={entered}
-          tabIndex={entered ? -1 : 0}
-        >
-          <span className="gate-door gate-door-left" aria-hidden="true" />
-          <span className="gate-door gate-door-right" aria-hidden="true" />
-          <span className="gate-light" aria-hidden="true" />
-          <span className="gate-sky" aria-hidden="true" />
-          <span className="gate-ring gate-ring-outer" aria-hidden="true" />
-          <span className="gate-ring gate-ring-inner" aria-hidden="true" />
-          <span className="gate-sword" aria-hidden="true" />
-          <span className="gate-rune gate-rune-left" aria-hidden="true">
-            玄
-          </span>
-          <span className="gate-rune gate-rune-right" aria-hidden="true">
-            凡
-          </span>
-          <span className="gate-title">叩开洞府</span>
-          <span className="gate-subtitle">门后有山河，也有旧人</span>
-        </button>
       </section>
 
-      <section id="journey" className="journey-section">
+      <button
+        type="button"
+        className="entry-gate"
+        onClick={enterSite}
+        aria-hidden={entered}
+        tabIndex={entered ? -1 : 0}
+      >
+        <span className="gate-door gate-door-left" aria-hidden="true" />
+        <span className="gate-door gate-door-right" aria-hidden="true" />
+        <span className="gate-light" aria-hidden="true" />
+        <span className="gate-sky" aria-hidden="true" />
+        <span className="gate-ring gate-ring-outer" aria-hidden="true" />
+        <span className="gate-ring gate-ring-inner" aria-hidden="true" />
+        <span className="gate-sword" aria-hidden="true" />
+        <span className="gate-rune gate-rune-left" aria-hidden="true">
+          玄
+        </span>
+        <span className="gate-rune gate-rune-right" aria-hidden="true">
+          凡
+        </span>
+        <span className="gate-title">叩开洞府</span>
+        <span className="gate-subtitle">门后有山河，也有旧人</span>
+      </button>
+
+      <section className="core-section" aria-label="网站核心功能">
+        <article>
+          <Gamepad2 size={24} />
+          <span>核心功能 01</span>
+          <h2>把行迹图做成可玩的数据可视化</h2>
+          <p>
+            地点、境界、人物、法宝和章节节奏都进同一张地图。点一个节点，路线会亮，韩立会跑，旁边会切出这一站的剧情信息。
+          </p>
+          <a href="#visual-game">
+            进入地图
+            <ChevronRight size={17} />
+          </a>
+        </article>
+        <article>
+          <Film size={24} />
+          <span>核心功能 02</span>
+          <h2>整理壁纸、动态壁纸和 PV 来源</h2>
+          <p>
+            官方壁纸、场景设定、制作方 PV
+            和动态壁纸线索都按来源呈现。站内先做目录和播放器，拿到授权后再自托管高清版本。
+          </p>
+          <a href="#wallpapers">
+            查看来源
+            <ChevronRight size={17} />
+          </a>
+        </article>
+      </section>
+
+      <section id="visual-game" className="journey-section">
         <div className="section-heading compact">
-          <span className="section-kicker">行迹图</span>
+          <span className="section-kicker">互动数据可视化</span>
           <h2>点一个地方，韩立就跑过去</h2>
           <p>
-            地名亮起时，路线、境界、旧人和法宝会一起浮出来。先看路，再想起那一章。
+            地名亮起时，路线、境界、旧人和法宝会一起浮出来。它不是静态年表，而是一张可以玩的修仙路线图。
           </p>
         </div>
 
@@ -519,6 +612,36 @@ function Home() {
         </div>
       </section>
 
+      <section className="asset-lab-section" aria-label="游戏化素材">
+        <div className="section-heading">
+          <span className="section-kicker">原创游戏素材</span>
+          <h2>先把粉丝站做成一段小游戏</h2>
+          <p>
+            这些素材先服务互动原型：横版场景、主角动作、小怪和道具都可以接入后续的小关卡、成就和路线解锁。
+          </p>
+        </div>
+
+        <div className="runner-lane" aria-hidden="true">
+          <span className="runner-track" />
+          <span className="nascent-runner" />
+        </div>
+
+        <div className="asset-grid">
+          {gameAssets.map((asset) => (
+            <article className="asset-card" key={asset.title}>
+              <div className="asset-preview">
+                <img src={asset.image} alt={asset.title} loading="lazy" />
+              </div>
+              <div className="asset-copy">
+                <span>{asset.label}</span>
+                <h3>{asset.title}</h3>
+                <p>{asset.note}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
       <section className="chapter-section">
         <div className="section-heading">
           <span className="section-kicker">五段路</span>
@@ -599,6 +722,98 @@ function Home() {
         </div>
       </section>
 
+      <section id="wallpapers" className="wallpaper-section">
+        <div className="section-heading">
+          <span className="section-kicker">壁纸与动态壁纸</span>
+          <h2>只放能追到来源的视觉资源</h2>
+          <p>
+            静态壁纸、官方场景、制作方 PV
+            和动态壁纸线索都保留来源。站内展示以链接和播放器为主，高清自托管留给授权后的版本。
+          </p>
+        </div>
+
+        <div className="source-feature">
+          <div className="bilibili-frame">
+            <iframe
+              title="《凡人修仙传》新年番定档 PV"
+              src="https://player.bilibili.com/player.html?bvid=BV1VukbYUEZs&autoplay=0"
+              loading="lazy"
+              allow="fullscreen; autoplay; encrypted-media; picture-in-picture"
+            />
+          </div>
+          <div className="source-feature-copy">
+            <Film size={22} />
+            <span>制作方 PV</span>
+            <h3>PV 用官方播放器，背景视频用授权素材</h3>
+            <p>
+              首页首屏已经拆成低码率预览和延迟加载高清版本。B站等平台视频不抓源、不转码，适合用播放器或跳转保留来源。
+            </p>
+            <a
+              href="https://www.bilibili.com/video/BV1VukbYUEZs/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              打开 B站来源
+              <ExternalLink size={16} />
+            </a>
+          </div>
+        </div>
+
+        <div className="media-policy">
+          <ShieldCheck size={20} />
+          <p>
+            站内原创素材可直接用于互动原型；官方壁纸、PV、动态壁纸先以来源目录呈现，拿到授权后再进入站内高清库或
+            R2 存储。
+          </p>
+        </div>
+
+        <div className="source-columns">
+          <div>
+            <div className="source-column-heading">
+              <ImageIcon size={19} />
+              <h3>静态壁纸 / 场景图</h3>
+            </div>
+            <div className="source-list">
+              {staticMediaSources.map((item) => (
+                <article className="source-card" key={item.url}>
+                  <span>{item.kind}</span>
+                  <h4>{item.title}</h4>
+                  <p>
+                    {item.source} · {item.usage}
+                  </p>
+                  <a href={item.url} target="_blank" rel="noreferrer">
+                    来源
+                    <ExternalLink size={15} />
+                  </a>
+                </article>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <div className="source-column-heading">
+              <Layers size={19} />
+              <h3>动态壁纸 / 视频</h3>
+            </div>
+            <div className="source-list">
+              {dynamicMediaSources.map((item) => (
+                <article className="source-card" key={item.url}>
+                  <span>{item.kind}</span>
+                  <h4>{item.title}</h4>
+                  <p>
+                    {item.source} · {item.usage}
+                  </p>
+                  <a href={item.url} target="_blank" rel="noreferrer">
+                    来源
+                    <ExternalLink size={15} />
+                  </a>
+                </article>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="oracle-section">
         <video
           autoPlay
@@ -612,7 +827,7 @@ function Home() {
         <div className="oracle-card">
           <h2>门已经开了，路还在往前。</h2>
           <p>山门旧影、禁地花雨、星海长夜，点回地图，换一站再走。</p>
-          <a href="#journey">
+          <a href="#visual-game">
             <MapIcon size={17} />
             回到行迹图
           </a>
@@ -628,7 +843,7 @@ function Home() {
             </a>
           </span>
         </div>
-        <a href="#journey">
+        <a href="#visual-game">
           <Play size={15} />
           再走一遍
         </a>
