@@ -13,21 +13,48 @@ export const Route = createRootRoute({
         content: 'width=device-width, initial-scale=1',
       },
       {
-        title: '凡人修仙传 · 互动行迹图与壁纸灵感库 | fanren.01mvp.com',
+        title: '凡人修仙阁 | 给道友玩的互动仙途长卷',
       },
       {
         name: 'description',
         content:
-          '把韩立的人界路线做成可玩的数据地图，并整理官方壁纸、制作方 PV 与动态壁纸来源。',
+          '从七玄门到乱星海，翻仙途长卷、点人物星图、试法宝行囊、跑一段韩跑跑小游戏。',
       },
     ],
     links: [
+      {
+        rel: 'icon',
+        href: '/icon.svg',
+        type: 'image/svg+xml',
+      },
+      {
+        rel: 'manifest',
+        href: '/manifest.json',
+      },
       {
         rel: 'stylesheet',
         href: appCss,
       },
     ],
   }),
+  notFoundComponent: () => (
+    <main className="fan-page not-found-page">
+      <a className="fan-brand not-found-brand" href="/">
+        <span className="fan-brand-mark" aria-hidden="true">
+          凡
+        </span>
+        <span>凡人修仙阁</span>
+      </a>
+      <section className="not-found-panel">
+        <span>山雾太深</span>
+        <h1>这条小径暂时无门。</h1>
+        <p>道友不妨先回阁中，换一卷再翻。</p>
+        <a className="ink-button primary" href="/">
+          回到洞府
+        </a>
+      </section>
+    </main>
+  ),
   shellComponent: RootDocument,
 })
 
