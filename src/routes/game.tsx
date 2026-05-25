@@ -310,6 +310,11 @@ function HoldButton({
   onDown: () => void
   onUp: () => void
 }) {
+  const tap = () => {
+    onDown()
+    window.setTimeout(onUp, 140)
+  }
+
   return (
     <button
       type="button"
@@ -317,6 +322,7 @@ function HoldButton({
       onPointerUp={onUp}
       onPointerLeave={onUp}
       onPointerCancel={onUp}
+      onClick={tap}
     >
       {label}
     </button>
