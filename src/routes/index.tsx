@@ -621,13 +621,26 @@ function Home() {
           <p className="eyebrow">今日天机</p>
           <h2>别从头硬翻，先把断掉的那一章接上。</h2>
           <p>
-            这个小站会继续加人物关系、名场面回放和复播进度。制作手记和源码整理在
-            01MVP。
+            这里只做剧情记忆整理，不提供正片资源，不售卖周边，不接广告合作，也不暗示任何官方授权。
           </p>
-          <a href="https://01mvp.com" target="_blank" rel="noreferrer">
-            去 01MVP 看制作过程
+          <a
+            className="credit-link"
+            href="https://01mvp.com"
+            target="_blank"
+            rel="noreferrer"
+          >
+            站点署名：01MVP
             <ExternalLink size={17} />
           </a>
+        </div>
+      </section>
+
+      <section className="rights-section" aria-label="粉丝作品边界说明">
+        <div>
+          <span>粉丝作品边界</span>
+          <p>
+            非官方、非商业、非观看入口。站内内容只做个人重读后的剧情线索整理；图片、视频与角色名称仅用于氛围和识别，如权利方认为不妥，可替换为原创素材或移除。
+          </p>
         </div>
       </section>
 
@@ -635,7 +648,7 @@ function Home() {
         <div>
           <strong>凡人修仙传 · 人界篇断章寻踪</strong>
           <span>
-            非官方粉丝整理页。剧情线索为个人重读整理，音频为原创氛围声。
+            非官方粉丝整理页。剧情线索为个人重读整理，不提供观看资源，不承接商业合作。
           </span>
         </div>
         <a href="#recall">

@@ -272,7 +272,7 @@ video {
 
 .primary-link,
 .share-row button:first-child,
-.oracle-card a {
+.oracle-card a:not(.credit-link) {
   color: #160d08;
   background: linear-gradient(135deg, #f6df98, #c4933c);
   border: 1px solid rgba(255, 231, 160, 0.72);
@@ -1071,6 +1071,45 @@ video {
   line-height: 1.95;
 }
 
+.credit-link {
+  width: fit-content;
+  margin: 1rem auto 0;
+  min-height: 38px;
+  padding: 0.45rem 0.72rem;
+  color: rgba(245, 230, 198, 0.62);
+  border: 1px solid rgba(245, 216, 137, 0.2);
+  background: rgba(255, 255, 255, 0.04);
+  font-size: 0.82rem;
+}
+
+.rights-section {
+  width: min(1180px, calc(100vw - 32px));
+  margin: 0 auto;
+  padding: 2.4rem 0 3.8rem;
+}
+
+.rights-section div {
+  display: grid;
+  grid-template-columns: 180px minmax(0, 1fr);
+  gap: 1.2rem;
+  align-items: start;
+  border-top: 1px solid rgba(216, 179, 95, 0.16);
+  padding-top: 1.2rem;
+}
+
+.rights-section span {
+  color: rgba(245, 216, 137, 0.72);
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+}
+
+.rights-section p {
+  margin: 0;
+  color: rgba(245, 230, 198, 0.54);
+  font-size: 0.9rem;
+  line-height: 1.85;
+}
+
 .site-footer {
   display: flex;
   justify-content: space-between;
@@ -1250,9 +1289,20 @@ video {
 
   .recall-section,
   .history-section,
-  .character-section {
+  .character-section,
+  .rights-section {
     width: min(100% - 24px, 1180px);
     padding: 4.5rem 0;
+  }
+
+  .rights-section {
+    padding-top: 1.2rem;
+    padding-bottom: 2.8rem;
+  }
+
+  .rights-section div {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
   }
 
   .section-heading h2,
