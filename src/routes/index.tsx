@@ -23,7 +23,7 @@ type Stage = {
   place: string
   memory: string
   recap: string
-  catchup: string
+  reclaim: string
   next: string
   status: string
   forgotten: number
@@ -31,162 +31,241 @@ type Stage = {
   people: string[]
   artifacts: string[]
   image: string
+  flowIndex: number
+}
+
+type HistoryStep = {
+  title: string
+  era: string
+  detail: string
+}
+
+type CharacterPath = {
+  name: string
+  image: string
+  tag: string
+  note: string
+  beats: string[]
 }
 
 const stages: Stage[] = [
   {
     id: 'qixuan',
-    title: '我只记得墨大夫想夺舍',
+    title: '只记得墨大夫那一局',
     short: '七玄门旧梦',
     place: '越国镜州 · 七玄门',
     memory: '韩立还是山村少年，在神手谷练长春功，捡到了改变命运的小瓶。',
     recap:
-      '你停在最早的凡人篇。韩立从江湖走进修仙世界，第一次明白“仙人”未必比凡人更干净，墨大夫这局把他的谨慎底色直接打出来了。',
-    catchup:
-      '从墨大夫、余子童、金光上人补起，重点记住掌天瓶、升仙令和韩立第一次杀修仙者。',
-    next: '接下来是黄枫谷、血色禁地和南宫婉，感情线与修仙界规则会同时展开。',
-    status: '记忆封印九成',
+      '你断在最早的人间烟火里。墨大夫、余子童、金光上人接连登场，韩立第一次知道修仙者也会算计到骨头里。',
+    reclaim:
+      '先把掌天瓶、长春功、升仙令想起来。这里不是热血开局，而是韩立谨慎性格的源头。',
+    next: '往后就是太南小会、黄枫谷和血色禁地，凡人正式推门进修仙界。',
+    status: '旧事蒙尘九成',
     forgotten: 91,
     route: '七玄门 -> 金光上人 -> 太南小会 -> 黄枫谷',
     people: ['韩立', '墨大夫', '厉飞雨'],
     artifacts: ['掌天瓶', '升仙令', '长春功'],
     image: '/media/images/characters/mo-daifu.webp',
+    flowIndex: 0,
   },
   {
     id: 'bloody-trial',
-    title: '我记得血色禁地和南宫婉',
+    title: '记得血色禁地和南宫婉',
     short: '血色禁地',
     place: '越国七派 · 血色禁地',
-    memory: '你记得那场试炼，也大概记得韩立和南宫婉的命运被强行绑在一起。',
+    memory: '你还记得那场试炼，也记得韩立和南宫婉的命运从这里拧在一起。',
     recap:
-      '这是人界篇最重要的早期节点。韩立靠谨慎、符箓、药园机缘活下来，也拿到筑基关键资源。南宫婉线从这里开始变成长期伏笔。',
-    catchup:
-      '补血色禁地后直接接筑基、李化元、青元剑诀。你需要把“韩立为什么能稳定发育”想起来。',
-    next: '接下来正魔大战压过来，韩立最经典的选择不是热血死守，而是先跑。',
-    status: '记忆封印七成',
+      '这是人界篇早期的分水岭。韩立靠准备和耐心活下来，拿到筑基关键资源，南宫婉线也从意外变成长线。',
+    reclaim:
+      '回看血色禁地、筑基、李化元、青元剑诀。重点不是名词，而是韩立为什么能稳定长起来。',
+    next: '正魔大战很快压过来，韩立最有凡人味的选择出现了：不硬撑，先活。',
+    status: '旧事蒙尘七成',
     forgotten: 73,
     route: '黄枫谷 -> 血色禁地 -> 筑基 -> 正魔大战',
     people: ['韩立', '南宫婉', '李化元'],
     artifacts: ['筑基丹', '青元剑诀', '符宝'],
     image: '/media/images/characters/nangong-wan.webp',
+    flowIndex: 2,
   },
   {
     id: 'run-to-sea',
-    title: '我记得韩立跑路去乱星海',
+    title: '记得他跑路去了乱星海',
     short: '韩跑跑远遁',
     place: '天南战乱 · 古传送阵',
-    memory:
-      '越国被卷进正魔大战，韩立没有站在原地等热血，而是保存实力远遁海外。',
+    memory: '越国卷入正魔大战，韩立没有站在原地等情怀，而是保存实力远遁海外。',
     recap:
-      '你记住了凡人最有味道的选择：修仙界不是少年漫赛场，活下来才有后续。乱星海打开了地图，也让韩立从宗门弟子变成真正的独行修士。',
-    catchup:
-      '回看古传送阵、乱星海、极阴老祖和结丹线。掌天瓶催熟灵药的价值会在这里全面放大。',
-    next: '虚天殿、虚天鼎、乾蓝冰焰会把韩立推到高阶修士牌桌边缘。',
-    status: '记忆封印五成',
+      '你记住了凡人最有辨识度的选择：修仙界不是擂台，活下来才有下一章。乱星海打开新地图，也让韩立从宗门弟子变成真正的独行修士。',
+    reclaim:
+      '把古传送阵、乱星海、极阴老祖、结丹线串起来。掌天瓶催熟灵药的价值，会在这段全面放大。',
+    next: '虚天殿、虚天鼎、乾蓝冰焰会把韩立推到高阶修士的牌桌边缘。',
+    status: '旧事蒙尘五成',
     forgotten: 52,
     route: '天南逃亡 -> 乱星海 -> 结丹 -> 虚天殿',
     people: ['韩立', '银月', '极阴老祖'],
     artifacts: ['古传送阵', '噬金虫', '虚天鼎'],
     image: '/media/images/characters/yinyue.webp',
+    flowIndex: 4,
   },
   {
     id: 'xutian',
-    title: '我记得虚天殿抢宝',
+    title: '记得虚天殿抢宝',
     short: '虚天殿夺宝',
     place: '乱星海 · 虚天殿',
-    memory: '你应该还记得高阶修士互相算计，韩立在夹缝里硬拿机缘。',
+    memory: '你应该还记得一群高阶修士互相算计，韩立在夹缝里硬拿机缘。',
     recap:
-      '这一段是“苟”和“狠”的结合。韩立不是最强，但他准备最多、撤退最快、底牌最杂。虚天鼎与乾蓝冰焰让他的战斗体系开始升维。',
-    catchup:
-      '补虚天殿、青竹蜂云剑、噬金虫和银月线。这里开始，韩立不是小修士混地图，而是在高阶局里活跃。',
-    next: '后面回到天南，元婴、坠魔谷、昆吾山会连续把世界观拔高。',
-    status: '记忆封印三成',
+      '这一段好看在“稳”和“狠”一起出现。韩立不是最强，但他准备最多、撤退最快、底牌最杂。',
+    reclaim:
+      '顺一遍虚天殿、青竹蜂云剑、噬金虫和银月线。到这里，韩立已经能在高阶局里留下名字。',
+    next: '回到天南后，元婴、坠魔谷、昆吾山会连续把世界观拔高。',
+    status: '旧事蒙尘三成',
     forgotten: 36,
     route: '虚天殿 -> 结丹稳固 -> 青竹蜂云剑 -> 回天南',
     people: ['韩立', '银月', '蛮胡子'],
     artifacts: ['虚天鼎', '乾蓝冰焰', '青竹蜂云剑'],
     image: '/media/images/characters/xiang-zhili.webp',
+    flowIndex: 5,
   },
   {
     id: 'nascent',
-    title: '我已经看到元婴大成',
+    title: '已经看到元婴之后',
     short: '元婴老魔',
     place: '天南 · 落云宗',
     memory: '你记得韩立已经成了元婴修士，手里底牌多到敌人很难算清。',
     recap:
-      '这时韩立完成身份转变：不再只是逃命的低阶修士，而是天南有分量的大修。辟邪神雷、飞剑、傀儡、灵虫开始形成完整战斗系统。',
-    catchup:
-      '补元婴后的落云宗、坠魔谷、慕兰大战和南宫婉重逢线。重点是“韩老魔为什么越来越难杀”。',
-    next: '复播接近的爽点就在这里：大场面、旧人回归、高阶战局和韩立的老练感。',
-    status: '记忆封印两成',
+      '这里完成身份转变：他不再只是逃命的小修士，而是天南有分量的大修。飞剑、神雷、傀儡、灵虫开始组成完整战斗系统。',
+    reclaim:
+      '接回落云宗、慕兰大战、坠魔谷和南宫婉重逢线。看点是韩老魔为什么越来越难杀。',
+    next: '后面的爽感在大场面、旧人回归、高阶战局，以及韩立那种老练的分寸感。',
+    status: '旧事蒙尘两成',
     forgotten: 24,
     route: '元婴 -> 落云宗 -> 慕兰大战 -> 坠魔谷',
     people: ['韩立', '南宫婉', '紫灵'],
     artifacts: ['辟邪神雷', '青竹蜂云剑', '大衍诀'],
     image: '/media/images/characters/zi-ling.webp',
+    flowIndex: 6,
   },
   {
     id: 'kunwu',
-    title: '我还记得坠魔谷 / 昆吾山',
+    title: '还记得坠魔谷 / 昆吾山',
     short: '人界终局',
     place: '天南 · 大晋 · 昆吾山',
-    memory: '你已经记到人界篇后期，化神、魔界裂缝和灵界信息都开始浮出水面。',
+    memory: '你已经记到人界篇后期，化神、魔界裂缝和灵界消息都开始浮出水面。',
     recap:
-      '人界篇后期的重点不是单个副本，而是人界上限被揭开。韩立已经不是追求筑基结丹的小修士，他要面对的是飞升、空间节点和更高世界。',
-    catchup:
-      '快速扫一遍大晋、昆吾山、空间节点和冰凤线即可。你需要的不是补课，是把主线顺序理回来。',
-    next: '后面就是离开人界，真正进入更大的修仙宇宙。',
-    status: '记忆封印一成',
+      '人界后期的重点不只是副本，而是上限被揭开。韩立要面对的是飞升、空间节点和更高世界。',
+    reclaim:
+      '快速扫过大晋、坠魔谷、昆吾山、空间节点和冰凤线即可。你缺的不是全集，是主线顺序。',
+    next: '再往后就是离开人界，真正进入更大的修仙宇宙。',
+    status: '旧事蒙尘一成',
     forgotten: 12,
     route: '坠魔谷 -> 昆吾山 -> 化神线索 -> 偷渡灵界',
     people: ['韩立', '银月', '向之礼'],
     artifacts: ['空间节点', '八灵尺', '古魔封印'],
     image: '/media/images/characters/yuanyao.webp',
+    flowIndex: 8,
   },
   {
     id: 'only-run',
-    title: '我只记得韩跑跑很能苟',
-    short: '道友失忆',
+    title: '只记得韩跑跑很能苟',
+    short: '道心未散',
     place: '记忆裂缝 · 不明洞府',
-    memory: '你保留了最正确的一条核心记忆：韩立不是莽，是把活命当成第一功法。',
+    memory: '你保留了最关键的一条：韩立不是莽，是把活命当成第一功法。',
     recap:
-      '这其实够用了。凡人好看的地方就是普通资质的人，在一个极端残酷的系统里，用谨慎、耐心和底牌一点点把命续上去。',
-    catchup:
-      '建议直接从“七玄门 10 分钟回顾”开始，再按血色禁地、乱星海、元婴三段补。',
-    next: '如果复播前只补一条线，就补“韩立从逃亡到元婴”的成长线。',
-    status: '记忆封印十成但道心尚在',
+      '这其实够用了。凡人好看的地方，是普通资质的人在极端残酷的系统里，用谨慎、耐心和底牌一点点把命续上。',
+    reclaim:
+      '从七玄门、血色禁地、乱星海、元婴四段接回即可。先看主线，再看支线。',
+    next: '如果复播前只接一条线，就接“韩立从逃亡到元婴”的成长线。',
+    status: '旧事蒙尘十成，道心还在',
     forgotten: 96,
     route: '七玄门 -> 血色禁地 -> 乱星海 -> 元婴',
     people: ['韩立', '厉飞雨', '南宫婉'],
     artifacts: ['掌天瓶', '符箓', '跑路路线'],
     image: '/media/images/characters/hanli.webp',
+    flowIndex: 1,
   },
 ]
 
-const characterCards = [
+const historyFlow: HistoryStep[] = [
+  {
+    title: '七玄门',
+    era: '凡人入局',
+    detail: '墨大夫设局，掌天瓶现身，韩立第一次从江湖摸到修仙界门槛。',
+  },
+  {
+    title: '太南小会',
+    era: '散修初见',
+    detail: '升仙令、修仙集市和底层散修规则，把“仙路很贵”讲清楚了。',
+  },
+  {
+    title: '黄枫谷',
+    era: '宗门发育',
+    detail: '入门、筑基、拜师、练剑，韩立开始把谨慎变成稳定收益。',
+  },
+  {
+    title: '血色禁地',
+    era: '早期名场面',
+    detail: '试炼夺药，南宫婉线埋下，韩立真正开始靠底牌活过大局。',
+  },
+  {
+    title: '乱星海',
+    era: '地图展开',
+    detail: '古传送阵远遁海外，结丹、灵虫、虚天殿接连把牌面拉高。',
+  },
+  {
+    title: '虚天殿',
+    era: '高阶牌桌',
+    detail: '虚天鼎、乾蓝冰焰、银月线开启，韩立在夹缝里拿到关键机缘。',
+  },
+  {
+    title: '元婴之后',
+    era: '韩老魔成型',
+    detail: '回天南、落云宗、慕兰战局，飞剑神雷与灵虫形成战斗体系。',
+  },
+  {
+    title: '坠魔谷',
+    era: '世界观上抬',
+    detail: '古魔、裂缝、旧人重逢交织，人界不再只是门派与资源之争。',
+  },
+  {
+    title: '昆吾山',
+    era: '人界终局',
+    detail: '化神和空间节点浮出水面，飞升不再是传说，而是下一扇门。',
+  },
+]
+
+const characterPaths: CharacterPath[] = [
   {
     name: '韩立',
     image: '/media/images/characters/hanli.webp',
-    tag: '谨慎流主角',
-    note: '凡人开局，靠耐心、底牌和撤退路线活到最后。',
+    tag: '主线',
+    note: '凡人开局，靠耐心、底牌和撤退路线，把每一次小胜变成下一次活路。',
+    beats: [
+      '七玄门入局',
+      '黄枫谷筑基',
+      '乱星海结丹',
+      '回天南元婴',
+      '寻找飞升路',
+    ],
   },
   {
     name: '南宫婉',
     image: '/media/images/characters/nangong-wan.webp',
-    tag: '早期宿命线',
-    note: '血色禁地之后，感情线开始变成贯穿人界篇的暗线。',
+    tag: '情线',
+    note: '血色禁地之后，她不常在场，却一直是韩立人界篇最重要的牵挂。',
+    beats: ['掩月宗', '血色禁地', '长期分离', '再遇与重逢', '道侣线回收'],
   },
   {
     name: '银月',
     image: '/media/images/characters/yinyue.webp',
-    tag: '乱星海之后',
-    note: '器灵、妖族身世、灵界伏笔，都是后期世界观入口。',
+    tag: '伏笔',
+    note: '从器灵到身世线，她让乱星海之后的故事自然接向灵界。',
+    beats: ['器灵现身', '虚天殿后同行', '妖族身世', '昆吾山牵连', '灵界伏笔'],
   },
   {
-    name: '向之礼',
-    image: '/media/images/characters/xiang-zhili.webp',
-    tag: '隐藏大佬',
-    note: '看似路人，实际把人界上限和飞升线悄悄端出来。',
+    name: '厉飞雨',
+    image: '/media/images/characters/li-feyu.webp',
+    tag: '凡尘',
+    note: '他提醒观众：韩立走得再远，最早那段江湖和凡人烟火并没有消失。',
+    beats: ['七玄门旧友', '凡人少年意气', '化名余响', '旧日对照', '人间牵挂'],
   },
 ]
 
@@ -210,6 +289,9 @@ function Home() {
   const [entered, setEntered] = useState(false)
   const [soundOn, setSoundOn] = useState(false)
   const [selectedId, setSelectedId] = useState(stages[2].id)
+  const [selectedCharacterName, setSelectedCharacterName] = useState(
+    characterPaths[0].name,
+  )
   const [copied, setCopied] = useState(false)
 
   const selectedStage = useMemo(
@@ -217,13 +299,21 @@ function Home() {
     [selectedId],
   )
 
-  const shareText = `复播前测了一下，我的凡人记忆停在「${selectedStage.short}」。${selectedStage.status}，补课路线：${selectedStage.route}。`
+  const selectedCharacter = useMemo(
+    () =>
+      characterPaths.find(
+        (character) => character.name === selectedCharacterName,
+      ) ?? characterPaths[0],
+    [selectedCharacterName],
+  )
+
+  const shareText = `我在「${selectedStage.short}」附近断过片，旧事还剩 ${selectedStage.forgotten}% 没接回。下一段从「${selectedStage.route}」继续看。`
 
   const enterSite = () => {
     setEntered(true)
     const audio = audioRef.current
     if (!audio) return
-    audio.volume = 0.34
+    audio.volume = 0.28
     audio
       .play()
       .then(() => setSoundOn(true))
@@ -254,9 +344,14 @@ function Home() {
 
   return (
     <main className={`site-shell ${entered ? 'is-entered' : ''}`}>
-      <audio ref={audioRef} src="/media/audio/bgm.mp3" preload="auto" loop />
+      <audio
+        ref={audioRef}
+        src="/media/audio/ambient.mp3"
+        preload="auto"
+        loop
+      />
 
-      <section className="hero-section" aria-label="凡人回坑入口">
+      <section className="hero-section" aria-label="凡人断章寻踪入口">
         <video
           className="hero-video"
           autoPlay
@@ -288,28 +383,28 @@ function Home() {
           className="sound-toggle"
           type="button"
           onClick={toggleSound}
-          aria-label={soundOn ? '关闭背景音乐' : '播放背景音乐'}
+          aria-label={soundOn ? '关闭背景声' : '播放背景声'}
         >
           {soundOn ? <Volume2 size={18} /> : <VolumeX size={18} />}
         </button>
 
         <div className="hero-content">
-          <p className="eyebrow">非官方粉丝回坑工具</p>
+          <p className="eyebrow">非官方粉丝互动页</p>
           <h1>
             凡人修仙传
-            <span>人界篇回坑玉简</span>
+            <span>人界篇断章寻踪</span>
           </h1>
           <p className="hero-copy">
-            复播前，点一下你最后记得的剧情。玉简会告诉你从哪补、该记谁、接下来为什么爽。
+            想不起自己断在哪一段？点一个旧印，把七玄门、血色禁地、乱星海和元婴后的线索接回来。
           </p>
           <div className="hero-actions">
             <a href="#recall" className="primary-link">
               <ScrollText size={18} />
-              开始回忆
+              寻回断点
             </a>
-            <a href="#report" className="ghost-link">
+            <a href="#history" className="ghost-link">
               <Compass size={18} />
-              看我的补课路线
+              看人界路书
             </a>
           </div>
         </div>
@@ -321,17 +416,28 @@ function Home() {
           aria-hidden={entered}
           tabIndex={entered ? -1 : 0}
         >
-          <span className="gate-ring" />
-          <span className="gate-title">叩开洞府</span>
-          <span className="gate-subtitle">点击进入，灵音自启</span>
+          <span className="gate-scroll" aria-hidden="true" />
+          <span className="gate-ring gate-ring-outer" aria-hidden="true" />
+          <span className="gate-ring gate-ring-inner" aria-hidden="true" />
+          <span className="gate-sword" aria-hidden="true" />
+          <span className="gate-rune gate-rune-left" aria-hidden="true">
+            玄
+          </span>
+          <span className="gate-rune gate-rune-right" aria-hidden="true">
+            凡
+          </span>
+          <span className="gate-title">启封旧卷</span>
+          <span className="gate-subtitle">点一下，风声入卷，旧事开场</span>
         </button>
       </section>
 
       <section id="recall" className="recall-section">
         <div className="section-kicker">你最后记得哪里</div>
         <div className="section-heading">
-          <h2>选一个记忆节点</h2>
-          <p>不用答题，不用登录。越像你，补课路线越准。</p>
+          <h2>选一个记忆断点</h2>
+          <p>
+            不用答题，不用登录。像就点它，页面会把下一段主线、人物和法宝一起亮出来。
+          </p>
         </div>
 
         <div className="memory-grid">
@@ -368,7 +474,7 @@ function Home() {
 
         <div className="jade-report">
           <div className="report-topline">
-            <span>回坑玉简已生成</span>
+            <span>断点已锁定</span>
             <span>{selectedStage.status}</span>
           </div>
           <div className="report-main">
@@ -385,7 +491,7 @@ function Home() {
 
           <div className="progress-block">
             <div>
-              <span>遗忘程度</span>
+              <span>旧事未接回</span>
               <strong>{selectedStage.forgotten}%</strong>
             </div>
             <div className="progress-track">
@@ -396,27 +502,27 @@ function Home() {
           <div className="report-columns">
             <article>
               <Sparkles size={18} />
-              <h3>60 秒补课</h3>
-              <p>{selectedStage.catchup}</p>
+              <h3>前情压缩</h3>
+              <p>{selectedStage.reclaim}</p>
             </article>
             <article>
               <Swords size={18} />
-              <h3>接下来爽点</h3>
+              <h3>下一段看点</h3>
               <p>{selectedStage.next}</p>
             </article>
           </div>
 
           <div className="report-tags">
             <div>
-              <span>必记人物</span>
+              <span>旧人</span>
               <p>{selectedStage.people.join(' / ')}</p>
             </div>
             <div>
-              <span>必记法宝</span>
+              <span>法宝</span>
               <p>{selectedStage.artifacts.join(' / ')}</p>
             </div>
             <div>
-              <span>补课路线</span>
+              <span>接回路线</span>
               <p>{selectedStage.route}</p>
             </div>
           </div>
@@ -424,33 +530,80 @@ function Home() {
           <div className="share-row">
             <button type="button" onClick={copyShareText}>
               <Copy size={17} />
-              {copied ? '已复制' : '复制分享文案'}
+              {copied ? '已复制' : '复制断点'}
             </button>
             <button type="button" onClick={() => setSelectedId(stages[0].id)}>
               <RotateCcw size={17} />
-              从头补起
+              从七玄门接起
             </button>
           </div>
         </div>
       </section>
 
-      <section className="character-section">
-        <div className="section-kicker">复播前必记旧人</div>
+      <section id="history" className="history-section">
+        <div className="section-kicker">人界篇进度</div>
         <div className="section-heading">
-          <h2>先把这几个人想起来</h2>
-          <p>不做百科，先抓主线。看完这些名字，很多剧情会自己接上。</p>
+          <h2>韩立这一路到底走到哪了</h2>
+          <p>
+            把大段剧情压成一张路书。你选的断点会在这里点亮，往后看就是下一段旧事。
+          </p>
         </div>
-        <div className="character-grid">
-          {characterCards.map((card) => (
-            <article className="character-card" key={card.name}>
-              <img src={card.image} alt={card.name} loading="lazy" />
-              <div>
-                <span>{card.tag}</span>
-                <h3>{card.name}</h3>
-                <p>{card.note}</p>
-              </div>
-            </article>
-          ))}
+        <div className="history-track">
+          {historyFlow.map((step, index) => {
+            const state =
+              index < selectedStage.flowIndex
+                ? 'past'
+                : index === selectedStage.flowIndex
+                  ? 'current'
+                  : ''
+
+            return (
+              <article className={`history-step ${state}`} key={step.title}>
+                <span>{String(index + 1).padStart(2, '0')}</span>
+                <strong>{step.title}</strong>
+                <em>{step.era}</em>
+                <p>{step.detail}</p>
+              </article>
+            )
+          })}
+        </div>
+      </section>
+
+      <section className="character-section">
+        <div className="section-kicker">人物命线</div>
+        <div className="section-heading">
+          <h2>旧人不是百科，是记忆钩子</h2>
+          <p>点一个人，看他在人界篇的几次抬头。先抓住线，再回去看细节。</p>
+        </div>
+        <div className="character-layout">
+          <div className="character-grid">
+            {characterPaths.map((card) => (
+              <button
+                className={`character-card ${
+                  selectedCharacter.name === card.name ? 'active' : ''
+                }`}
+                key={card.name}
+                type="button"
+                onClick={() => setSelectedCharacterName(card.name)}
+              >
+                <img src={card.image} alt={card.name} loading="lazy" />
+                <div>
+                  <span>{card.tag}</span>
+                  <h3>{card.name}</h3>
+                  <p>{card.note}</p>
+                </div>
+              </button>
+            ))}
+          </div>
+          <aside className="path-panel">
+            <span>当前命线</span>
+            <h3>{selectedCharacter.name}</h3>
+            <ol>
+              {selectedCharacter.beats.map((beat) => (
+                <li key={beat}>{beat}</li>
+              ))}
+            </ol>
+          </aside>
         </div>
       </section>
 
@@ -466,10 +619,9 @@ function Home() {
         </video>
         <div className="oracle-card">
           <p className="eyebrow">今日天机</p>
-          <h2>复播前别硬补全集，先补你断掉的那一段。</h2>
+          <h2>别从头硬翻，先把断掉的那一章接上。</h2>
           <p>
-            这个小站是用 AI
-            辅助开发出来的互动网页。想看从想法、素材、交互到部署的完整拆解，我会整理到
+            这个小站会继续加人物关系、名场面回放和复播进度。制作手记和源码整理在
             01MVP。
           </p>
           <a href="https://01mvp.com" target="_blank" rel="noreferrer">
@@ -481,8 +633,10 @@ function Home() {
 
       <footer className="site-footer">
         <div>
-          <strong>凡人修仙传 · 人界篇回坑玉简</strong>
-          <span>非官方粉丝项目。剧情信息为个人整理，素材仅作氛围展示。</span>
+          <strong>凡人修仙传 · 人界篇断章寻踪</strong>
+          <span>
+            非官方粉丝整理页。剧情线索为个人重读整理，音频为原创氛围声。
+          </span>
         </div>
         <a href="#recall">
           <Play size={15} />

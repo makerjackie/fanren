@@ -13,12 +13,12 @@ export const Route = createRootRoute({
         content: 'width=device-width, initial-scale=1',
       },
       {
-        title: '凡人修仙传回坑玉简 | fanren.01mvp.com',
+        title: '凡人修仙传人界篇断章寻踪 | fanren.01mvp.com',
       },
       {
         name: 'description',
         content:
-          '复播前的凡人修仙传回坑工具：选择你最后记得的剧情，生成一份人界篇补课玉简。',
+          '选择你最后记得的剧情节点，把凡人修仙传人界篇主线、人物命线和下一段看点接回来。',
       },
     ],
     links: [
