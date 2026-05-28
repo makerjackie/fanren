@@ -476,42 +476,50 @@ video {
 }
 
 .sound-toggle {
-  position: fixed;
-  right: 1rem;
-  top: 1rem;
-  z-index: 30;
   display: grid;
+  flex: 0 0 38px;
   place-items: center;
-  width: 44px;
-  height: 44px;
-  color: var(--paper);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: 999px;
-  background: rgba(8, 7, 7, 0.5);
-  backdrop-filter: blur(14px);
-}
-
-.home-shell .sound-toggle {
-  top: 4.35rem;
-  right: 1.1rem;
-  bottom: auto;
-  z-index: 36;
-  width: 42px;
-  height: 42px;
+  width: 38px;
+  height: 38px;
   color: #fff5da;
-  border-color: rgba(245, 216, 137, 0.28);
+  border: 1px solid rgba(245, 216, 137, 0.28);
+  border-radius: 999px;
   background: rgba(6, 7, 7, 0.42);
   box-shadow: 0 12px 34px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(14px);
+  transition:
+    border-color 180ms ease,
+    background 180ms ease,
+    transform 180ms ease;
 }
 
-.home-shell .sound-toggle:hover {
+.nav-github-link {
+  display: grid;
+  flex: 0 0 38px;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  color: #fff5da;
+  border: 1px solid rgba(245, 216, 137, 0.28);
+  border-radius: 999px;
+  background: rgba(6, 7, 7, 0.42);
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(14px);
+  transition:
+    border-color 180ms ease,
+    background 180ms ease,
+    transform 180ms ease;
+}
+
+.sound-toggle:hover,
+.nav-github-link:hover {
   border-color: rgba(245, 216, 137, 0.62);
   background: rgba(12, 13, 12, 0.62);
+  transform: translateY(-1px);
 }
 
 .entry-gate {
   --gate-ease: cubic-bezier(0.22, 0.72, 0.18, 1);
-  --gate-swing: cubic-bezier(0.16, 0.9, 0.18, 1);
   position: fixed;
   inset: 0;
   z-index: 44;
@@ -520,18 +528,20 @@ video {
   color: var(--paper-strong);
   border: 0;
   background:
+    linear-gradient(rgba(4, 5, 6, 0.04), rgba(4, 5, 6, 0.2)),
     radial-gradient(
       circle at 50% 52%,
       rgba(245, 216, 137, 0.12),
       transparent 18rem
     ),
+    url('/media/images/bg/dongfu-gate.webp') center / cover no-repeat,
     #050607;
-  perspective: 1500px;
+  perspective: none;
   overflow: hidden;
-  transform-style: preserve-3d;
+  transform-style: flat;
   transition:
-    opacity 620ms ease 1320ms,
-    visibility 0s linear 1940ms;
+    opacity 520ms ease 760ms,
+    visibility 0s linear 1320ms;
 }
 
 .entry-gate::before,
@@ -581,10 +591,10 @@ video {
 }
 
 .is-entered .entry-gate {
+  animation: gateDissolve 980ms cubic-bezier(0.2, 0.72, 0.18, 1) forwards;
   visibility: hidden;
   opacity: 0;
   pointer-events: none;
-  background: transparent;
   cursor: default;
 }
 
@@ -598,111 +608,7 @@ video {
 }
 
 .gate-door {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 50.04%;
-  overflow: hidden;
-  transform: translate3d(0, 0, 0) rotateY(0deg);
-  backface-visibility: hidden;
-  box-shadow: inset 0 0 70px rgba(2, 2, 2, 0.34);
-  transform-style: preserve-3d;
-  transition:
-    transform 1460ms var(--gate-swing) 120ms,
-    filter 1180ms ease 160ms,
-    opacity 960ms ease 260ms;
-  z-index: 1;
-  will-change: transform, filter, opacity;
-}
-
-.gate-door::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 200%;
-  background-image:
-    linear-gradient(rgba(4, 5, 6, 0.02), rgba(4, 5, 6, 0.16)),
-    url('/media/images/bg/dongfu-gate.webp');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  transform: translateZ(0) scale(1.01);
-  z-index: 1;
-}
-
-.gate-door::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  z-index: 2;
-  width: 2px;
-  background: linear-gradient(
-    180deg,
-    transparent,
-    rgba(255, 241, 190, 0.72) 18%,
-    rgba(255, 252, 223, 0.9) 50%,
-    rgba(216, 179, 95, 0.46) 82%,
-    transparent
-  );
-  box-shadow:
-    0 0 22px rgba(245, 216, 137, 0.5),
-    0 0 70px rgba(118, 168, 137, 0.22);
-  opacity: 0.58;
-  transition: opacity 720ms ease 320ms;
-}
-
-.gate-door-left {
-  left: 0;
-  transform-origin: left center;
-  box-shadow:
-    inset -58px 0 90px rgba(2, 2, 2, 0.4),
-    inset 0 0 70px rgba(2, 2, 2, 0.3);
-}
-
-.gate-door-left::before {
-  left: 0;
-}
-
-.gate-door-left::after {
-  right: 0;
-}
-
-.gate-door-right {
-  right: 0;
-  transform-origin: right center;
-  box-shadow:
-    inset 58px 0 90px rgba(2, 2, 2, 0.4),
-    inset 0 0 70px rgba(2, 2, 2, 0.3);
-}
-
-.gate-door-right::before {
-  right: 0;
-}
-
-.gate-door-right::after {
-  left: 0;
-}
-
-.entry-gate:hover .gate-door {
-  filter: brightness(1.1) saturate(1.08);
-}
-
-.is-entered .gate-door-left {
-  opacity: 0.96;
-  transform: rotateY(78deg) translateZ(16px);
-  filter: brightness(0.72) saturate(1.08);
-}
-
-.is-entered .gate-door-right {
-  opacity: 0.96;
-  transform: rotateY(-78deg) translateZ(16px);
-  filter: brightness(0.72) saturate(1.08);
-}
-
-.is-entered .gate-door::after {
-  opacity: 0.16;
+  display: none;
 }
 
 .gate-light,
@@ -761,8 +667,8 @@ video {
 }
 
 .is-entered .gate-sky {
-  opacity: 0.86;
-  transform: scale(1.04);
+  opacity: 0.24;
+  transform: scale(1.01);
 }
 
 .gate-ring {
@@ -1821,7 +1727,7 @@ video {
     transform: scale(0.98);
   }
   56% {
-    opacity: 0.42;
+    opacity: 0.14;
     transform: scale(1.05);
   }
   100% {
@@ -1868,26 +1774,49 @@ video {
   }
 }
 
-@keyframes gateSeamOpen {
+@keyframes gateDissolve {
   0% {
-    opacity: 0.52;
-    transform: translate3d(0, 0, 0) scaleX(0.46) scaleY(1);
-    filter: blur(0);
+    opacity: 1;
+    filter: brightness(1) saturate(1);
+    transform: scale(1);
   }
-  28% {
-    opacity: 0.82;
-    transform: translate3d(0, 0, 0) scaleX(0.9) scaleY(1.02);
-    filter: blur(1px);
+  34% {
+    opacity: 0.96;
+    filter: brightness(1.12) saturate(1.04);
+    transform: scale(1.006);
   }
-  62% {
-    opacity: 0.36;
-    transform: translate3d(0, 0, 0) scaleX(2.7) scaleY(1.08);
-    filter: blur(7px);
+  72% {
+    opacity: 0.46;
+    filter: brightness(1.18) saturate(0.96) blur(2px);
+    transform: scale(1.018);
   }
   100% {
     opacity: 0;
-    transform: translate3d(0, 0, 0) scaleX(3.4) scaleY(1.12);
-    filter: blur(14px);
+    filter: brightness(1.22) saturate(0.9) blur(8px);
+    transform: scale(1.032);
+  }
+}
+
+@keyframes gateSeamOpen {
+  0% {
+    opacity: 0.44;
+    transform: translate3d(0, 0, 0) scaleX(0.32) scaleY(1);
+    filter: blur(0);
+  }
+  24% {
+    opacity: 0.58;
+    transform: translate3d(0, 0, 0) scaleX(0.68) scaleY(1.01);
+    filter: blur(1px);
+  }
+  58% {
+    opacity: 0.16;
+    transform: translate3d(0, 0, 0) scaleX(1.55) scaleY(1.04);
+    filter: blur(5px);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0) scaleX(2.1) scaleY(1.06);
+    filter: blur(10px);
   }
 }
 
@@ -2064,7 +1993,9 @@ video {
   .timeline-atmosphere::before,
   .timeline-atmosphere::after,
   .rail-runner,
+  .entry-gate,
   .entry-gate::before,
+  .gate-door,
   .gate-light,
   .gate-ring,
   .gate-sword,
@@ -2388,6 +2319,14 @@ video {
   scrollbar-width: none;
 }
 
+.fan-nav-actions {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.45rem;
+}
+
 .fan-nav nav::-webkit-scrollbar {
   display: none;
 }
@@ -2586,10 +2525,10 @@ video {
   inset: 0;
   z-index: -2;
   pointer-events: none;
-  opacity: calc(0.16 + var(--timeline-progress) * 0.18);
+  opacity: calc(0.16 + var(--timeline-progress, 0) * 0.18);
   background:
     radial-gradient(
-      circle at 50% var(--timeline-progress-percent),
+      circle at 50% var(--timeline-progress-percent, 0%),
       rgba(245, 216, 137, 0.16),
       transparent 18rem
     ),
@@ -2719,7 +2658,7 @@ video {
 .rail-line-fill {
   bottom: auto;
   height: 100%;
-  transform: scaleY(var(--timeline-progress));
+  transform: scaleY(var(--timeline-progress, 0));
   transform-origin: top;
   background:
     linear-gradient(
@@ -2911,6 +2850,8 @@ video {
 }
 
 .cinematic-scene {
+  content-visibility: auto;
+  contain-intrinsic-size: 1000px 720px;
   display: grid;
   grid-template-columns: minmax(300px, 1.04fr) minmax(0, 0.96fr);
   gap: clamp(1.4rem, 4.4vw, 5.2rem);
@@ -2999,15 +2940,15 @@ video {
   pointer-events: none;
 }
 
-.scene-visual::before,
-.scene-visual::after,
-.scene-halo,
-.scene-glyph,
-.scene-character-cloud,
-.scene-artifact-cloud,
-.scene-frame-strip,
-.scene-orbit,
-.scene-particles {
+.cinematic-scene.is-active .scene-visual::before,
+.cinematic-scene.is-active .scene-visual::after,
+.cinematic-scene.is-active .scene-halo,
+.cinematic-scene.is-active .scene-glyph,
+.cinematic-scene.is-active .scene-character-cloud,
+.cinematic-scene.is-active .scene-artifact-cloud,
+.cinematic-scene.is-active .scene-frame-strip,
+.cinematic-scene.is-active .scene-orbit,
+.cinematic-scene.is-active .scene-particles {
   will-change: opacity, transform;
 }
 
@@ -5604,6 +5545,12 @@ video {
     flex-direction: column;
   }
 
+  .fan-nav-actions {
+    position: absolute;
+    top: 0.48rem;
+    right: 0.52rem;
+  }
+
   .fan-brand {
     justify-content: center;
   }
@@ -5653,13 +5600,6 @@ video {
 
   .home-hero-copy {
     padding: 8.5rem 0 4rem;
-  }
-
-  .home-shell .sound-toggle {
-    top: 7.25rem;
-    right: 1rem;
-    width: 40px;
-    height: 40px;
   }
 
   .home-hero-copy h1 {

@@ -19,6 +19,7 @@ export type CharacterNode = {
   id: string
   name: string
   track: string
+  image: string
   firstEventId: string
   firstPlace: string
   echo: string
@@ -49,11 +50,9 @@ export type WallpaperSource = {
 export const countdownTarget = '2026-06-13T11:00:00+08:00'
 
 export const navItems = [
-  { href: '/timeline', label: '仙途长卷', shortLabel: '长卷' },
-  { href: '/relationships', label: '人物星图', shortLabel: '星图' },
-  { href: '/artifacts', label: '法宝行囊', shortLabel: '法宝' },
-  { href: '/game', label: '星图消消乐', shortLabel: '消消' },
+  { href: '/#hanli-timeline', label: '修仙长卷', shortLabel: '长卷' },
   { href: '/run', label: '韩跑跑', shortLabel: '韩跑跑' },
+  { href: '/game', label: '星图消消乐', shortLabel: '消消' },
   { href: '/wallpapers', label: '壁纸洞府', shortLabel: '更多' },
 ]
 
@@ -218,6 +217,7 @@ export const characters: CharacterNode[] = [
     id: 'nangong-wan',
     name: '南宫婉',
     track: '血色禁地',
+    image: '/media/images/characters/nangong-wan.webp',
     firstEventId: 'bloody',
     firstPlace: '血色禁地',
     echo: '血色禁地一场意外，把两个人的仙途拧在了一起。',
@@ -229,6 +229,7 @@ export const characters: CharacterNode[] = [
     id: 'zi-ling',
     name: '紫灵',
     track: '乱星海',
+    image: '/media/images/characters/zi-ling.webp',
     firstEventId: 'sea',
     firstPlace: '乱星海',
     echo: '乱星海里的明艳一笔，近又远，亮又飘。',
@@ -240,6 +241,7 @@ export const characters: CharacterNode[] = [
     id: 'yuan-yao',
     name: '元瑶',
     track: '乱星海',
+    image: '/media/images/characters/yuanyao.webp',
     firstEventId: 'sea',
     firstPlace: '乱星海',
     echo: '鬼修线让乱星海更冷，也让韩立少见地留下几分柔软。',
@@ -251,6 +253,7 @@ export const characters: CharacterNode[] = [
     id: 'yinyue',
     name: '银月',
     track: '虚天殿后',
+    image: '/media/images/characters/yinyue.webp',
     firstEventId: 'xutian',
     firstPlace: '虚天殿',
     echo: '从器灵到身世伏笔，她把人界故事自然牵向更大的世界。',
@@ -262,6 +265,7 @@ export const characters: CharacterNode[] = [
     id: 'xin-ruyin',
     name: '辛如音',
     track: '初入仙途',
+    image: '/media/images/characters/xin-ruyin.webp',
     firstEventId: 'huangfeng',
     firstPlace: '黄枫谷外',
     echo: '阵法、旧宅、遗愿，她的支线不喧哗，却很有凡人味。',
@@ -273,6 +277,7 @@ export const characters: CharacterNode[] = [
     id: 'li-feiyu',
     name: '厉飞雨',
     track: '七玄门',
+    image: '/media/images/characters/li-feyu.webp',
     firstEventId: 'qixuan',
     firstPlace: '七玄门',
     echo: '少年旧友，是韩立踏入江湖门缝时少见的亮色。',
@@ -284,6 +289,7 @@ export const characters: CharacterNode[] = [
     id: 'xiang-zhili',
     name: '向之礼',
     track: '血色禁地',
+    image: '/media/images/characters/xiang-zhili.webp',
     firstEventId: 'bloody',
     firstPlace: '血色禁地',
     echo: '看似闲散，实则把人界上限悄悄埋进早期剧情。',

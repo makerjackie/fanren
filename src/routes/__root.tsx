@@ -18,7 +18,7 @@ export const Route = createRootRoute({
       {
         name: 'description',
         content:
-          '从七玄门到乱星海，翻仙途长卷、点人物星图、试法宝行囊、跑一段韩跑跑小游戏。',
+          '从七玄门到乱星海，翻修仙长卷、看人物法宝索引、跑一段韩跑跑小游戏。',
       },
     ],
     links: [

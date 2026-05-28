@@ -20,9 +20,9 @@ function CharacterMatchPage() {
             交换相邻棋子，三个一样就消除。韩立、南宫婉、墨大夫、掌天瓶有特殊效果。
           </p>
         </div>
-        <a className="ink-button" href="/relationships">
+        <a className="ink-button" href="/#fanren-index">
           <Sparkles size={17} />
-          人物星图
+          人物索引
         </a>
       </section>
       <CharacterMatchGame />

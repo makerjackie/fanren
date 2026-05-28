@@ -25,7 +25,7 @@ import { artifacts, characters, countdownTarget } from '../data/fanrenWorld'
 
 export const Route = createFileRoute('/')({ component: Home })
 
-const HERO_PREVIEW_VIDEO = '/media/videos/hero-mini.mp4'
+const HERO_PREVIEW_VIDEO = '/media/videos/hero-preview.mp4'
 const HERO_HIGH_VIDEO = '/media/videos/hero-compress.mp4'
 const HOME_AUDIO_VOLUME = 0.34
 
@@ -84,11 +84,11 @@ const homeTimelineNodes: HomeTimelineNode[] = [
     id: 'wili-gou',
     order: '01',
     title: '五里沟 / 少年韩立',
-    phase: '凡人少年',
+    phase: '离乡入门',
     realm: '凡人',
     summary:
-      '山村里的少年第一次离家，命运线从一盏微光开始。仙途还远，他先学会把每一步走稳。',
-    tags: ['五里沟', '离乡', '命线初起'],
+      '韩立出身五里沟贫寒农家，被七玄门选中收为外门弟子，与张铁一起离开山村，踏上修仙路。',
+    tags: ['五里沟', '七玄门', '入门'],
     symbol: '凡',
     visual: 'village',
     image: '/media/images/bg/dongfu-gate.webp',
@@ -122,14 +122,14 @@ const homeTimelineNodes: HomeTimelineNode[] = [
     id: 'qixuan-men',
     order: '02',
     title: '七玄门',
-    phase: '江湖入门',
+    phase: '初入山门',
     realm: '凡人',
     summary:
-      '山门一开，韩立从村路走进江湖。这里没有仙气满堂，只有规矩、试探和活下去的本事。',
-    tags: ['山门', '厉飞雨', '初入局'],
+      '韩立在七玄门做外门弟子，与厉飞雨结交为友，在门派底层磨砺性子，学会在规矩中求存。',
+    tags: ['七玄门', '厉飞雨', '外门弟子'],
     symbol: '门',
     visual: 'gate',
-    image: '/media/images/bg/hanli-map.webp',
+    image: '/media/images/sourced/bili-ep2-frame.webp',
     characters: [
       {
         src: '/media/images/characters/hanli.webp',
@@ -165,14 +165,14 @@ const homeTimelineNodes: HomeTimelineNode[] = [
     id: 'mo-daifu',
     order: '03',
     title: '墨大夫',
-    phase: '神手谷危局',
+    phase: '夺舍之劫',
     realm: '凡人',
     summary:
-      '药炉、黑雾和一场蓄谋已久的夺舍，把少年人的信任烧成警醒。韩立的谨慎从这里真正成形。',
-    tags: ['神手谷', '药炉', '危机'],
+      '墨大夫暗中修炼夺舍邪术，临死前企图强占韩立肉身。韩立拼死反击，从此学会不轻信任何人。',
+    tags: ['神手谷', '夺舍', '墨大夫'],
     symbol: '墨',
     visual: 'medicine',
-    image: '/media/images/characters/mo-daifu.webp',
+    image: '/media/images/sourced/bili-ep3-frame.webp',
     characters: [
       {
         src: '/media/images/characters/mo-daifu.webp',
@@ -208,11 +208,11 @@ const homeTimelineNodes: HomeTimelineNode[] = [
     id: 'green-bottle',
     order: '04',
     title: '小绿瓶',
-    phase: '仙缘入手',
+    phase: '掌天瓶现',
     realm: '练气',
     summary:
-      '一只小瓶让灵草有了时间，也让韩立有了和资质讨价还价的余地。微光从掌心照进漫长仙路。',
-    tags: ['掌天瓶', '灵草', '机缘'],
+      '韩立在神手谷意外获得掌天瓶，发现灵草在瓶中可以加速生长，从此有了提升修炼资源的底牌。',
+    tags: ['掌天瓶', '灵草加速', '修炼底牌'],
     symbol: '瓶',
     visual: 'bottle',
     characters: [
@@ -242,11 +242,11 @@ const homeTimelineNodes: HomeTimelineNode[] = [
     id: 'huangfeng-gu',
     order: '05',
     title: '黄枫谷',
-    phase: '仙门修行',
+    phase: '入谷修行',
     realm: '练气后期',
     summary:
-      '药园、洞府、飞剑和阵法慢慢入卷。韩立开始把资源、消息和退路一件件收进自己的行囊。',
-    tags: ['黄枫谷', '药园', '飞剑'],
+      '韩立加入黄枫谷，管理药园积累资源，结识辛如音习得阵法，青竹蜂云剑初成，飞剑之路正式起步。',
+    tags: ['黄枫谷', '药园', '青竹蜂云剑'],
     symbol: '谷',
     visual: 'valley',
     image: '/media/images/bg/timeline-poster.jpg',
@@ -290,14 +290,14 @@ const homeTimelineNodes: HomeTimelineNode[] = [
     id: 'bloody-land',
     order: '06',
     title: '血色禁地',
-    phase: '试炼夺药',
+    phase: '禁地试炼',
     realm: '筑基机缘',
     summary:
-      '红雾压低山色，试炼把机缘和杀意放在同一处。南宫婉入卷，韩立的早期命运也被改写。',
-    tags: ['禁地', '南宫婉', '夺药'],
+      '七派血色禁地联合试炼，韩立在禁地中与南宫婉意外相遇，共历生死，两人命运从此交织。',
+    tags: ['血色禁地', '南宫婉', '七派试炼'],
     symbol: '血',
     visual: 'bloody',
-    image: '/media/images/characters/nangong-wan.webp',
+    image: '/media/images/sourced/aigei-battle.jpg',
     characters: [
       {
         src: '/media/images/characters/nangong-wan.webp',
@@ -328,11 +328,11 @@ const homeTimelineNodes: HomeTimelineNode[] = [
     id: 'foundation',
     order: '07',
     title: '筑基',
-    phase: '境界突破',
+    phase: '筑基突破',
     realm: '筑基',
     summary:
-      '灵力沉入根基，命线第一次真正向上抬升。韩立不再只是躲进角落的少年修士。',
-    tags: ['筑基丹', '境界阶梯', '根基'],
+      '韩立服下筑基丹，突破练气瓶颈，正式踏入筑基期，从底层散修跨入正经修士的门槛。',
+    tags: ['筑基丹', '筑基期', '境界突破'],
     symbol: '基',
     visual: 'foundation',
     characters: [
@@ -367,11 +367,11 @@ const homeTimelineNodes: HomeTimelineNode[] = [
     id: 'star-sea',
     order: '08',
     title: '乱星海',
-    phase: '远遁外海',
+    phase: '远赴乱星海',
     realm: '结丹前后',
     summary:
-      '海雾和星光把地图忽然拉大。宗门弟子成了独行修士，新的洞府、旧人和灵虫都在海上浮现。',
-    tags: ['外海', '星宫', '独行'],
+      '天南正魔大战后韩立远遁乱星海，独行外海修行，结识紫灵、元瑶，收服噬金虫群。',
+    tags: ['乱星海', '外海', '噬金虫'],
     symbol: '海',
     visual: 'sea',
     image: '/media/images/bg/galaxy-bg.webp',
@@ -410,11 +410,11 @@ const homeTimelineNodes: HomeTimelineNode[] = [
     id: 'gold-core',
     order: '09',
     title: '结丹',
-    phase: '金丹凝聚',
+    phase: '金丹凝成',
     realm: '结丹',
     summary:
-      '金光在丹田聚成一点，韩立终于摸到高阶修士的门槛。小心和底牌开始变成体系。',
-    tags: ['金丹', '雷光', '体系初成'],
+      '韩立在乱星海闭关结丹，青竹蜂云剑阵、噬金虫群和功法体系成型，正式成为中阶修士。',
+    tags: ['金丹', '剑阵', '体系成型'],
     symbol: '丹',
     visual: 'core',
     characters: [
@@ -444,14 +444,14 @@ const homeTimelineNodes: HomeTimelineNode[] = [
     id: 'xutian-palace',
     order: '10',
     title: '虚天殿',
-    phase: '高阶牌桌',
+    phase: '虚天殿夺宝',
     realm: '结丹中后期',
     summary:
-      '古殿轮廓从海雾里露出，高阶修士各怀算计。韩立在夹缝里拿机缘，也把牌面抬高一层。',
+      '虚天殿开启，韩立与蛮胡子、万天明等元婴修士周旋算计，在夹缝中取得虚天鼎和乾蓝冰焰，收服银月。',
     tags: ['虚天鼎', '乾蓝冰焰', '银月'],
     symbol: '殿',
     visual: 'palace',
-    image: '/media/images/bg/timeline-full.webp',
+    image: '/media/images/bg-image/玄骨2.webp',
     characters: [
       {
         src: '/media/images/characters/yinyue.webp',
@@ -487,11 +487,11 @@ const homeTimelineNodes: HomeTimelineNode[] = [
     id: 'nascent-soul',
     order: '11',
     title: '元婴',
-    phase: '韩老魔成型',
+    phase: '落云结婴',
     realm: '元婴',
     summary:
-      '人影与灵光分化，飞剑、神雷、灵虫和心性连成完整打法。韩立终于坐上自己的位置。',
-    tags: ['元婴', '青竹蜂云剑', '辟邪神雷'],
+      '韩立回到天南加入落云宗，凝结元婴突破大关，飞剑、神雷、灵虫连成完整战斗体系，人称"韩老魔"。',
+    tags: ['元婴', '落云宗', '韩老魔'],
     symbol: '婴',
     visual: 'nascent',
     characters: [
@@ -524,14 +524,14 @@ const homeTimelineNodes: HomeTimelineNode[] = [
     id: 'spirit-world',
     order: '12',
     title: '飞升灵界',
-    phase: '人界终章',
+    phase: '破界飞升',
     realm: '化神之后',
     summary:
-      '人界长卷走到尽头，空间裂隙把故事推向更大的世界。旧路收束，新的门在天光里亮起。',
-    tags: ['空间节点', '灵界', '新篇章'],
+      '韩立化神之后找到空间节点，破开人界与灵界的壁障飞升灵界，凡人修仙传人界篇至此完结。',
+    tags: ['空间节点', '飞升', '灵界'],
     symbol: '升',
     visual: 'ascend',
-    image: '/media/images/bg/galaxy-bg.webp',
+    image: '/media/images/bg/oracle-poster.jpg',
     characters: [
       {
         src: '/media/images/characters/xiang-zhili.webp',
@@ -569,12 +569,12 @@ function Home() {
   const [heroHighSource, setHeroHighSource] = useState<string | null>(null)
   const [heroHighReady, setHeroHighReady] = useState(false)
   const [activeTimelineIndex, setActiveTimelineIndex] = useState(0)
-  const [timelineProgress, setTimelineProgress] = useState(0)
-  const countdown = useCountdown(countdownTarget)
-  const countdownActive =
-    countdown.remainingMs === null || countdown.remainingMs > 0
 
   useEffect(() => {
+    if (!entered || heroHighSource) {
+      return
+    }
+
     const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
     const connection = (
       navigator as Navigator & {
@@ -587,21 +587,35 @@ function Home() {
     }
 
     const loadHighVideo = () => setHeroHighSource(HERO_HIGH_VIDEO)
-    const timerId = window.setTimeout(loadHighVideo, 1800)
+    const timerId = window.setTimeout(loadHighVideo, 1200)
     return () => window.clearTimeout(timerId)
-  }, [])
+  }, [entered, heroHighSource])
 
   useEffect(() => {
     const section = timelineRef.current
     if (!section) return
 
     let animationFrame = 0
+    let lastProgress = -1
+
+    const writeProgress = (progress: number) => {
+      const nextProgress = Math.round(progress * 1000) / 1000
+      if (Math.abs(nextProgress - lastProgress) < 0.002) return
+
+      lastProgress = nextProgress
+      section.style.setProperty('--timeline-progress', String(nextProgress))
+      section.style.setProperty(
+        '--timeline-progress-percent',
+        `${nextProgress * 100}%`,
+      )
+    }
+
     const updateProgress = () => {
       animationFrame = 0
       const rect = section.getBoundingClientRect()
       const scrollableDistance = Math.max(rect.height - window.innerHeight, 1)
       const current = Math.min(Math.max(-rect.top, 0), scrollableDistance)
-      setTimelineProgress(current / scrollableDistance)
+      writeProgress(current / scrollableDistance)
     }
 
     const requestUpdate = () => {
@@ -645,7 +659,9 @@ function Home() {
         )
 
         if (Number.isFinite(nextIndex)) {
-          setActiveTimelineIndex(nextIndex)
+          setActiveTimelineIndex((currentIndex) =>
+            currentIndex === nextIndex ? currentIndex : nextIndex,
+          )
         }
       },
       {
@@ -694,7 +710,9 @@ function Home() {
   }
 
   const enterSite = () => {
-    setEntered(true)
+    if (!entered) {
+      setEntered(true)
+    }
     playHomeAudio()
   }
 
@@ -717,9 +735,20 @@ function Home() {
 
   return (
     <main className={`home-shell ${entered ? 'is-entered' : ''}`}>
-      <audio ref={audioRef} src="/media/audio/bufan.mp3" preload="auto" loop />
+      <audio ref={audioRef} src="/media/audio/bufan.mp3" preload="none" loop />
       <span className="world-flash" aria-hidden="true" />
-      <SiteNav />
+      <SiteNav
+        actions={
+          <button
+            className="sound-toggle"
+            type="button"
+            onClick={toggleSound}
+            aria-label={soundOn ? '关闭背景声' : '播放背景声'}
+          >
+            {soundOn ? <Volume2 size={18} /> : <VolumeX size={18} />}
+          </button>
+        }
+      />
 
       <section className="home-hero" aria-label="凡人修仙阁入口">
         <div className="hero-media" aria-hidden="true">
@@ -731,7 +760,7 @@ function Home() {
             loop
             muted
             playsInline
-            preload="auto"
+            preload="metadata"
             poster="/media/images/bg/hero-poster.jpg"
           >
             <source src={HERO_PREVIEW_VIDEO} type="video/mp4" />
@@ -769,44 +798,7 @@ function Home() {
           ))}
         </div>
 
-        <button
-          className="sound-toggle"
-          type="button"
-          onClick={toggleSound}
-          aria-label={soundOn ? '关闭背景声' : '播放背景声'}
-        >
-          {soundOn ? <Volume2 size={18} /> : <VolumeX size={18} />}
-        </button>
-
-        <div className="home-hero-copy">
-          <p className="seal-line">凡人修仙阁</p>
-          <h1>{countdownActive ? '慕兰之战，归期已定' : '凡人修仙阁'}</h1>
-          <p className="home-hero-subtitle">
-            {countdownActive
-              ? '6 月 13 日 11:00，请道友回阁'
-              : '七玄门风起，乱星海潮生，请道友翻开韩立这一卷'}
-          </p>
-
-          {countdownActive ? (
-            <div className="countdown-altar" aria-label="复播倒计时">
-              <CountdownUnit label="天" value={countdown.days} />
-              <CountdownUnit label="时" value={countdown.hours} />
-              <CountdownUnit label="分" value={countdown.minutes} />
-              <CountdownUnit label="秒" value={countdown.seconds} />
-            </div>
-          ) : null}
-
-          <div className="hero-actions">
-            <a className="primary-link" href="#hanli-timeline">
-              <Map size={18} />
-              入阁翻卷
-            </a>
-            <a className="ghost-link" href="/run">
-              <Footprints size={18} />
-              韩跑跑出发
-            </a>
-          </div>
-        </div>
+        <HomeHeroCopy />
       </section>
 
       <button
@@ -840,8 +832,6 @@ function Home() {
         ref={timelineRef}
         style={
           {
-            '--timeline-progress': timelineProgress,
-            '--timeline-progress-percent': `${timelineProgress * 100}%`,
             '--active-index': activeTimelineIndex,
           } as CSSProperties
         }
@@ -1071,6 +1061,44 @@ function Home() {
         </a>
       </footer>
     </main>
+  )
+}
+
+function HomeHeroCopy() {
+  const countdown = useCountdown(countdownTarget)
+  const countdownActive =
+    countdown.remainingMs === null || countdown.remainingMs > 0
+
+  return (
+    <div className="home-hero-copy">
+      <p className="seal-line">凡人修仙阁</p>
+      <h1>{countdownActive ? '慕兰之战，归期已定' : '凡人修仙阁'}</h1>
+      <p className="home-hero-subtitle">
+        {countdownActive
+          ? '6 月 13 日 11:00，请道友回阁'
+          : '七玄门风起，乱星海潮生，请道友翻开韩立这一卷'}
+      </p>
+
+      {countdownActive ? (
+        <div className="countdown-altar" aria-label="复播倒计时">
+          <CountdownUnit label="天" value={countdown.days} />
+          <CountdownUnit label="时" value={countdown.hours} />
+          <CountdownUnit label="分" value={countdown.minutes} />
+          <CountdownUnit label="秒" value={countdown.seconds} />
+        </div>
+      ) : null}
+
+      <div className="hero-actions">
+        <a className="primary-link" href="#hanli-timeline">
+          <Map size={18} />
+          入阁翻卷
+        </a>
+        <a className="ghost-link" href="/run">
+          <Footprints size={18} />
+          韩跑跑出发
+        </a>
+      </div>
+    </div>
   )
 }
 

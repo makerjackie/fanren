@@ -1,7 +1,17 @@
-import { RotateCcw, Shuffle, Sparkles, Star, Wand2 } from 'lucide-react'
+import {
+  RotateCcw,
+  Shuffle,
+  Sparkles,
+  Star,
+  Volume2,
+  VolumeX,
+  Wand2,
+} from 'lucide-react'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import type { CSSProperties } from 'react'
 
+import { playCharacterMatchSound } from '../../game/character-match/audio'
+import type { MatchSoundType } from '../../game/character-match/audio'
 import {
   areAdjacent,
   chooseMatchCell,
@@ -138,6 +148,7 @@ export function CharacterMatchGame() {
   const [visualBoard, setVisualBoard] = useState<MatchCell[]>(() => game.board)
   const [feedback, setFeedback] = useState<MatchFeedback | null>(null)
   const [animation, setAnimation] = useState<MatchAnimation | null>(null)
+  const [soundOn, setSoundOn] = useState(true)
   const settleTimerRef = useRef<number | null>(null)
 
   const dangerByIndex = useMemo(
@@ -150,6 +161,10 @@ export function CharacterMatchGame() {
   )
   const selectedToken =
     game.selectedIndex === null ? null : game.board[game.selectedIndex]
+
+  const playSound = (type: MatchSoundType) => {
+    playCharacterMatchSound(type, soundOn)
+  }
 
   const chooseCell = (index: number) => {
     if (animation) return
@@ -168,6 +183,9 @@ export function CharacterMatchGame() {
           line: preview.lineIndices,
           special: preview.special,
         }
+        const soundType = soundForMove(game, next, preview.special)
+        playSound(soundType)
+        pulseHaptic(soundType)
         setVisualBoard(preview.swappedBoard)
         setAnimation(matchAnimation)
         setFeedback(buildFeedback(game, next, preview.clearIndices))
@@ -181,11 +199,18 @@ export function CharacterMatchGame() {
       }
     }
 
+    const nextFeedback = buildFeedback(
+      game,
+      next,
+      from === null ? [index] : [from, index],
+    )
+    const soundType =
+      nextFeedback.boardClass === 'is-missing' ? 'miss' : 'select'
+    playSound(soundType)
+    pulseHaptic(soundType)
     setGame(next)
     setVisualBoard(next.board)
-    setFeedback(
-      buildFeedback(game, next, from === null ? [index] : [from, index]),
-    )
+    setFeedback(nextFeedback)
   }
   const restart = () => {
     if (settleTimerRef.current) window.clearTimeout(settleTimerRef.current)
@@ -193,6 +218,8 @@ export function CharacterMatchGame() {
     setGame(next)
     setVisualBoard(next.board)
     setAnimation(null)
+    playSound('restart')
+    pulseHaptic('restart')
     setFeedback(
       makeFeedback({
         title: '重开',
@@ -207,6 +234,8 @@ export function CharacterMatchGame() {
     const next = revealHint(game)
     setGame(next)
     setVisualBoard(next.board)
+    playSound('hint')
+    pulseHaptic('hint')
     setFeedback(
       makeFeedback({
         title: '提示',
@@ -223,6 +252,8 @@ export function CharacterMatchGame() {
     setGame(next)
     setVisualBoard(next.board)
     setAnimation(null)
+    playSound('shuffle')
+    pulseHaptic('shuffle')
     setFeedback(
       makeFeedback({
         title: '重排',
@@ -232,6 +263,22 @@ export function CharacterMatchGame() {
       }),
     )
   }
+  const toggleSound = () => {
+    const next = !soundOn
+    setSoundOn(next)
+    if (typeof window !== 'undefined') {
+      window.localStorage.setItem('character-match-sound', next ? '1' : '0')
+    }
+    if (next) {
+      playCharacterMatchSound('select', true)
+    }
+  }
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    const saved = window.localStorage.getItem('character-match-sound')
+    if (saved !== null) setSoundOn(saved === '1')
+  }, [])
 
   useEffect(() => {
     if (!feedback) return
@@ -246,7 +293,10 @@ export function CharacterMatchGame() {
   }, [])
 
   return (
-    <section className="character-match-shell" aria-label="人物星图消消乐">
+    <section
+      className={`character-match-shell ${soundOn ? 'sound-on' : 'sound-off'}`}
+      aria-label="人物星图消消乐"
+    >
       <div className="match-arena">
         <div className="match-board-panel">
           <div className="match-board-meta" aria-live="polite">
@@ -400,6 +450,18 @@ export function CharacterMatchGame() {
               <RotateCcw size={16} />
               重开
             </button>
+            <button
+              className={`ink-button match-sound-toggle ${
+                soundOn ? 'sound-on' : 'sound-off'
+              }`}
+              type="button"
+              onClick={toggleSound}
+              aria-pressed={soundOn}
+              aria-label={soundOn ? '关闭音效' : '打开音效'}
+            >
+              {soundOn ? <Volume2 size={16} /> : <VolumeX size={16} />}
+              {soundOn ? '音效' : '静音'}
+            </button>
           </div>
         </div>
 
@@ -415,6 +477,24 @@ export function CharacterMatchGame() {
             </span>
             <strong>{feedback?.title ?? '三消得分'}</strong>
             <em>{feedback?.detail ?? '红色数字先清掉'}</em>
+            {feedback ? (
+              <div
+                key={`wave-${feedback.id}`}
+                className={`match-wave ${feedback.tone}`}
+                aria-hidden="true"
+              >
+                {[0, 1, 2, 3, 4, 5, 6].map((bar) => (
+                  <i
+                    key={bar}
+                    style={
+                      {
+                        '--wave-index': bar,
+                      } as CSSProperties
+                    }
+                  />
+                ))}
+              </div>
+            ) : null}
           </div>
 
           <div className="match-meter" aria-label={`羁绊 ${game.bond} / 3`}>
@@ -572,6 +652,24 @@ function buildFeedback(
   })
 }
 
+function soundForMove(
+  previous: CharacterMatchState,
+  next: CharacterMatchState,
+  special: boolean,
+): MatchSoundType {
+  if (special) return 'special'
+
+  const addedDangers = next.dangerCells.length > previous.dangerCells.length
+  if (addedDangers) return 'danger'
+
+  const upgraded =
+    next.board.filter((cell) => cell.rank === 2).length >
+    previous.board.filter((cell) => cell.rank === 2).length
+  if (upgraded) return 'upgrade'
+
+  return 'clear'
+}
+
 function makeFeedback(
   feedback: Omit<MatchFeedback, 'id' | 'delta' | 'combo' | 'pulse'> &
     Partial<Pick<MatchFeedback, 'delta' | 'combo' | 'pulse'>>,
@@ -606,4 +704,27 @@ function cellCenter(index: number) {
     x: ((col + 0.5) / matchBoardSize) * 100,
     y: ((row + 0.5) / matchBoardSize) * 100,
   }
+}
+
+function pulseHaptic(type: MatchSoundType) {
+  if (typeof window === 'undefined') return
+
+  if (type === 'special') {
+    vibrate([18, 28, 18])
+    return
+  }
+
+  if (type === 'miss' || type === 'danger') {
+    vibrate(22)
+    return
+  }
+
+  vibrate(10)
+}
+
+function vibrate(pattern: number | number[]) {
+  const maybeNavigator = window.navigator as {
+    vibrate?: (pattern: number | number[]) => boolean
+  }
+  maybeNavigator.vibrate?.(pattern)
 }
