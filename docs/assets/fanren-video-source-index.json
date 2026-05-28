@@ -1,0 +1,192 @@
+{
+  "schema_version": "2026-05-27",
+  "purpose": "Track locally-downloaded video assets for the fanren homepage and media use, with source provenance.",
+  "authorized_file_pattern": {
+    "preview_mp4": "public/media/videos/candidates/<candidate-id>/hero-preview.mp4",
+    "high_mp4": "public/media/videos/candidates/<candidate-id>/hero.mp4",
+    "poster": "public/media/videos/candidates/<candidate-id>/poster.jpg",
+    "license_record": "docs/assets/licenses/<candidate-id>.md"
+  },
+  "items": [
+    {
+      "id": "bili-bv1jx9gb9eas-fanren-annual-0613",
+      "title": "【凡人年番定档】凡人修仙传年番定档0613",
+      "bvid": "BV1jx9gB9EAS",
+      "source_url": "https://www.bilibili.com/video/BV1jx9gB9EAS/",
+      "embed_url": "https://player.bilibili.com/player.html?bvid=BV1jx9gB9EAS&autoplay=0",
+      "source_name": "原力数字科技",
+      "source_type": "official_or_production_pv",
+      "duration": "00:50",
+      "recommended_authorized_use": "Homepage hero background candidate for the Mulan war / annual-series launch state.",
+      "future_local_paths": {
+        "preview_mp4": "public/media/videos/candidates/bili-bv1jx9gb9eas-fanren-annual-0613/hero-preview.mp4",
+        "high_mp4": "public/media/videos/candidates/bili-bv1jx9gb9eas-fanren-annual-0613/hero.mp4",
+        "poster": "public/media/videos/candidates/bili-bv1jx9gb9eas-fanren-annual-0613/poster.jpg",
+        "license_record": "docs/assets/licenses/bili-bv1jx9gb9eas-fanren-annual-0613.md"
+      },
+      "visual_notes": "Current homepage copy already references 慕兰之战, so this is the closest official-facing direction."
+    },
+    {
+      "id": "bili-bv1vukbyuezs-han-tianzun-return",
+      "title": "《凡人修仙传》年番定档PV发布！韩天尊归来，搅动外海风云！",
+      "bvid": "BV1VukbYUEZs",
+      "source_url": "https://www.bilibili.com/video/BV1VukbYUEZs/",
+      "embed_url": "https://player.bilibili.com/player.html?bvid=BV1VukbYUEZs&autoplay=0",
+      "source_name": "原力数字科技",
+      "source_type": "official_or_production_pv",
+      "duration": "01:15",
+      "recommended_authorized_use": "Hero background or PV section anchor for 韩天尊归来 / 外海风云.",
+      "future_local_paths": {
+        "preview_mp4": "public/media/videos/candidates/bili-bv1vukbyuezs-han-tianzun-return/hero-preview.mp4",
+        "high_mp4": "public/media/videos/candidates/bili-bv1vukbyuezs-han-tianzun-return/hero.mp4",
+        "poster": "public/media/videos/candidates/bili-bv1vukbyuezs-han-tianzun-return/poster.jpg",
+        "license_record": "docs/assets/licenses/bili-bv1vukbyuezs-han-tianzun-return.md"
+      },
+      "visual_notes": "Strong match for official atmosphere, characters, and large-scale battle energy."
+    },
+    {
+      "id": "bili-bv16e421g7to-hundred-episode-recap",
+      "title": "【凡人修仙传】百集纪念回顾PV发布！一键回顾韩立的修炼长路！",
+      "bvid": "BV16E421G7to",
+      "source_url": "https://www.bilibili.com/video/BV16E421G7to/",
+      "embed_url": "https://player.bilibili.com/player.html?bvid=BV16E421G7to&autoplay=0",
+      "source_name": "万维猫动画",
+      "source_type": "official_or_production_recap",
+      "duration": "03:13",
+      "recommended_authorized_use": "Source for an authorized 5-7 shot route-history loop.",
+      "future_local_paths": {
+        "preview_mp4": "public/media/videos/candidates/bili-bv16e421g7to-hundred-episode-recap/hero-preview.mp4",
+        "high_mp4": "public/media/videos/candidates/bili-bv16e421g7to-hundred-episode-recap/hero.mp4",
+        "poster": "public/media/videos/candidates/bili-bv16e421g7to-hundred-episode-recap/poster.jpg",
+        "license_record": "docs/assets/licenses/bili-bv16e421g7to-hundred-episode-recap.md"
+      },
+      "visual_notes": "Best official-style source for the requested important-scenes-and-characters montage direction."
+    },
+    {
+      "id": "bili-bv1fdgnzke5g-fifth-anniversary-making-of",
+      "title": "《凡人》动画五周年特别花絮奉上！五载光阴，以技证道",
+      "bvid": "BV1FDgnzKE5g",
+      "source_url": "https://www.bilibili.com/video/BV1FDgnzKE5g/",
+      "embed_url": "https://player.bilibili.com/player.html?bvid=BV1FDgnzKE5g&autoplay=0",
+      "source_name": "万维猫动画",
+      "source_type": "official_or_production_making_of",
+      "duration": "04:09",
+      "recommended_authorized_use": "Secondary video module, not the default homepage background.",
+      "future_local_paths": {
+        "preview_mp4": "public/media/videos/candidates/bili-bv1fdgnzke5g-fifth-anniversary-making-of/hero-preview.mp4",
+        "high_mp4": "public/media/videos/candidates/bili-bv1fdgnzke5g-fifth-anniversary-making-of/hero.mp4",
+        "poster": "public/media/videos/candidates/bili-bv1fdgnzke5g-fifth-anniversary-making-of/poster.jpg",
+        "license_record": "docs/assets/licenses/bili-bv1fdgnzke5g-fifth-anniversary-making-of.md"
+      },
+      "visual_notes": "Useful for behind-the-scenes credibility; less immersive as a silent hero loop."
+    },
+    {
+      "id": "bili-bv1ftYzzVEuE-hanli-nascent-soul",
+      "title": "【8K/HDR/120FPS】韩立结婴天兆全程，恭迎韩天尊",
+      "bvid": "BV1FtYzzVEuE",
+      "source_url": "https://www.bilibili.com/video/BV1FtYzzVEuE/",
+      "embed_url": "https://player.bilibili.com/player.html?bvid=BV1FtYzzVEuE&autoplay=0",
+      "source_name": "IM闪电",
+      "source_type": "fan_edit_or_enhanced_clip",
+      "duration": "02:59",
+      "recommended_authorized_use": "High-impact hero loop direction if both clip/uploader rights and IP usage rights are cleared.",
+      "future_local_paths": {
+        "preview_mp4": "public/media/videos/candidates/bili-bv1ftYzzVEuE-hanli-nascent-soul/hero-preview.mp4",
+        "high_mp4": "public/media/videos/candidates/bili-bv1ftYzzVEuE-hanli-nascent-soul/hero.mp4",
+        "poster": "public/media/videos/candidates/bili-bv1ftYzzVEuE-hanli-nascent-soul/poster.jpg",
+        "license_record": "docs/assets/licenses/bili-bv1ftYzzVEuE-hanli-nascent-soul.md"
+      },
+      "visual_notes": "Very strong visual impact, but likely too bright for readable hero text unless heavily graded and masked."
+    },
+    {
+      "id": "bili-bv1fnybzeey1-nascent-soul-wallpaper",
+      "title": "凡人修仙传，韩立元婴天象动态壁纸，已上传Wallpaper！！",
+      "bvid": "BV1FNYbzEEY1",
+      "source_url": "https://www.bilibili.com/video/BV1FNYbzEEY1/",
+      "embed_url": "https://player.bilibili.com/player.html?bvid=BV1FNYbzEEY1&autoplay=0",
+      "source_name": "汪凝是紫灵啊",
+      "source_type": "fan_wallpaper_or_wallpaper_engine",
+      "duration": "00:40",
+      "recommended_authorized_use": "Desktop-style looping hero background candidate.",
+      "future_local_paths": {
+        "preview_mp4": "public/media/videos/candidates/bili-bv1fnybzeey1-nascent-soul-wallpaper/hero-preview.mp4",
+        "high_mp4": "public/media/videos/candidates/bili-bv1fnybzeey1-nascent-soul-wallpaper/hero.mp4",
+        "poster": "public/media/videos/candidates/bili-bv1fnybzeey1-nascent-soul-wallpaper/poster.jpg",
+        "license_record": "docs/assets/licenses/bili-bv1fnybzeey1-nascent-soul-wallpaper.md"
+      },
+      "visual_notes": "Close to the desired looped dynamic-wallpaper feel."
+    },
+    {
+      "id": "bili-bv1oshczweao-scenery-compilation",
+      "title": "【8K/HDR/120FPS】凡人风景全合集，且看这二百多年的风景美学",
+      "bvid": "BV1oSHCzWEAo",
+      "source_url": "https://www.bilibili.com/video/BV1oSHCzWEAo/",
+      "embed_url": "https://player.bilibili.com/player.html?bvid=BV1oSHCzWEAo&autoplay=0",
+      "source_name": "IM闪电",
+      "source_type": "fan_edit_or_enhanced_clip",
+      "duration": "16:59",
+      "recommended_authorized_use": "Source direction for a calmer scenery-first homepage loop.",
+      "future_local_paths": {
+        "preview_mp4": "public/media/videos/candidates/bili-bv1oshczweao-scenery-compilation/hero-preview.mp4",
+        "high_mp4": "public/media/videos/candidates/bili-bv1oshczweao-scenery-compilation/hero.mp4",
+        "poster": "public/media/videos/candidates/bili-bv1oshczweao-scenery-compilation/poster.jpg",
+        "license_record": "docs/assets/licenses/bili-bv1oshczweao-scenery-compilation.md"
+      },
+      "visual_notes": "Best reference for a readable, long-lived background because scenery competes less with copy."
+    },
+    {
+      "id": "bili-bv1mngt6dejf-hanli-highlight-compilation",
+      "title": "【4K×HDR】凡人修仙传【韩立高光时刻超精剪大合集】极致画质+极致音效",
+      "bvid": "BV1mNGt6dEjf",
+      "source_url": "https://www.bilibili.com/video/BV1mNGt6dEjf/",
+      "embed_url": "https://player.bilibili.com/player.html?bvid=BV1mNGt6dEjf&autoplay=0",
+      "source_name": "4K音乐影像馆",
+      "source_type": "fan_edit_or_enhanced_clip",
+      "duration": "35:21",
+      "recommended_authorized_use": "Shot-list reference for important scenes and characters; avoid using the full long edit as a background.",
+      "future_local_paths": {
+        "preview_mp4": "public/media/videos/candidates/bili-bv1mngt6dejf-hanli-highlight-compilation/hero-preview.mp4",
+        "high_mp4": "public/media/videos/candidates/bili-bv1mngt6dejf-hanli-highlight-compilation/hero.mp4",
+        "poster": "public/media/videos/candidates/bili-bv1mngt6dejf-hanli-highlight-compilation/poster.jpg",
+        "license_record": "docs/assets/licenses/bili-bv1mngt6dejf-hanli-highlight-compilation.md"
+      },
+      "visual_notes": "Very close to the requested important-scene montage, but high rights risk and too long to use directly."
+    },
+    {
+      "id": "bili-bv1qpgb6pezz-fireworks-loop",
+      "title": "韩立看烟花循环壁纸wallpaper",
+      "bvid": "BV1QpGb6PEZz",
+      "source_url": "https://www.bilibili.com/video/BV1QpGb6PEZz/",
+      "embed_url": "https://player.bilibili.com/player.html?bvid=BV1QpGb6PEZz&autoplay=0",
+      "source_name": "落雨无声AI",
+      "source_type": "ai_or_fan_wallpaper",
+      "duration": "00:12",
+      "recommended_authorized_use": "Short loop reference for calm character wallpaper motion.",
+      "future_local_paths": {
+        "preview_mp4": "public/media/videos/candidates/bili-bv1qpgb6pezz-fireworks-loop/hero-preview.mp4",
+        "high_mp4": "public/media/videos/candidates/bili-bv1qpgb6pezz-fireworks-loop/hero.mp4",
+        "poster": "public/media/videos/candidates/bili-bv1qpgb6pezz-fireworks-loop/poster.jpg",
+        "license_record": "docs/assets/licenses/bili-bv1qpgb6pezz-fireworks-loop.md"
+      },
+      "visual_notes": "Good loop length and mood, but AI/IP rights need careful review."
+    },
+    {
+      "id": "bili-bv1ukskzlesj-wind-thunder-wings-wallpaper",
+      "title": "【凡人|8K动壁】风雷翅元婴韩立宛若神明，吓哭了！",
+      "bvid": "BV1uksKzLESj",
+      "source_url": "https://www.bilibili.com/video/BV1uksKzLESj/",
+      "embed_url": "https://player.bilibili.com/player.html?bvid=BV1uksKzLESj&autoplay=0",
+      "source_name": "佚之兔科",
+      "source_type": "fan_wallpaper_or_wallpaper_engine",
+      "duration": "00:49",
+      "recommended_authorized_use": "High-energy hero background candidate if a darker edit is authorized.",
+      "future_local_paths": {
+        "preview_mp4": "public/media/videos/candidates/bili-bv1ukskzlesj-wind-thunder-wings-wallpaper/hero-preview.mp4",
+        "high_mp4": "public/media/videos/candidates/bili-bv1ukskzlesj-wind-thunder-wings-wallpaper/hero.mp4",
+        "poster": "public/media/videos/candidates/bili-bv1ukskzlesj-wind-thunder-wings-wallpaper/poster.jpg",
+        "license_record": "docs/assets/licenses/bili-bv1ukskzlesj-wind-thunder-wings-wallpaper.md"
+      },
+      "visual_notes": "Strong character-focus dynamic-wallpaper direction, but should be treated as visual reference until cleared."
+    }
+  ]
+}

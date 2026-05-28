@@ -1,0 +1,673 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schema_version": "2026-05-26",
+  "metadata_schema": {
+    "id": "string, stable slug",
+    "source_url": "string | null",
+    "local_path": "string | null",
+    "stage": "string",
+    "event_ids": ["string"],
+    "character_names": ["string"],
+    "realm": "string | null",
+    "asset_type": "character | relationship | artifact | background_frame | motion | reference",
+    "description": "string",
+    "license_note": "string",
+    "source_risk": "low | medium | high | unknown",
+    "usage_status": "in_use | candidate | missing | reference_only | needs_license_review | approved",
+    "hash": "string | null",
+    "dimensions": {
+      "width": "number | null",
+      "height": "number | null"
+    },
+    "crawl_priority": "P0 | P1 | P2",
+    "notes": "string"
+  },
+  "source_priority": [
+    {
+      "rank": "P0",
+      "source": "fanren-website characters",
+      "target_asset_types": ["character", "relationship"],
+      "license_note": "Record original character page URL and official ownership. Self-host only after usage scope is confirmed.",
+      "source_risk": "medium"
+    },
+    {
+      "rank": "P0",
+      "source": "Bilibili readlist / episodes / PV",
+      "target_asset_types": ["background_frame", "motion", "reference"],
+      "license_note": "Use as reference first. Public self-hosted screenshots need explicit permission or replacement with redrawn/generated derivatives.",
+      "source_risk": "high"
+    },
+    {
+      "rank": "P1",
+      "source": "Aigei",
+      "target_asset_types": ["reference", "artifact", "background_frame"],
+      "license_note": "Capture asset page, author, and license terms per item before public use.",
+      "source_risk": "medium"
+    },
+    {
+      "rank": "P1",
+      "source": "Official pages / encyclopedia / video screenshots",
+      "target_asset_types": [
+        "character",
+        "artifact",
+        "background_frame",
+        "reference"
+      ],
+      "license_note": "Prefer source attribution and link-out. Trace encyclopedia images back to original source.",
+      "source_risk": "medium"
+    }
+  ],
+  "timeline_requirements": [
+    {
+      "event_id": "wili-gou",
+      "title": "五里沟 / 少年韩立",
+      "stage": "hanli-young-wiligou",
+      "realm": "凡人",
+      "required_asset_types": [
+        "character",
+        "relationship",
+        "artifact",
+        "background_frame",
+        "motion"
+      ],
+      "needed_assets": [
+        "少年韩立专属半身或全身形象",
+        "五里沟村路和离家背影",
+        "韩立、张铁早期关系图",
+        "凡人少年阶段微光/命线动效"
+      ],
+      "current_local_paths": [
+        "public/media/images/characters/hanli.webp",
+        "public/media/images/characters-extra/zhang-tie.webp",
+        "public/media/images/bg/dongfu-gate.webp",
+        "public/media/images/sourced/bili-ep1-frame.webp",
+        "public/media/images/sourced/bili-ep2-frame.webp"
+      ],
+      "gap_summary": "通用韩立不能区分少年阶段，B 站帧低清且授权风险高。",
+      "crawl_priority": "P0"
+    },
+    {
+      "event_id": "qixuan-men",
+      "title": "七玄门",
+      "stage": "hanli-qixuan-shenshougu",
+      "realm": "凡人",
+      "required_asset_types": [
+        "character",
+        "relationship",
+        "background_frame",
+        "motion"
+      ],
+      "needed_assets": [
+        "七玄门时期韩立",
+        "厉飞雨、张铁与韩立关系素材",
+        "七玄门山门和门派训练场",
+        "低武江湖转场动效"
+      ],
+      "current_local_paths": [
+        "public/media/images/characters/hanli.webp",
+        "public/media/images/characters/li-feyu.webp",
+        "public/media/images/characters-extra/zhang-tie.webp",
+        "public/media/images/bg/hanli-map.webp",
+        "public/media/images/sourced/aigei-hanli-turn.jpg",
+        "public/media/images/sourced/bili-ep2-frame.webp"
+      ],
+      "gap_summary": "缺七玄门服饰韩立和清晰山门背景。",
+      "crawl_priority": "P0"
+    },
+    {
+      "event_id": "mo-daifu",
+      "title": "墨大夫",
+      "stage": "hanli-qixuan-shenshougu",
+      "realm": "凡人",
+      "required_asset_types": [
+        "character",
+        "relationship",
+        "background_frame",
+        "motion"
+      ],
+      "needed_assets": [
+        "神手谷时期韩立",
+        "墨大夫、曲魂、墨彩环关系素材",
+        "药炉、密室、夺舍危机背景",
+        "药炉黑雾和夺舍氛围动效"
+      ],
+      "current_local_paths": [
+        "public/media/images/characters/mo-daifu.webp",
+        "public/media/images/characters-extra/qu-hun.webp",
+        "public/media/images/characters-extra/mo-caihuan.webp",
+        "public/media/images/sourced/bili-ep3-frame.webp",
+        "public/media/images/sourced/bili-ep4-frame.webp"
+      ],
+      "gap_summary": "缺韩立在神手谷阶段的形象和可公开使用的药炉场景。",
+      "crawl_priority": "P0"
+    },
+    {
+      "event_id": "green-bottle",
+      "title": "小绿瓶",
+      "stage": "hanli-qi-refining",
+      "realm": "练气",
+      "required_asset_types": [
+        "character",
+        "artifact",
+        "background_frame",
+        "motion"
+      ],
+      "needed_assets": [
+        "练气期韩立",
+        "掌天瓶官方参考或授权重绘版",
+        "灵草培育和瓶光背景帧",
+        "瓶光/灵液动效素材"
+      ],
+      "current_local_paths": [
+        "public/media/images/characters/hanli.webp",
+        "public/media/images/generated/green-bottle.png",
+        "public/media/images/sourced/bili-ep3-frame.webp"
+      ],
+      "gap_summary": "掌天瓶为生成图，需要补官方参考链路；练气韩立缺失。",
+      "crawl_priority": "P0"
+    },
+    {
+      "event_id": "huangfeng-gu",
+      "title": "黄枫谷",
+      "stage": "hanli-huangfeng-valley",
+      "realm": "练气后期",
+      "required_asset_types": [
+        "character",
+        "relationship",
+        "artifact",
+        "background_frame",
+        "motion"
+      ],
+      "needed_assets": [
+        "黄枫谷时期韩立",
+        "辛如音、李化元、陈巧倩关系素材",
+        "飞剑、阵法、药园、洞府",
+        "飞剑掠过/阵法纹路动效"
+      ],
+      "current_local_paths": [
+        "public/media/images/characters/hanli.webp",
+        "public/media/images/characters/xin-ruyin.webp",
+        "public/media/images/characters-extra/li-huayuan.webp",
+        "public/media/images/characters-extra/chen-qiaoqian.webp",
+        "public/media/images/bg/timeline-poster.jpg",
+        "public/media/images/sourced/aigei-sword.jpg",
+        "public/media/images/sourced/bili-ep4-frame.webp"
+      ],
+      "gap_summary": "缺黄枫谷韩立专属形象和清晰药园/洞府帧。",
+      "crawl_priority": "P0"
+    },
+    {
+      "event_id": "bloody-land",
+      "title": "血色禁地",
+      "stage": "hanli-bloody-trial",
+      "realm": "筑基机缘",
+      "required_asset_types": [
+        "character",
+        "relationship",
+        "artifact",
+        "background_frame",
+        "motion"
+      ],
+      "needed_assets": [
+        "血色禁地试炼韩立",
+        "南宫婉、向之礼、菡云芝关系素材",
+        "禁地红雾、灵药、斗法场景",
+        "红雾/法术碰撞动效"
+      ],
+      "current_local_paths": [
+        "public/media/images/characters/nangong-wan.webp",
+        "public/media/images/characters/xiang-zhili.webp",
+        "public/media/images/characters-extra/han-yunzhi.webp",
+        "public/media/images/sourced/aigei-battle.jpg"
+      ],
+      "gap_summary": "缺韩立试炼形象、血色禁地场景和可用法宝/灵药素材。",
+      "crawl_priority": "P0"
+    },
+    {
+      "event_id": "foundation",
+      "title": "筑基",
+      "stage": "hanli-foundation",
+      "realm": "筑基",
+      "required_asset_types": [
+        "character",
+        "artifact",
+        "background_frame",
+        "motion"
+      ],
+      "needed_assets": [
+        "筑基后韩立",
+        "筑基丹或境界突破法阵",
+        "突破背景帧",
+        "灵力上涌/境界阶梯动效"
+      ],
+      "current_local_paths": [
+        "public/media/images/characters/hanli.webp",
+        "public/media/images/characters-extra/han-yunzhi.webp",
+        "public/media/images/generated/gold-core.png",
+        "public/media/images/sourced/bili-ep4-frame.webp"
+      ],
+      "gap_summary": "当前用金丹图代替筑基灵光，阶段语义不准。",
+      "crawl_priority": "P1"
+    },
+    {
+      "event_id": "star-sea",
+      "title": "乱星海",
+      "stage": "hanli-star-sea",
+      "realm": "结丹前后",
+      "required_asset_types": [
+        "character",
+        "relationship",
+        "artifact",
+        "background_frame",
+        "motion"
+      ],
+      "needed_assets": [
+        "乱星海独行修士韩立",
+        "紫灵、元瑶、凌玉灵、风希关系素材",
+        "灵虫/外海洞府/星宫素材",
+        "海雾、星光和遁光动效"
+      ],
+      "current_local_paths": [
+        "public/media/images/characters/zi-ling.webp",
+        "public/media/images/characters/yuanyao.webp",
+        "public/media/images/characters-extra/ling-yuling.webp",
+        "public/media/images/characters-extra/feng-xi.webp",
+        "public/media/images/bg/galaxy-bg.webp",
+        "public/media/images/sourced/aigei-hanli-turn.jpg"
+      ],
+      "gap_summary": "缺乱星海韩立主形象和海域/洞府剧情帧。",
+      "crawl_priority": "P0"
+    },
+    {
+      "event_id": "gold-core",
+      "title": "结丹",
+      "stage": "hanli-gold-core",
+      "realm": "结丹",
+      "required_asset_types": [
+        "character",
+        "artifact",
+        "background_frame",
+        "motion"
+      ],
+      "needed_assets": [
+        "结丹期韩立",
+        "金丹凝聚",
+        "雷光/飞剑体系背景",
+        "金丹成型动效"
+      ],
+      "current_local_paths": [
+        "public/media/images/characters/hanli.webp",
+        "public/media/images/generated/gold-core.png",
+        "public/media/images/sourced/aigei-sword.jpg"
+      ],
+      "gap_summary": "缺结丹期韩立，飞剑参考图分辨率偏低。",
+      "crawl_priority": "P1"
+    },
+    {
+      "event_id": "xutian-palace",
+      "title": "虚天殿",
+      "stage": "hanli-xutian-palace",
+      "realm": "结丹中后期",
+      "required_asset_types": [
+        "character",
+        "relationship",
+        "artifact",
+        "background_frame",
+        "motion"
+      ],
+      "needed_assets": [
+        "虚天殿阶段韩立",
+        "银月、蛮胡子、万天明、玄骨上人关系素材",
+        "虚天鼎、乾蓝冰焰",
+        "古殿内景和冰焰动效"
+      ],
+      "current_local_paths": [
+        "public/media/images/characters/yinyue.webp",
+        "public/media/images/characters-extra/man-huzi.webp",
+        "public/media/images/characters-extra/wan-tianming.webp",
+        "public/media/images/characters-extra/xuangu-shangren.webp",
+        "public/media/images/bg/timeline-full.webp",
+        "public/media/images/sourced/aigei-battle.jpg"
+      ],
+      "gap_summary": "缺虚天鼎、乾蓝冰焰和韩立参会形象。",
+      "crawl_priority": "P1"
+    },
+    {
+      "event_id": "nascent-soul",
+      "title": "元婴",
+      "stage": "hanli-nascent-soul",
+      "realm": "元婴",
+      "required_asset_types": [
+        "character",
+        "relationship",
+        "artifact",
+        "background_frame",
+        "motion"
+      ],
+      "needed_assets": [
+        "元婴期韩立",
+        "南宫婉与韩立关系素材",
+        "青竹蜂云剑、辟邪神雷",
+        "元婴离体和神雷动效"
+      ],
+      "current_local_paths": [
+        "public/media/images/generated/nascent-spirit-v2.png",
+        "public/media/images/characters/nangong-wan.webp",
+        "public/media/images/characters/hanli.webp",
+        "public/media/images/generated/gold-core.png"
+      ],
+      "gap_summary": "生成元婴图可临时使用，但缺元婴期韩立正稿和招式素材。",
+      "crawl_priority": "P1"
+    },
+    {
+      "event_id": "spirit-world",
+      "title": "飞升灵界",
+      "stage": "hanli-dajin-pre-ascension",
+      "realm": "化神之后",
+      "required_asset_types": [
+        "character",
+        "relationship",
+        "artifact",
+        "background_frame",
+        "motion"
+      ],
+      "needed_assets": [
+        "大晋/飞升前韩立",
+        "向之礼、银月、慕沛灵关系素材",
+        "空间节点和灵界入口",
+        "空间裂隙/天光动效"
+      ],
+      "current_local_paths": [
+        "public/media/images/characters/xiang-zhili.webp",
+        "public/media/images/characters/yinyue.webp",
+        "public/media/images/characters-extra/mu-peiling.webp",
+        "public/media/images/bg/galaxy-bg.webp",
+        "public/media/images/sourced/aigei-hanli-turn.jpg"
+      ],
+      "gap_summary": "缺大晋/飞升前韩立主形象和空间节点专属背景。",
+      "crawl_priority": "P0"
+    }
+  ],
+  "existing_assets": [
+    {
+      "id": "character-hanli-generic",
+      "source_url": null,
+      "local_path": "public/media/images/characters/hanli.webp",
+      "stage": "hanli-generic",
+      "event_ids": [
+        "wili-gou",
+        "qixuan-men",
+        "green-bottle",
+        "huangfeng-gu",
+        "foundation",
+        "gold-core",
+        "nascent-soul"
+      ],
+      "character_names": ["韩立"],
+      "realm": null,
+      "asset_type": "character",
+      "description": "通用韩立人物图，当前被多个阶段复用。",
+      "license_note": "Source URL and license need review before wider use.",
+      "source_risk": "unknown",
+      "usage_status": "in_use",
+      "hash": null,
+      "dimensions": { "width": 551, "height": 786 },
+      "crawl_priority": "P0",
+      "notes": "Replace with stage-specific Han Li assets where possible."
+    },
+    {
+      "id": "artifact-green-bottle-generated",
+      "source_url": null,
+      "local_path": "public/media/images/generated/green-bottle.png",
+      "stage": "hanli-qi-refining",
+      "event_ids": ["green-bottle"],
+      "character_names": [],
+      "realm": "练气",
+      "asset_type": "artifact",
+      "description": "掌天瓶生成图。",
+      "license_note": "Generated asset. Record prompt and reference inputs before approval.",
+      "source_risk": "medium",
+      "usage_status": "in_use",
+      "hash": null,
+      "dimensions": { "width": 1254, "height": 1254 },
+      "crawl_priority": "P0",
+      "notes": "Needs official reference chain or approved redraw."
+    },
+    {
+      "id": "artifact-gold-core-generated",
+      "source_url": null,
+      "local_path": "public/media/images/generated/gold-core.png",
+      "stage": "hanli-gold-core",
+      "event_ids": ["foundation", "gold-core", "nascent-soul"],
+      "character_names": [],
+      "realm": "结丹",
+      "asset_type": "artifact",
+      "description": "金丹/境界灵光生成图，被多个境界节点复用。",
+      "license_note": "Generated asset. Record prompt and reference inputs before approval.",
+      "source_risk": "medium",
+      "usage_status": "in_use",
+      "hash": null,
+      "dimensions": { "width": 1254, "height": 1254 },
+      "crawl_priority": "P1",
+      "notes": "Split into foundation, gold-core, and nascent-soul variants."
+    },
+    {
+      "id": "character-nascent-spirit-generated",
+      "source_url": null,
+      "local_path": "public/media/images/generated/nascent-spirit-v2.png",
+      "stage": "hanli-nascent-soul",
+      "event_ids": ["nascent-soul"],
+      "character_names": ["韩立"],
+      "realm": "元婴",
+      "asset_type": "character",
+      "description": "元婴期生成主图。",
+      "license_note": "Generated asset. Needs human review for similarity to reference materials.",
+      "source_risk": "medium",
+      "usage_status": "in_use",
+      "hash": null,
+      "dimensions": { "width": 1023, "height": 1537 },
+      "crawl_priority": "P1",
+      "notes": "Use until a licensed stage-specific asset is available."
+    },
+    {
+      "id": "bili-ep1-frame",
+      "source_url": null,
+      "local_path": "public/media/images/sourced/bili-ep1-frame.webp",
+      "stage": "hanli-young-wiligou",
+      "event_ids": ["wili-gou"],
+      "character_names": [],
+      "realm": "凡人",
+      "asset_type": "background_frame",
+      "description": "B 站第 1 集低清截图帧。",
+      "license_note": "Video screenshot. Treat as reference-only unless permission is confirmed.",
+      "source_risk": "high",
+      "usage_status": "reference_only",
+      "hash": null,
+      "dimensions": { "width": 234, "height": 176 },
+      "crawl_priority": "P0",
+      "notes": "Record exact BV/episode timestamp."
+    },
+    {
+      "id": "bili-ep2-frame",
+      "source_url": null,
+      "local_path": "public/media/images/sourced/bili-ep2-frame.webp",
+      "stage": "hanli-qixuan-shenshougu",
+      "event_ids": ["wili-gou", "qixuan-men"],
+      "character_names": [],
+      "realm": "凡人",
+      "asset_type": "background_frame",
+      "description": "B 站第 2 集低清截图帧。",
+      "license_note": "Video screenshot. Treat as reference-only unless permission is confirmed.",
+      "source_risk": "high",
+      "usage_status": "reference_only",
+      "hash": null,
+      "dimensions": { "width": 234, "height": 176 },
+      "crawl_priority": "P0",
+      "notes": "Record exact BV/episode timestamp."
+    },
+    {
+      "id": "aigei-hanli-turn-reference",
+      "source_url": null,
+      "local_path": "public/media/images/sourced/aigei-hanli-turn.jpg",
+      "stage": "hanli-qixuan-shenshougu",
+      "event_ids": ["qixuan-men", "star-sea", "spirit-world"],
+      "character_names": ["韩立"],
+      "realm": null,
+      "asset_type": "reference",
+      "description": "Aigei 韩立转身镜头参考。",
+      "license_note": "Aigei terms need per-asset review.",
+      "source_risk": "medium",
+      "usage_status": "needs_license_review",
+      "hash": null,
+      "dimensions": { "width": 282, "height": 159 },
+      "crawl_priority": "P0",
+      "notes": "Find original Aigei page and author."
+    }
+  ],
+  "missing_assets": [
+    {
+      "id": "missing-hanli-young-wiligou",
+      "source_url": null,
+      "local_path": null,
+      "stage": "hanli-young-wiligou",
+      "event_ids": ["wili-gou"],
+      "character_names": ["韩立"],
+      "realm": "凡人",
+      "asset_type": "character",
+      "description": "少年韩立专属形象。",
+      "license_note": "Prefer official character source or approved redraw.",
+      "source_risk": "unknown",
+      "usage_status": "missing",
+      "hash": null,
+      "dimensions": { "width": null, "height": null },
+      "crawl_priority": "P0",
+      "notes": "Do not continue using generic adult Han Li as final asset."
+    },
+    {
+      "id": "missing-hanli-qixuan",
+      "source_url": null,
+      "local_path": null,
+      "stage": "hanli-qixuan-shenshougu",
+      "event_ids": ["qixuan-men", "mo-daifu"],
+      "character_names": ["韩立"],
+      "realm": "凡人",
+      "asset_type": "character",
+      "description": "七玄门/神手谷阶段韩立。",
+      "license_note": "Prefer official character source or approved redraw.",
+      "source_risk": "unknown",
+      "usage_status": "missing",
+      "hash": null,
+      "dimensions": { "width": null, "height": null },
+      "crawl_priority": "P0",
+      "notes": "Should show low-martial-world clothing and early cautious personality."
+    },
+    {
+      "id": "missing-hanli-qi-refining",
+      "source_url": null,
+      "local_path": null,
+      "stage": "hanli-qi-refining",
+      "event_ids": ["green-bottle", "huangfeng-gu"],
+      "character_names": ["韩立"],
+      "realm": "练气",
+      "asset_type": "character",
+      "description": "练气期韩立。",
+      "license_note": "Prefer official character source or approved redraw.",
+      "source_risk": "unknown",
+      "usage_status": "missing",
+      "hash": null,
+      "dimensions": { "width": null, "height": null },
+      "crawl_priority": "P0",
+      "notes": "Pair with green bottle and herb garden assets."
+    },
+    {
+      "id": "missing-hanli-bloody-trial",
+      "source_url": null,
+      "local_path": null,
+      "stage": "hanli-bloody-trial",
+      "event_ids": ["bloody-land"],
+      "character_names": ["韩立"],
+      "realm": "筑基机缘",
+      "asset_type": "character",
+      "description": "血色禁地试炼韩立。",
+      "license_note": "Prefer official character source or approved redraw.",
+      "source_risk": "unknown",
+      "usage_status": "missing",
+      "hash": null,
+      "dimensions": { "width": null, "height": null },
+      "crawl_priority": "P0",
+      "notes": "Needs red-mist trial tone."
+    },
+    {
+      "id": "missing-hanli-star-sea",
+      "source_url": null,
+      "local_path": null,
+      "stage": "hanli-star-sea",
+      "event_ids": ["star-sea"],
+      "character_names": ["韩立"],
+      "realm": "结丹前后",
+      "asset_type": "character",
+      "description": "乱星海独行修士韩立。",
+      "license_note": "Prefer official character source or approved redraw.",
+      "source_risk": "unknown",
+      "usage_status": "missing",
+      "hash": null,
+      "dimensions": { "width": null, "height": null },
+      "crawl_priority": "P0",
+      "notes": "Should distinguish from Huangfeng Valley stage."
+    },
+    {
+      "id": "missing-hanli-dajin-pre-ascension",
+      "source_url": null,
+      "local_path": null,
+      "stage": "hanli-dajin-pre-ascension",
+      "event_ids": ["spirit-world"],
+      "character_names": ["韩立"],
+      "realm": "化神之后",
+      "asset_type": "character",
+      "description": "大晋/飞升前韩立。",
+      "license_note": "Prefer official character source or approved redraw.",
+      "source_risk": "unknown",
+      "usage_status": "missing",
+      "hash": null,
+      "dimensions": { "width": null, "height": null },
+      "crawl_priority": "P0",
+      "notes": "Needed for human-world finale and ascension node."
+    },
+    {
+      "id": "missing-xutian-ding",
+      "source_url": null,
+      "local_path": null,
+      "stage": "hanli-xutian-palace",
+      "event_ids": ["xutian-palace"],
+      "character_names": [],
+      "realm": "结丹中后期",
+      "asset_type": "artifact",
+      "description": "虚天鼎。",
+      "license_note": "Prefer official prop reference or approved redraw.",
+      "source_risk": "unknown",
+      "usage_status": "missing",
+      "hash": null,
+      "dimensions": { "width": null, "height": null },
+      "crawl_priority": "P1",
+      "notes": "Pair with Qianlan ice flame motion."
+    },
+    {
+      "id": "missing-space-node-frame",
+      "source_url": null,
+      "local_path": null,
+      "stage": "hanli-dajin-pre-ascension",
+      "event_ids": ["spirit-world"],
+      "character_names": [],
+      "realm": "化神之后",
+      "asset_type": "background_frame",
+      "description": "空间节点和灵界入口背景。",
+      "license_note": "Prefer generated/redrawn derivative with source references recorded.",
+      "source_risk": "medium",
+      "usage_status": "missing",
+      "hash": null,
+      "dimensions": { "width": null, "height": null },
+      "crawl_priority": "P0",
+      "notes": "Current galaxy background is only a temporary substitute."
+    }
+  ]
+}
