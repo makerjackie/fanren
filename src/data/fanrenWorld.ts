@@ -52,7 +52,8 @@ export const navItems = [
   { href: '/timeline', label: '仙途长卷', shortLabel: '长卷' },
   { href: '/relationships', label: '人物星图', shortLabel: '星图' },
   { href: '/artifacts', label: '法宝行囊', shortLabel: '法宝' },
-  { href: '/game', label: '韩跑跑', shortLabel: '韩跑跑' },
+  { href: '/game', label: '星图消消乐', shortLabel: '消消' },
+  { href: '/run', label: '韩跑跑', shortLabel: '韩跑跑' },
   { href: '/wallpapers', label: '壁纸洞府', shortLabel: '更多' },
 ]
 

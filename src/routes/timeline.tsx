@@ -66,7 +66,7 @@ function TimelinePage() {
             道友点一处剧情，韩立就沿着长卷跑过去。地点、境界、同场旧人和行囊法宝会一起亮起。
           </p>
         </div>
-        <a className="ink-button" href="/game">
+        <a className="ink-button" href="/run">
           <Footprints size={17} />
           跑一段
         </a>

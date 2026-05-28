@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as WallpapersRouteImport } from './routes/wallpapers'
 import { Route as TimelineRouteImport } from './routes/timeline'
+import { Route as RunRouteImport } from './routes/run'
 import { Route as RelationshipsRouteImport } from './routes/relationships'
 import { Route as GameRouteImport } from './routes/game'
 import { Route as ArtifactsRouteImport } from './routes/artifacts'
@@ -24,6 +25,11 @@ const WallpapersRoute = WallpapersRouteImport.update({
 const TimelineRoute = TimelineRouteImport.update({
   id: '/timeline',
   path: '/timeline',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RunRoute = RunRouteImport.update({
+  id: '/run',
+  path: '/run',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RelationshipsRoute = RelationshipsRouteImport.update({
@@ -52,6 +58,7 @@ export interface FileRoutesByFullPath {
   '/artifacts': typeof ArtifactsRoute
   '/game': typeof GameRoute
   '/relationships': typeof RelationshipsRoute
+  '/run': typeof RunRoute
   '/timeline': typeof TimelineRoute
   '/wallpapers': typeof WallpapersRoute
 }
@@ -60,6 +67,7 @@ export interface FileRoutesByTo {
   '/artifacts': typeof ArtifactsRoute
   '/game': typeof GameRoute
   '/relationships': typeof RelationshipsRoute
+  '/run': typeof RunRoute
   '/timeline': typeof TimelineRoute
   '/wallpapers': typeof WallpapersRoute
 }
@@ -69,6 +77,7 @@ export interface FileRoutesById {
   '/artifacts': typeof ArtifactsRoute
   '/game': typeof GameRoute
   '/relationships': typeof RelationshipsRoute
+  '/run': typeof RunRoute
   '/timeline': typeof TimelineRoute
   '/wallpapers': typeof WallpapersRoute
 }
@@ -79,6 +88,7 @@ export interface FileRouteTypes {
     | '/artifacts'
     | '/game'
     | '/relationships'
+    | '/run'
     | '/timeline'
     | '/wallpapers'
   fileRoutesByTo: FileRoutesByTo
@@ -87,6 +97,7 @@ export interface FileRouteTypes {
     | '/artifacts'
     | '/game'
     | '/relationships'
+    | '/run'
     | '/timeline'
     | '/wallpapers'
   id:
@@ -95,6 +106,7 @@ export interface FileRouteTypes {
     | '/artifacts'
     | '/game'
     | '/relationships'
+    | '/run'
     | '/timeline'
     | '/wallpapers'
   fileRoutesById: FileRoutesById
@@ -104,6 +116,7 @@ export interface RootRouteChildren {
   ArtifactsRoute: typeof ArtifactsRoute
   GameRoute: typeof GameRoute
   RelationshipsRoute: typeof RelationshipsRoute
+  RunRoute: typeof RunRoute
   TimelineRoute: typeof TimelineRoute
   WallpapersRoute: typeof WallpapersRoute
 }
@@ -122,6 +135,13 @@ declare module '@tanstack/react-router' {
       path: '/timeline'
       fullPath: '/timeline'
       preLoaderRoute: typeof TimelineRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/run': {
+      id: '/run'
+      path: '/run'
+      fullPath: '/run'
+      preLoaderRoute: typeof RunRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/relationships': {
@@ -160,6 +180,7 @@ const rootRouteChildren: RootRouteChildren = {
   ArtifactsRoute: ArtifactsRoute,
   GameRoute: GameRoute,
   RelationshipsRoute: RelationshipsRoute,
+  RunRoute: RunRoute,
   TimelineRoute: TimelineRoute,
   WallpapersRoute: WallpapersRoute,
 }
