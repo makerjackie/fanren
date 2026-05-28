@@ -21,9 +21,25 @@ import type { CSSProperties } from 'react'
 import type { LucideIcon } from 'lucide-react'
 
 import { SiteNav } from '../components/SiteNav'
-import { countdownTarget } from '../data/fanrenWorld'
+import { artifacts, characters, countdownTarget } from '../data/fanrenWorld'
 
 export const Route = createFileRoute('/')({ component: Home })
+
+const HERO_PREVIEW_VIDEO = '/media/videos/hero-mini.mp4'
+const HERO_HIGH_VIDEO = '/media/videos/hero-compress.mp4'
+const HOME_AUDIO_VOLUME = 0.34
+
+let activeHomeAudio: HTMLAudioElement | null = null
+
+function claimHomeAudio(audio: HTMLAudioElement) {
+  if (activeHomeAudio !== null && activeHomeAudio !== audio) {
+    activeHomeAudio.pause()
+  }
+
+  activeHomeAudio = audio
+  audio.volume = HOME_AUDIO_VOLUME
+  return audio
+}
 
 const entranceParticles = [
   [8, 22, 3],
@@ -570,7 +586,7 @@ function Home() {
       return
     }
 
-    const loadHighVideo = () => setHeroHighSource('/media/videos/hero.mp4')
+    const loadHighVideo = () => setHeroHighSource(HERO_HIGH_VIDEO)
     const timerId = window.setTimeout(loadHighVideo, 1800)
     return () => window.clearTimeout(timerId)
   }, [])
@@ -605,7 +621,9 @@ function Home() {
   }, [])
 
   useEffect(() => {
-    const scenes = timelineSceneRefs.current.filter(Boolean)
+    const scenes = timelineSceneRefs.current.filter(
+      (scene): scene is HTMLElement => scene !== null,
+    )
     if (!scenes.length) return
 
     const observer = new IntersectionObserver(
@@ -640,28 +658,58 @@ function Home() {
     return () => observer.disconnect()
   }, [])
 
-  const enterSite = () => {
-    setEntered(true)
+  useEffect(() => {
     const audio = audioRef.current
     if (!audio) return
-    audio.volume = 0.34
-    audio
+
+    audio.volume = HOME_AUDIO_VOLUME
+    const syncSoundState = () => {
+      setSoundOn(!audio.paused && !audio.ended)
+    }
+
+    audio.addEventListener('play', syncSoundState)
+    audio.addEventListener('pause', syncSoundState)
+    audio.addEventListener('ended', syncSoundState)
+
+    return () => {
+      audio.removeEventListener('play', syncSoundState)
+      audio.removeEventListener('pause', syncSoundState)
+      audio.removeEventListener('ended', syncSoundState)
+
+      if (activeHomeAudio === audio) {
+        audio.pause()
+        activeHomeAudio = null
+      }
+    }
+  }, [])
+
+  const playHomeAudio = () => {
+    const audio = audioRef.current
+    if (!audio) return
+
+    claimHomeAudio(audio)
       .play()
       .then(() => setSoundOn(true))
       .catch(() => setSoundOn(false))
   }
 
+  const enterSite = () => {
+    setEntered(true)
+    playHomeAudio()
+  }
+
   const toggleSound = () => {
     const audio = audioRef.current
     if (!audio) return
+    const controlledAudio = claimHomeAudio(audio)
 
-    if (soundOn) {
-      audio.pause()
+    if (!controlledAudio.paused) {
+      controlledAudio.pause()
       setSoundOn(false)
       return
     }
 
-    audio
+    controlledAudio
       .play()
       .then(() => setSoundOn(true))
       .catch(() => setSoundOn(false))
@@ -686,7 +734,7 @@ function Home() {
             preload="auto"
             poster="/media/images/bg/hero-poster.jpg"
           >
-            <source src="/media/videos/hero-preview.mp4" type="video/mp4" />
+            <source src={HERO_PREVIEW_VIDEO} type="video/mp4" />
           </video>
           {heroHighSource ? (
             <video
@@ -697,7 +745,7 @@ function Home() {
               loop
               muted
               playsInline
-              preload="metadata"
+              preload="auto"
               onCanPlay={() => setHeroHighReady(true)}
             >
               <source src={heroHighSource} type="video/mp4" />
@@ -749,7 +797,7 @@ function Home() {
           ) : null}
 
           <div className="hero-actions">
-            <a className="primary-link" href="/timeline">
+            <a className="primary-link" href="#hanli-timeline">
               <Map size={18} />
               入阁翻卷
             </a>
@@ -950,12 +998,74 @@ function Home() {
         </div>
       </section>
 
+      <section
+        id="fanren-index"
+        className="home-index-section"
+        aria-label="人物与法宝索引"
+      >
+        <div className="home-index-inner">
+          <header className="home-index-header">
+            <p className="seal-line">卷中索引</p>
+            <h2>人物和法宝，留在同一卷里看。</h2>
+            <p>
+              按初逢、支线和关键底牌整理，翻完长卷后可以顺手回看这些熟面孔和重要器物。
+            </p>
+          </header>
+
+          <div className="home-index-columns">
+            <section className="home-index-column" aria-label="主要人物">
+              <div className="home-index-column-title">
+                <Sparkles size={18} />
+                <h3>主要人物</h3>
+              </div>
+              <div className="home-character-grid">
+                {characters.map((character) => (
+                  <article className="home-character-card" key={character.id}>
+                    <img src={character.image} alt="" loading="lazy" />
+                    <div>
+                      <span>{character.track}</span>
+                      <h4>{character.name}</h4>
+                      <p>{character.echo}</p>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </section>
+
+            <section className="home-index-column" aria-label="关键法宝">
+              <div className="home-index-column-title">
+                <Gem size={18} />
+                <h3>关键法宝</h3>
+              </div>
+              <div className="home-artifact-grid">
+                {artifacts.map((artifact) => (
+                  <article
+                    className="home-artifact-card"
+                    data-tone={artifact.tone}
+                    key={artifact.id}
+                  >
+                    <span className="home-artifact-symbol">
+                      {artifact.symbol}
+                    </span>
+                    <div>
+                      <span>{artifact.type}</span>
+                      <h4>{artifact.name}</h4>
+                      <p>{artifact.change}</p>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </section>
+          </div>
+        </div>
+      </section>
+
       <footer className="site-footer">
         <div>
           <strong>凡人修仙阁</strong>
           <span>给道友玩的互动仙途长卷</span>
         </div>
-        <a href="/timeline">
+        <a href="#hanli-timeline">
           <Clock3 size={15} />
           翻开长卷
         </a>
