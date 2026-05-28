@@ -1980,16 +1980,12 @@ video {
 }
 
 .fan-brand-mark {
-  display: grid;
-  place-items: center;
+  display: block;
   width: 34px;
   height: 34px;
-  border: 1px solid rgba(245, 216, 137, 0.42);
   border-radius: 6px;
-  color: #201007;
-  background:
-    radial-gradient(circle at 35% 24%, #fff4c8, #d9b45d 64%, #825d2e), #d9b45d;
   box-shadow: 0 0 24px rgba(216, 179, 95, 0.28);
+  object-fit: cover;
 }
 
 .fan-nav nav {

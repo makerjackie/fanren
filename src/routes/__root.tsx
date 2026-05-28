@@ -40,9 +40,12 @@ export const Route = createRootRoute({
   notFoundComponent: () => (
     <main className="fan-page not-found-page">
       <a className="fan-brand not-found-brand" href="/">
-        <span className="fan-brand-mark" aria-hidden="true">
-          凡
-        </span>
+        <img
+          className="fan-brand-mark"
+          src="/icon.svg"
+          alt=""
+          aria-hidden="true"
+        />
         <span>凡人修仙阁</span>
       </a>
       <section className="not-found-panel">

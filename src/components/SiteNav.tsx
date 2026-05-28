@@ -10,9 +10,12 @@ export function SiteNav() {
   return (
     <header className="fan-nav" aria-label="凡人修仙阁">
       <a className="fan-brand" href="/" aria-label="返回凡人修仙阁首页">
-        <span className="fan-brand-mark" aria-hidden="true">
-          凡
-        </span>
+        <img
+          className="fan-brand-mark"
+          src="/icon.svg"
+          alt=""
+          aria-hidden="true"
+        />
         <span>凡人修仙阁</span>
       </a>
       <nav>
