@@ -56,3 +56,12 @@ export const flightPropFrames = {
   swordLight: 8,
   dustBurst: 9,
 }
+
+export const slopeRiderFrames = {
+  glide: 0,
+  dive: 1,
+  jump: 2,
+  air: 3,
+  land: 4,
+  hit: 5,
+}

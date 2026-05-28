@@ -5,11 +5,12 @@ export const gameSize = {
 
 export const assetBase = '/media/game/han-runner'
 const spriteVersion = 'cutout-v2'
-const flightVersion = 'sword-flight-v1'
+const flightVersion = 'sword-flight-v2'
 
 export const assetKeys = {
   runner: 'runner-arcade',
   atlas: 'arcade-atlas',
+  slopeRider: 'slope-rider',
   flightProps: 'flight-props',
   flightPanorama: 'flight-panorama',
   far: 'bg-far',
@@ -41,6 +42,12 @@ export const assetManifest = {
       url: `${assetBase}/sprites/flight-props-sheet.png?v=${flightVersion}`,
       frameWidth: 400,
       frameHeight: 400,
+    },
+    {
+      key: assetKeys.slopeRider,
+      url: `${assetBase}/sprites/slope-rider-sheet.png?v=${flightVersion}`,
+      frameWidth: 330,
+      frameHeight: 660,
     },
   ],
   images: [

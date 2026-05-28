@@ -14,6 +14,11 @@ export type LevelPickup = {
   offsetY: number
 }
 
+export type TerrainPoint = {
+  x: number
+  y: number
+}
+
 export const realmStops = [
   { distance: 0, label: '凡人' },
   { distance: 900, label: '练气' },
@@ -37,12 +42,30 @@ export const levelConfig = {
   playerStartY: 306,
   flightTopY: 108,
   flightBottomY: 438,
-  riderOffsetY: 74,
+  riderOffsetY: 92,
+  terrain: [
+    { x: 0, y: 430 },
+    { x: 280, y: 426 },
+    { x: 620, y: 382 },
+    { x: 940, y: 404 },
+    { x: 1240, y: 350 },
+    { x: 1580, y: 424 },
+    { x: 1960, y: 466 },
+    { x: 2360, y: 414 },
+    { x: 2740, y: 360 },
+    { x: 3160, y: 448 },
+    { x: 3540, y: 474 },
+    { x: 3960, y: 402 },
+    { x: 4380, y: 356 },
+    { x: 4780, y: 430 },
+    { x: 5200, y: 468 },
+    { x: 5660, y: 390 },
+    { x: 6200, y: 420 },
+  ] satisfies TerrainPoint[],
   obstacles: [
-    { kind: 'thunderCloud', x: 680, offsetY: -156 },
-    { kind: 'runeRing', x: 1060, offsetY: -78 },
-    { kind: 'swordLight', x: 1410, offsetY: -118 },
-    { kind: 'thunderCloud', x: 1860, offsetY: -132 },
+    { kind: 'thunderCloud', x: 1280, offsetY: -166 },
+    { kind: 'runeRing', x: 1700, offsetY: -88 },
+    { kind: 'swordLight', x: 1960, offsetY: -126 },
     { kind: 'runeRing', x: 2240, offsetY: -184 },
     { kind: 'swordLight', x: 2700, offsetY: -88 },
     { kind: 'thunderCloud', x: 3120, offsetY: -160 },
@@ -54,8 +77,9 @@ export const levelConfig = {
   ] satisfies FlightObstacle[],
   pickups: [
     { kind: 'stone', x: 430, offsetY: -94 },
-    { kind: 'talisman', x: 850, offsetY: -152 },
-    { kind: 'stone', x: 1180, offsetY: -104 },
+    { kind: 'talisman', x: 760, offsetY: -142 },
+    { kind: 'stone', x: 1040, offsetY: -104 },
+    { kind: 'pill', x: 1280, offsetY: -154 },
     { kind: 'pill', x: 1580, offsetY: -164 },
     { kind: 'stone', x: 1970, offsetY: -96 },
     { kind: 'bottle', x: 2440, offsetY: -204 },

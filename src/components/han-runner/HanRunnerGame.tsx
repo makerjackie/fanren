@@ -61,7 +61,7 @@ export function HanRunnerGame() {
           <div className="han-runner-control-list">
             <span>
               <Gamepad2 size={15} />
-              Space / 点击起势
+              Space / 点击跃起
             </span>
             <span>S / ↓ 俯冲</span>
             <span>Shift 疾冲</span>
@@ -107,7 +107,7 @@ function getStatusCopy(event: RunnerGameEvent) {
   if (event.type === 'running') {
     return {
       title: '踏剑入云',
-      copy: '韩立站上飞剑向前滑行，起势、俯冲和剑光之间留一线余地。',
+      copy: '韩立贴着云坡御剑前行，顺坡落地会加速，落歪了因果就逼近。',
       distance: `${event.distance} 里`,
       realm: event.realm,
       pressure: `${event.pressure}%`,
