@@ -52,6 +52,7 @@ export const countdownTarget = '2026-06-13T11:00:00+08:00'
 export const navItems = [
   { href: '/#hanli-timeline', label: '修仙长卷', shortLabel: '长卷' },
   { href: '/run', label: '韩跑跑', shortLabel: '韩跑跑' },
+  { href: '/hanpaopao', label: '星海御剑', shortLabel: '御剑' },
   { href: '/game', label: '星图消消乐', shortLabel: '消消' },
   { href: '/wallpapers', label: '壁纸洞府', shortLabel: '更多' },
 ]

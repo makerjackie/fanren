@@ -1,0 +1,1191 @@
+.hanpaopao-game {
+  --ink: #08131d;
+  --panel: rgba(6, 15, 24, 0.66);
+  --panel-strong: rgba(5, 11, 18, 0.84);
+  --line: rgba(207, 234, 255, 0.22);
+  --text: #f3f7ee;
+  --muted: #b9c8c9;
+  --cyan: #62e3ff;
+  --jade: #36d59a;
+  --gold: #f5bd55;
+  --orange: #ff7a3d;
+  --danger: #ef4f6d;
+  --violet: #9b72ff;
+  font-family: 'Songti SC', 'Noto Serif SC', 'STSong', Georgia, serif;
+  color: var(--text);
+  background: var(--ink);
+}
+
+.hanpaopao-game,
+.hanpaopao-game * {
+  box-sizing: border-box;
+}
+
+.hanpaopao-game,
+.hanpaopao-game {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      circle at 18% 18%,
+      rgba(61, 142, 174, 0.22),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 82% 12%,
+      rgba(221, 165, 82, 0.16),
+      transparent 24%
+    ),
+    linear-gradient(180deg, #0a1524 0%, #112537 42%, #d9edf5 100%);
+}
+
+.hanpaopao-game button {
+  font: inherit;
+  color: inherit;
+  border: 0;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.hanpaopao-game button:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 3px;
+}
+
+.hanpaopao-game .hanpaopao-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.hanpaopao-game .screen,
+.hanpaopao-game .hud,
+.hanpaopao-game .modal,
+.hanpaopao-game .toast {
+  position: absolute;
+  z-index: 10;
+}
+
+.hanpaopao-game .screen {
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: clamp(18px, 4vw, 48px);
+  background:
+    linear-gradient(90deg, rgba(5, 9, 16, 0.94), rgba(5, 9, 16, 0.56)),
+    radial-gradient(
+      circle at 70% 25%,
+      rgba(125, 90, 255, 0.18),
+      transparent 34%
+    );
+}
+
+.hanpaopao-game .screen[hidden],
+.hanpaopao-game .hud[hidden],
+.hanpaopao-game .modal[hidden] {
+  display: none;
+}
+
+.hanpaopao-game .story-shell {
+  width: min(1180px, 100%);
+  height: min(700px, calc(100% - 48px));
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.65fr);
+  gap: clamp(18px, 3vw, 34px);
+  align-items: stretch;
+}
+
+.hanpaopao-game .story-art {
+  min-height: 360px;
+  border: 1px solid rgba(234, 218, 169, 0.34);
+  border-radius: 8px;
+  background-image:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.24)),
+    url('/assets/xianxia/story/story-intro.png');
+  background-size: 200% 200%;
+  background-position: 0 0;
+  box-shadow: 0 26px 80px rgba(0, 0, 0, 0.38);
+  overflow: hidden;
+}
+
+.hanpaopao-game .story-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  gap: 16px;
+  padding: clamp(22px, 4vw, 44px);
+  border-left: 1px solid rgba(234, 218, 169, 0.2);
+}
+
+.hanpaopao-game .eyebrow {
+  margin: 0;
+  color: var(--gold);
+  letter-spacing: 0;
+  font-size: 14px;
+}
+
+.hanpaopao-game h1,
+.hanpaopao-game h2,
+.hanpaopao-game p {
+  margin: 0;
+}
+
+.hanpaopao-game h1 {
+  max-width: 8em;
+  font-size: clamp(42px, 7vw, 78px);
+  line-height: 0.96;
+  font-weight: 700;
+  color: #fff7d7;
+}
+
+.hanpaopao-game h2 {
+  font-size: clamp(28px, 5vw, 46px);
+  line-height: 1;
+  color: #fff7d7;
+}
+
+.hanpaopao-game .story-copy p:not(.eyebrow) {
+  max-width: 31em;
+  color: rgba(242, 247, 238, 0.86);
+  font-size: clamp(16px, 2vw, 20px);
+  line-height: 1.8;
+}
+
+.hanpaopao-game .story-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.hanpaopao-game .primary-button,
+.hanpaopao-game .ghost-button {
+  min-height: 46px;
+  padding: 0 20px;
+  border-radius: 6px;
+  font-weight: 700;
+}
+
+.hanpaopao-game .primary-button {
+  background: linear-gradient(180deg, #f7cf79, #c8842e);
+  color: #180f09;
+  box-shadow: 0 12px 30px rgba(245, 189, 85, 0.24);
+}
+
+.hanpaopao-game .ghost-button {
+  background: rgba(255, 255, 255, 0.08);
+  color: #f7f4df;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.hanpaopao-game .hud {
+  inset: 0;
+  pointer-events: none;
+  isolation: isolate;
+  transition: opacity 180ms ease;
+}
+
+.hanpaopao-game .hud::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0;
+  background:
+    radial-gradient(
+      circle at 50% 50%,
+      transparent 44%,
+      rgba(239, 79, 109, 0.18) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(239, 79, 109, 0.08),
+      transparent 30%,
+      rgba(239, 79, 109, 0.1)
+    );
+  transition: opacity 180ms ease;
+}
+
+.hanpaopao-game .hud.hud--warning::after {
+  opacity: 0.48;
+}
+
+.hanpaopao-game .hud.hud--critical::after {
+  opacity: 0.75;
+  animation: danger-vignette 820ms ease-in-out infinite alternate;
+}
+
+.hanpaopao-game .hud.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.hanpaopao-game .hud.is-hidden button {
+  pointer-events: none;
+}
+
+.hanpaopao-game .hud button {
+  pointer-events: auto;
+}
+
+.hanpaopao-game .hud-profile,
+.hanpaopao-game .chase-panel,
+.hanpaopao-game .objective-panel,
+.hanpaopao-game .distance-pill,
+.hanpaopao-game .danger-ribbon,
+.hanpaopao-game .combo-badge,
+.hanpaopao-game .status-panel,
+.hanpaopao-game .inventory-strip,
+.hanpaopao-game .mobile-pad,
+.hanpaopao-game .action-pad {
+  position: absolute;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.24);
+  backdrop-filter: blur(14px);
+  z-index: 1;
+}
+
+.hanpaopao-game .hud-profile {
+  top: 18px;
+  left: 18px;
+  display: grid;
+  grid-template-columns: 62px minmax(190px, 270px);
+  gap: 12px;
+  align-items: center;
+  padding: 10px 12px;
+  border-radius: 8px;
+}
+
+.hanpaopao-game .portrait,
+.hanpaopao-game .boss-mark {
+  width: 62px;
+  height: 62px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid rgba(246, 214, 125, 0.82);
+}
+
+.hanpaopao-game .portrait {
+  object-position: 50% 18%;
+}
+
+.hanpaopao-game .boss-mark {
+  width: 48px;
+  height: 48px;
+  object-position: 47% 26%;
+}
+
+.hanpaopao-game .profile-lines {
+  min-width: 0;
+}
+
+.hanpaopao-game .profile-name {
+  margin-bottom: 6px;
+  color: #fff7d7;
+  font-size: 16px;
+  white-space: nowrap;
+}
+
+.hanpaopao-game .bar-row {
+  display: grid;
+  grid-template-columns: 38px minmax(108px, 1fr) 34px;
+  gap: 8px;
+  align-items: center;
+  margin: 4px 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.hanpaopao-game .bar-row b {
+  color: #eef9f8;
+  font-size: 12px;
+  text-align: right;
+}
+
+.hanpaopao-game .bar {
+  height: 10px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.hanpaopao-game .bar i {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #42d183, #a5ff9c);
+  transition:
+    width 120ms linear,
+    background 120ms linear;
+}
+
+.hanpaopao-game .bar--qi i {
+  background: linear-gradient(90deg, #23bff2, #83f4ff);
+}
+
+.hanpaopao-game .distance-pill {
+  top: 18px;
+  left: 50%;
+  min-width: 190px;
+  padding: 10px 22px;
+  border-radius: 8px;
+  text-align: center;
+  transform: translateX(-50%);
+}
+
+.hanpaopao-game .distance-pill span,
+.hanpaopao-game .chase-copy span {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.hanpaopao-game .distance-pill strong {
+  display: block;
+  color: #fff7d7;
+  font-size: clamp(24px, 3vw, 34px);
+  line-height: 1.05;
+}
+
+.hanpaopao-game .distance-pill em {
+  display: block;
+  margin-top: 4px;
+  color: rgba(243, 247, 238, 0.8);
+  font-size: 11px;
+  font-style: normal;
+}
+
+.hanpaopao-game .distance-pill em b {
+  color: #fff7d7;
+  font-size: 13px;
+}
+
+.hanpaopao-game .danger-ribbon {
+  top: 92px;
+  left: 50%;
+  width: min(520px, calc(100vw - 42px));
+  padding: 9px 18px;
+  border-radius: 999px;
+  color: #f8f5df;
+  font-size: 14px;
+  text-align: center;
+  transform: translateX(-50%);
+  background: rgba(6, 15, 24, 0.58);
+}
+
+.hanpaopao-game .hud--warning .danger-ribbon,
+.hanpaopao-game .hud--critical .danger-ribbon {
+  border-color: rgba(255, 122, 61, 0.58);
+  background: rgba(42, 12, 24, 0.74);
+  box-shadow: 0 18px 56px rgba(239, 79, 109, 0.22);
+}
+
+.hanpaopao-game .hud--critical .danger-ribbon,
+.hanpaopao-game .hud--critical .chase-panel {
+  animation: pressure-pulse 680ms ease-in-out infinite alternate;
+}
+
+.hanpaopao-game .combo-badge {
+  top: 140px;
+  left: 50%;
+  padding: 8px 16px;
+  border-radius: 999px;
+  color: #151009;
+  font-size: 13px;
+  font-weight: 800;
+  background: linear-gradient(180deg, #fff1a6, #f5bd55);
+  border-color: rgba(255, 246, 190, 0.6);
+  box-shadow: 0 16px 44px rgba(245, 189, 85, 0.28);
+  transform: translateX(-50%);
+}
+
+.hanpaopao-game .combo-badge[hidden] {
+  display: none;
+}
+
+.hanpaopao-game .combo-badge--hot {
+  animation: combo-pop 520ms ease-in-out infinite alternate;
+}
+
+.hanpaopao-game .chase-panel {
+  top: 18px;
+  right: 18px;
+  display: grid;
+  grid-template-columns: 40px 48px minmax(140px, 210px);
+  gap: 10px;
+  align-items: center;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.hanpaopao-game .icon-button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  font-weight: 900;
+}
+
+.hanpaopao-game .chase-copy {
+  display: grid;
+  grid-template-columns: 1fr 40px;
+  gap: 5px 8px;
+  align-items: center;
+}
+
+.hanpaopao-game .chase-copy span,
+.hanpaopao-game .bar--chase {
+  grid-column: 1 / -1;
+}
+
+.hanpaopao-game .bar--chase i {
+  width: 40%;
+  background: linear-gradient(90deg, var(--cyan), var(--jade));
+}
+
+.hanpaopao-game .objective-panel {
+  top: 160px;
+  left: 18px;
+  width: min(270px, calc(100vw - 36px));
+  padding: 14px 16px;
+  border-radius: 8px;
+}
+
+.hanpaopao-game .objective-panel h2 {
+  margin-bottom: 10px;
+  font-size: 17px;
+  color: var(--gold);
+}
+
+.hanpaopao-game .objective-panel p {
+  margin: 7px 0;
+  color: rgba(243, 247, 238, 0.86);
+  font-size: 14px;
+}
+
+.hanpaopao-game .objective-panel p::before {
+  content: '';
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin-right: 8px;
+  border: 1px solid var(--gold);
+  transform: rotate(45deg) translateY(-1px);
+}
+
+.hanpaopao-game .item-guide {
+  display: grid;
+  gap: 7px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(207, 234, 255, 0.16);
+}
+
+.hanpaopao-game .item-guide span {
+  display: grid;
+  grid-template-columns: 16px 1fr;
+  gap: 8px;
+  align-items: center;
+  min-width: 0;
+  color: rgba(243, 247, 238, 0.86);
+  font-size: 12px;
+  line-height: 1.25;
+}
+
+.hanpaopao-game .item-guide i {
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+  display: inline-block;
+  transform: rotate(45deg);
+  box-shadow: 0 0 12px currentColor;
+}
+
+.hanpaopao-game .status-panel {
+  top: 128px;
+  right: 18px;
+  width: min(260px, calc(100vw - 36px));
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px;
+  padding: 9px;
+  border-radius: 8px;
+}
+
+.hanpaopao-game .status-panel div {
+  min-width: 0;
+  padding: 7px 8px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.hanpaopao-game .status-panel span,
+.hanpaopao-game .status-panel b {
+  display: block;
+}
+
+.hanpaopao-game .status-panel span {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.hanpaopao-game .status-panel b {
+  margin-top: 3px;
+  color: #fff7d7;
+  font-size: 13px;
+}
+
+.hanpaopao-game .status-panel div.is-active {
+  background: rgba(98, 227, 255, 0.14);
+  border: 1px solid rgba(98, 227, 255, 0.28);
+  box-shadow: inset 0 0 18px rgba(98, 227, 255, 0.1);
+}
+
+.hanpaopao-game .inventory-strip {
+  bottom: 18px;
+  left: 50%;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(78px, 1fr));
+  gap: 8px;
+  width: min(460px, calc(100vw - 40px));
+  padding: 8px;
+  border-radius: 8px;
+  transform: translateX(-50%);
+}
+
+.hanpaopao-game .inventory-strip div {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: 0 8px;
+  align-items: center;
+  min-width: 0;
+  padding: 7px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.hanpaopao-game .inventory-strip b {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.hanpaopao-game .inventory-strip small {
+  grid-column: 2;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.hanpaopao-game .inventory-strip em {
+  grid-column: 2;
+  color: rgba(255, 247, 215, 0.78);
+  font-size: 10px;
+  font-style: normal;
+}
+
+.hanpaopao-game .gem {
+  grid-row: 1 / span 2;
+  width: 26px;
+  height: 26px;
+  border-radius: 7px;
+  display: inline-block;
+  transform: rotate(45deg);
+  box-shadow: 0 0 18px currentColor;
+}
+
+.hanpaopao-game .icon-gem {
+  color: #49e5ff;
+  background: linear-gradient(135deg, #a6ffff, #0a8cff 68%, #123b76);
+}
+
+.hanpaopao-game .icon-elixir {
+  color: #f5bd55;
+  background: radial-gradient(circle, #fff2a8 12%, #d48b25 56%, #77502d);
+}
+
+.hanpaopao-game .icon-talisman {
+  color: #ffe37d;
+  border-radius: 3px;
+  background: linear-gradient(135deg, #fce8a5, #c07b35);
+}
+
+.hanpaopao-game .icon-sword {
+  color: #74f7ff;
+  background: linear-gradient(135deg, #eaffff, #3ad4ff 42%, #0f4379);
+}
+
+.hanpaopao-game .mobile-pad {
+  left: 18px;
+  bottom: 18px;
+  width: 138px;
+  height: 138px;
+  border-radius: 50%;
+  background: rgba(10, 22, 35, 0.42);
+}
+
+.hanpaopao-game .mobile-pad button {
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #eafcff;
+  user-select: none;
+}
+
+.hanpaopao-game #touch-up {
+  top: 9px;
+  left: 47px;
+}
+
+.hanpaopao-game #touch-left {
+  top: 47px;
+  left: 9px;
+}
+
+.hanpaopao-game #touch-right {
+  top: 47px;
+  right: 9px;
+}
+
+.hanpaopao-game #touch-down {
+  bottom: 9px;
+  left: 47px;
+}
+
+.hanpaopao-game .action-pad {
+  right: 18px;
+  bottom: 18px;
+  display: flex;
+  gap: 14px;
+  padding: 8px;
+  border-radius: 8px;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+.hanpaopao-game .action-pad button {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  background:
+    radial-gradient(
+      circle at 35% 28%,
+      rgba(255, 255, 255, 0.34),
+      transparent 28%
+    ),
+    rgba(9, 21, 34, 0.72);
+  border: 1px solid rgba(215, 242, 255, 0.32);
+  box-shadow:
+    0 14px 42px rgba(0, 0, 0, 0.34),
+    inset 0 0 24px rgba(99, 226, 255, 0.16);
+  color: #eefbff;
+  font-weight: 800;
+  user-select: none;
+}
+
+.hanpaopao-game .action-pad button:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+.hanpaopao-game .action-pad button.is-active,
+.hanpaopao-game .setting-button.is-active {
+  border-color: rgba(143, 248, 255, 0.76);
+  box-shadow:
+    0 16px 46px rgba(98, 227, 255, 0.2),
+    inset 0 0 30px rgba(98, 227, 255, 0.28);
+}
+
+.hanpaopao-game .action-pad button.is-disabled,
+.hanpaopao-game .action-pad button:disabled {
+  opacity: 0.58;
+  filter: grayscale(0.25);
+  cursor: not-allowed;
+}
+
+.hanpaopao-game .modal {
+  inset: 0;
+  z-index: 30;
+  display: grid;
+  place-items: center;
+  padding: 22px;
+  background: rgba(5, 9, 16, 0.62);
+  backdrop-filter: blur(8px);
+}
+
+.hanpaopao-game .modal-card {
+  width: min(520px, 100%);
+  padding: 30px;
+  border-radius: 8px;
+  background: var(--panel-strong);
+  border: 1px solid rgba(234, 218, 169, 0.28);
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.42);
+  text-align: center;
+}
+
+.hanpaopao-game .modal-card h2 {
+  margin: 10px 0 22px;
+}
+
+.hanpaopao-game .pause-guide,
+.hanpaopao-game .final-reason {
+  margin: 0 0 16px;
+  color: rgba(243, 247, 238, 0.78);
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.hanpaopao-game .pause-guide {
+  display: grid;
+  gap: 6px;
+  padding: 12px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.06);
+  text-align: left;
+}
+
+.hanpaopao-game .settings-panel {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0 0 10px;
+}
+
+.hanpaopao-game .setting-button {
+  min-height: 40px;
+  padding: 0 10px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(207, 234, 255, 0.18);
+  color: #eefbff;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.hanpaopao-game .setting-button--danger {
+  color: #ffe4d9;
+  border-color: rgba(255, 122, 61, 0.34);
+}
+
+.hanpaopao-game .modal-card button {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.hanpaopao-game .results {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(88px, 1fr));
+  gap: 8px;
+  margin: 0 0 16px;
+}
+
+.hanpaopao-game .results div {
+  padding: 10px 6px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.hanpaopao-game .results dt {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.hanpaopao-game .results dd {
+  margin: 6px 0 0;
+  color: #fff7d7;
+  font-weight: 700;
+}
+
+.hanpaopao-game .toast {
+  left: 50%;
+  bottom: 154px;
+  padding: 10px 16px;
+  max-width: min(420px, calc(100vw - 40px));
+  border-radius: 999px;
+  background: rgba(6, 15, 24, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #f8f5df;
+  opacity: 0;
+  transform: translate(-50%, 8px);
+  pointer-events: none;
+  transition:
+    opacity 160ms ease,
+    transform 160ms ease;
+}
+
+.hanpaopao-game .toast.is-visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+@keyframes danger-vignette {
+  from {
+    opacity: 0.58;
+  }
+
+  to {
+    opacity: 0.86;
+  }
+}
+
+@keyframes pressure-pulse {
+  from {
+    border-color: rgba(255, 122, 61, 0.56);
+  }
+
+  to {
+    border-color: rgba(239, 79, 109, 0.9);
+    box-shadow: 0 18px 58px rgba(239, 79, 109, 0.26);
+  }
+}
+
+@keyframes combo-pop {
+  from {
+    transform: translateX(-50%) scale(1);
+  }
+
+  to {
+    transform: translateX(-50%) scale(1.05);
+  }
+}
+
+@media (max-width: 820px) {
+  .hanpaopao-game .story-shell {
+    height: auto;
+    min-height: calc(100% - 36px);
+    grid-template-columns: 1fr;
+  }
+
+  .hanpaopao-game .story-art {
+    min-height: 48vh;
+  }
+
+  .hanpaopao-game .story-copy {
+    padding: 18px 0 0;
+    border-left: 0;
+  }
+
+  .hanpaopao-game .hud-profile {
+    grid-template-columns: 48px minmax(0, 1fr);
+    right: 18px;
+  }
+
+  .hanpaopao-game .portrait {
+    width: 48px;
+    height: 48px;
+  }
+
+  .hanpaopao-game .profile-name {
+    font-size: 13px;
+  }
+
+  .hanpaopao-game .objective-panel {
+    display: none;
+  }
+
+  .hanpaopao-game .distance-pill {
+    top: 96px;
+    min-width: 142px;
+  }
+
+  .hanpaopao-game .danger-ribbon {
+    top: 152px;
+    padding: 8px 14px;
+    font-size: 12px;
+  }
+
+  .hanpaopao-game .combo-badge {
+    top: 198px;
+    font-size: 12px;
+  }
+
+  .hanpaopao-game .status-panel {
+    top: auto;
+    right: 18px;
+    bottom: 250px;
+    width: min(280px, calc(100vw - 36px));
+  }
+
+  .hanpaopao-game .chase-panel {
+    top: 96px;
+    grid-template-columns: 38px minmax(120px, 1fr);
+  }
+
+  .hanpaopao-game .chase-panel .boss-mark {
+    display: none;
+  }
+
+  .hanpaopao-game .inventory-strip {
+    bottom: calc(156px + env(safe-area-inset-bottom));
+  }
+
+  .hanpaopao-game .action-pad button {
+    width: 78px;
+    height: 78px;
+  }
+}
+
+@media (max-width: 560px) {
+  .hanpaopao-game .hud-profile,
+  .hanpaopao-game .chase-panel {
+    left: 8px;
+    right: 8px;
+  }
+
+  .hanpaopao-game .hud-profile {
+    top: 8px;
+    grid-template-columns: 42px minmax(0, 1fr);
+    gap: 8px;
+    padding: 7px 8px;
+  }
+
+  .hanpaopao-game .portrait {
+    width: 42px;
+    height: 42px;
+  }
+
+  .hanpaopao-game .profile-name {
+    margin-bottom: 3px;
+    font-size: 12px;
+  }
+
+  .hanpaopao-game .bar-row {
+    grid-template-columns: 30px minmax(0, 1fr) 28px;
+    gap: 5px;
+    margin: 2px 0;
+    font-size: 10px;
+  }
+
+  .hanpaopao-game .bar-row b {
+    font-size: 10px;
+  }
+
+  .hanpaopao-game .bar {
+    height: 7px;
+  }
+
+  .hanpaopao-game .chase-panel {
+    top: 80px;
+    grid-template-columns: 34px minmax(0, 1fr);
+    gap: 7px;
+    padding: 7px 8px;
+  }
+
+  .hanpaopao-game .icon-button {
+    width: 34px;
+    height: 34px;
+  }
+
+  .hanpaopao-game .chase-copy {
+    grid-template-columns: 1fr 34px;
+  }
+
+  .hanpaopao-game .chase-copy span,
+  .hanpaopao-game .distance-pill span {
+    font-size: 10px;
+  }
+
+  .hanpaopao-game .distance-pill {
+    top: 150px;
+    min-width: 116px;
+    padding: 7px 14px;
+  }
+
+  .hanpaopao-game .danger-ribbon {
+    top: 198px;
+    width: calc(100vw - 18px);
+    padding: 7px 10px;
+    font-size: 11px;
+  }
+
+  .hanpaopao-game .combo-badge {
+    top: 238px;
+    padding: 6px 12px;
+    font-size: 11px;
+  }
+
+  .hanpaopao-game .distance-pill strong {
+    font-size: 23px;
+  }
+
+  .hanpaopao-game .distance-pill em {
+    margin-top: 2px;
+    font-size: 10px;
+  }
+
+  .hanpaopao-game .status-panel {
+    bottom: calc(212px + env(safe-area-inset-bottom));
+    left: 9px;
+    right: 9px;
+    width: auto;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 5px;
+    padding: 6px;
+  }
+
+  .hanpaopao-game .status-panel div {
+    padding: 5px 3px;
+    text-align: center;
+  }
+
+  .hanpaopao-game .status-panel span {
+    font-size: 9px;
+  }
+
+  .hanpaopao-game .status-panel b {
+    font-size: 10px;
+  }
+
+  .hanpaopao-game .inventory-strip {
+    grid-template-columns: repeat(4, minmax(58px, 1fr));
+    bottom: calc(112px + env(safe-area-inset-bottom));
+    width: calc(100vw - 18px);
+    gap: 6px;
+    padding: 6px;
+  }
+
+  .hanpaopao-game .inventory-strip div {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 3px;
+    padding: 6px 4px;
+  }
+
+  .hanpaopao-game .inventory-strip b {
+    font-size: 16px;
+  }
+
+  .hanpaopao-game .inventory-strip small {
+    grid-column: 1;
+    font-size: 10px;
+  }
+
+  .hanpaopao-game .inventory-strip em {
+    grid-column: 1;
+    font-size: 9px;
+  }
+
+  .hanpaopao-game .toast {
+    bottom: 274px;
+    border-radius: 16px;
+    line-height: 1.35;
+  }
+
+  .hanpaopao-game .gem {
+    width: 18px;
+    height: 18px;
+  }
+
+  .hanpaopao-game .mobile-pad {
+    width: 104px;
+    height: 104px;
+    left: 10px;
+    bottom: calc(10px + env(safe-area-inset-bottom));
+  }
+
+  .hanpaopao-game .mobile-pad button {
+    width: 36px;
+    height: 36px;
+  }
+
+  .hanpaopao-game #touch-up,
+  .hanpaopao-game #touch-down {
+    left: 34px;
+  }
+
+  .hanpaopao-game #touch-left,
+  .hanpaopao-game #touch-right {
+    top: 34px;
+  }
+
+  .hanpaopao-game .action-pad {
+    right: 12px;
+    bottom: calc(12px + env(safe-area-inset-bottom));
+    gap: 8px;
+  }
+
+  .hanpaopao-game .action-pad button {
+    width: 60px;
+    height: 60px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 560px) {
+  .hanpaopao-game .settings-panel {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hanpaopao-game,
+  .hanpaopao-game *,
+  .hanpaopao-game *::before,
+  .hanpaopao-game *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+.hanpaopao-route {
+  min-height: 100vh;
+}
+
+.hanpaopao-route .hanpaopao-shell {
+  width: min(1440px, calc(100vw - 24px));
+  margin: 0 auto;
+  padding: 0 0 2rem;
+}
+
+.hanpaopao-game {
+  position: relative;
+  width: 100%;
+  height: calc(100svh - 7.4rem);
+  min-height: 620px;
+  overflow: hidden;
+  isolation: isolate;
+  border: 1px solid rgba(245, 216, 137, 0.24);
+  border-radius: 8px;
+  box-shadow: 0 26px 90px rgba(0, 0, 0, 0.32);
+}
+
+.hanpaopao-game .hanpaopao-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+@media (max-width: 1080px) {
+  .hanpaopao-game {
+    height: calc(100svh - 9.4rem);
+    min-height: 620px;
+  }
+}
+
+@media (max-width: 560px) {
+  .hanpaopao-route .hanpaopao-shell {
+    width: 100%;
+    padding-bottom: 0;
+  }
+
+  .hanpaopao-game {
+    height: calc(100svh - 8.8rem);
+    min-height: 590px;
+    border-right: 0;
+    border-left: 0;
+    border-radius: 0;
+  }
+}

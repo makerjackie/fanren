@@ -13,6 +13,7 @@ import { Route as WallpapersRouteImport } from './routes/wallpapers'
 import { Route as TimelineRouteImport } from './routes/timeline'
 import { Route as RunRouteImport } from './routes/run'
 import { Route as RelationshipsRouteImport } from './routes/relationships'
+import { Route as HanpaopaoRouteImport } from './routes/hanpaopao'
 import { Route as GameRouteImport } from './routes/game'
 import { Route as ArtifactsRouteImport } from './routes/artifacts'
 import { Route as IndexRouteImport } from './routes/index'
@@ -37,6 +38,11 @@ const RelationshipsRoute = RelationshipsRouteImport.update({
   path: '/relationships',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HanpaopaoRoute = HanpaopaoRouteImport.update({
+  id: '/hanpaopao',
+  path: '/hanpaopao',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const GameRoute = GameRouteImport.update({
   id: '/game',
   path: '/game',
@@ -57,6 +63,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/artifacts': typeof ArtifactsRoute
   '/game': typeof GameRoute
+  '/hanpaopao': typeof HanpaopaoRoute
   '/relationships': typeof RelationshipsRoute
   '/run': typeof RunRoute
   '/timeline': typeof TimelineRoute
@@ -66,6 +73,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/artifacts': typeof ArtifactsRoute
   '/game': typeof GameRoute
+  '/hanpaopao': typeof HanpaopaoRoute
   '/relationships': typeof RelationshipsRoute
   '/run': typeof RunRoute
   '/timeline': typeof TimelineRoute
@@ -76,6 +84,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/artifacts': typeof ArtifactsRoute
   '/game': typeof GameRoute
+  '/hanpaopao': typeof HanpaopaoRoute
   '/relationships': typeof RelationshipsRoute
   '/run': typeof RunRoute
   '/timeline': typeof TimelineRoute
@@ -87,6 +96,7 @@ export interface FileRouteTypes {
     | '/'
     | '/artifacts'
     | '/game'
+    | '/hanpaopao'
     | '/relationships'
     | '/run'
     | '/timeline'
@@ -96,6 +106,7 @@ export interface FileRouteTypes {
     | '/'
     | '/artifacts'
     | '/game'
+    | '/hanpaopao'
     | '/relationships'
     | '/run'
     | '/timeline'
@@ -105,6 +116,7 @@ export interface FileRouteTypes {
     | '/'
     | '/artifacts'
     | '/game'
+    | '/hanpaopao'
     | '/relationships'
     | '/run'
     | '/timeline'
@@ -115,6 +127,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ArtifactsRoute: typeof ArtifactsRoute
   GameRoute: typeof GameRoute
+  HanpaopaoRoute: typeof HanpaopaoRoute
   RelationshipsRoute: typeof RelationshipsRoute
   RunRoute: typeof RunRoute
   TimelineRoute: typeof TimelineRoute
@@ -151,6 +164,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RelationshipsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/hanpaopao': {
+      id: '/hanpaopao'
+      path: '/hanpaopao'
+      fullPath: '/hanpaopao'
+      preLoaderRoute: typeof HanpaopaoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/game': {
       id: '/game'
       path: '/game'
@@ -179,6 +199,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ArtifactsRoute: ArtifactsRoute,
   GameRoute: GameRoute,
+  HanpaopaoRoute: HanpaopaoRoute,
   RelationshipsRoute: RelationshipsRoute,
   RunRoute: RunRoute,
   TimelineRoute: TimelineRoute,
@@ -189,10 +210,11 @@ export const routeTree = rootRouteImport
   ._addFileTypes<FileRouteTypes>()
 
 import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
+import type { startInstance } from './start.ts'
 declare module '@tanstack/react-start' {
   interface Register {
     ssr: true
     router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
   }
 }
