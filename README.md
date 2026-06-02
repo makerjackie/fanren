@@ -15,7 +15,7 @@
 | 网站背景视频 | B 站 UP 主 [@落雨无声AI](https://www.bilibili.com) |
 | 壁纸（含韩立水墨等） | B 站 UP 主 [@天南第一深情hero](https://www.bilibili.com) |
 | 韩立走动素材 | B 站 UP 主 [@IM 闪电](https://www.bilibili.com) |
-| 女角色动态壁纸 | B 站 UP 主 [@落雨无声AI](https://www.bilibili.com) |
+
 
 具体来源记录见 `docs/research/` 目录。
 
